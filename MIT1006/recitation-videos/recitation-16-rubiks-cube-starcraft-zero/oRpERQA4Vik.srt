@@ -1,0 +1,5739 @@
+1
+00:00:00,000 --> 00:00:00,060
+
+2
+00:00:00,060 --> 00:00:01,770
+The following
+content is provided
+
+3
+00:00:01,770 --> 00:00:04,010
+under a Creative
+Commons license.
+
+4
+00:00:04,010 --> 00:00:06,860
+Your support will help MIT
+OpenCourseWare continue
+
+5
+00:00:06,860 --> 00:00:10,720
+to offer high quality
+educational resources for free.
+
+6
+00:00:10,720 --> 00:00:13,330
+To make a donation or
+view additional materials
+
+7
+00:00:13,330 --> 00:00:17,226
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+8
+00:00:17,226 --> 00:00:17,851
+at ocw.mit.edu.
+
+9
+00:00:17,851 --> 00:00:20,907
+
+10
+00:00:20,907 --> 00:00:21,490
+PROFESSOR: OK.
+
+11
+00:00:21,490 --> 00:00:25,020
+So who's going lecture?
+
+12
+00:00:25,020 --> 00:00:27,290
+Good.
+
+13
+00:00:27,290 --> 00:00:29,905
+Does everything makes sense?
+
+14
+00:00:29,905 --> 00:00:31,252
+AUDIENCE: Mostly.
+
+15
+00:00:31,252 --> 00:00:33,710
+PROFESSOR: That's good, because
+we're going to do problems.
+
+16
+00:00:33,710 --> 00:00:34,460
+AUDIENCE: Awesome.
+
+17
+00:00:34,460 --> 00:00:37,240
+PROFESSOR: So, what I want
+to talk about is, first,
+
+18
+00:00:37,240 --> 00:00:39,750
+there's a subtlety in the
+Rubik's cube problem, which I'm
+
+19
+00:00:39,750 --> 00:00:42,462
+guessing nobody has seen yet,
+but we're going to talk about
+
+20
+00:00:42,462 --> 00:00:44,920
+it anyway, because otherwise
+you'll trip on it while you're
+
+21
+00:00:44,920 --> 00:00:46,340
+doing the problem.
+
+22
+00:00:46,340 --> 00:00:48,780
+And then we're going to
+talk about one or maybe two
+
+23
+00:00:48,780 --> 00:00:49,380
+problems.
+
+24
+00:00:49,380 --> 00:00:51,474
+And I'm excited about
+the problem titled,
+
+25
+00:00:51,474 --> 00:00:53,140
+"there's StarCraft
+and counter strikes,"
+
+26
+00:00:53,140 --> 00:00:55,050
+so, let's hope we get to them.
+
+27
+00:00:55,050 --> 00:00:57,960
+
+28
+00:00:57,960 --> 00:01:00,600
+AUDIENCE: I'm curious, did you
+write this week's problem set?
+
+29
+00:01:00,600 --> 00:01:02,630
+Because there's some
+Chinese in there.
+
+30
+00:01:02,630 --> 00:01:03,260
+PROFESSOR: No.
+
+31
+00:01:03,260 --> 00:01:03,968
+AUDIENCE: Oh, OK.
+
+32
+00:01:03,968 --> 00:01:06,580
+PROFESSOR: No,
+someone else wrote it.
+
+33
+00:01:06,580 --> 00:01:08,675
+I suggested putting
+that in there, though.
+
+34
+00:01:08,675 --> 00:01:11,675
+
+35
+00:01:11,675 --> 00:01:13,857
+AUDIENCE: You had an
+awesome internship, right?
+
+36
+00:01:13,857 --> 00:01:14,811
+[INAUDIBLE]
+
+37
+00:01:14,811 --> 00:01:17,767
+AUDIENCE: Wait, did you make all
+the AMD [INAUDIBLE] questions?
+
+38
+00:01:17,767 --> 00:01:18,600
+PROFESSOR:Of course.
+
+39
+00:01:18,600 --> 00:01:19,266
+That's my stuff.
+
+40
+00:01:19,266 --> 00:01:22,531
+
+41
+00:01:22,531 --> 00:01:23,030
+OK.
+
+42
+00:01:23,030 --> 00:01:25,280
+So Rubik's cubes.
+
+43
+00:01:25,280 --> 00:01:27,319
+Did everyone see a 2
+by 2 by 2 Rubik's cube?
+
+44
+00:01:27,319 --> 00:01:28,860
+You guys are going
+to lecture, right?
+
+45
+00:01:28,860 --> 00:01:29,700
+You have one.
+
+46
+00:01:29,700 --> 00:01:31,240
+Yeah.
+
+47
+00:01:31,240 --> 00:01:34,210
+Did you guys see Eric's
+2 by 2 by 2 Rubik's cube?
+
+48
+00:01:34,210 --> 00:01:36,830
+
+49
+00:01:36,830 --> 00:01:37,960
+It looks sort of like this.
+
+50
+00:01:37,960 --> 00:01:48,140
+
+51
+00:01:48,140 --> 00:01:51,230
+All right, so big
+Rubik's cube has how many
+
+52
+00:01:51,230 --> 00:01:53,319
+small cubelets in it?
+
+53
+00:01:53,319 --> 00:01:53,860
+AUDIENCE: 80.
+
+54
+00:01:53,860 --> 00:01:55,820
+AUDIENCE: 80.
+
+55
+00:01:55,820 --> 00:01:58,270
+AUDIENCE: I like cubelets
+better than cubies.
+
+56
+00:01:58,270 --> 00:01:59,687
+Cubies is hard to say.
+
+57
+00:01:59,687 --> 00:02:01,270
+PROFESSOR: Yeah, I
+would say cubicles.
+
+58
+00:02:01,270 --> 00:02:03,260
+So let's go for--
+let's try cubelets
+
+59
+00:02:03,260 --> 00:02:05,410
+and see how this works.
+
+60
+00:02:05,410 --> 00:02:06,410
+OK.
+
+61
+00:02:06,410 --> 00:02:11,750
+So each cubelet has six
+faces, but three faces
+
+62
+00:02:11,750 --> 00:02:13,460
+are always facing inwards.
+
+63
+00:02:13,460 --> 00:02:15,960
+They're always attached
+to the center of the cube.
+
+64
+00:02:15,960 --> 00:02:17,810
+So we don't care about them.
+
+65
+00:02:17,810 --> 00:02:19,760
+We only care about
+the other three faces.
+
+66
+00:02:19,760 --> 00:02:22,060
+So if you have a
+plastic Rubik's cube.
+
+67
+00:02:22,060 --> 00:02:27,360
+Say this is a plastic--
+This is a plastic cube.
+
+68
+00:02:27,360 --> 00:02:30,870
+Then you're going to have
+eight plastic cubelets.
+
+69
+00:02:30,870 --> 00:02:32,722
+Each cubelet has
+three colored faces
+
+70
+00:02:32,722 --> 00:02:34,430
+and three faces that
+we don't care about.
+
+71
+00:02:34,430 --> 00:02:38,440
+
+72
+00:02:38,440 --> 00:02:42,020
+So how many total plastic
+faces in a cubelet, sorry,
+
+73
+00:02:42,020 --> 00:02:44,728
+plastic cube?
+
+74
+00:02:44,728 --> 00:02:46,144
+AUDIENCE: Twenty-four.
+[INAUDIBLE]
+
+75
+00:02:46,144 --> 00:02:50,975
+
+76
+00:02:50,975 --> 00:02:51,850
+PROFESSOR: All right.
+
+77
+00:02:51,850 --> 00:02:54,010
+Now let's play with
+an imaginary cube.
+
+78
+00:02:54,010 --> 00:02:56,224
+And I call this
+a wireframe cube,
+
+79
+00:02:56,224 --> 00:02:57,390
+because I draw it like this.
+
+80
+00:02:57,390 --> 00:03:11,800
+
+81
+00:03:11,800 --> 00:03:14,460
+So, here pretend you have the
+skeleton of a Rubik's cube,
+
+82
+00:03:14,460 --> 00:03:17,510
+made out of wires or out
+of wood or something.
+
+83
+00:03:17,510 --> 00:03:22,130
+So it's basically a small sheet
+of wood, small piece of wood,
+
+84
+00:03:22,130 --> 00:03:24,200
+small sheet of wood,
+so on and so forth.
+
+85
+00:03:24,200 --> 00:03:28,310
+And so this doesn't
+have any colors in it,
+
+86
+00:03:28,310 --> 00:03:32,700
+but it's the right shape
+and sort of the right look.
+
+87
+00:03:32,700 --> 00:03:35,440
+So the way you would build
+the configuration is,
+
+88
+00:03:35,440 --> 00:03:41,050
+you take 24 plastic faces that
+you get from a plastic cube,
+
+89
+00:03:41,050 --> 00:03:45,590
+and you paste them one
+by one onto the faces
+
+90
+00:03:45,590 --> 00:03:47,430
+of a wireframe cube.
+
+91
+00:03:47,430 --> 00:03:50,200
+And they claim that this
+can build any configuration
+
+92
+00:03:50,200 --> 00:03:53,570
+that you can think about.
+
+93
+00:03:53,570 --> 00:03:56,110
+If you look at a cube, after
+no matter how many moves
+
+94
+00:03:56,110 --> 00:03:58,750
+you've done to it,
+it's going to have
+
+95
+00:03:58,750 --> 00:04:01,420
+some-- it's going to have
+the faces somewhere, right?
+
+96
+00:04:01,420 --> 00:04:03,275
+So you can take the
+faces and face them
+
+97
+00:04:03,275 --> 00:04:05,250
+where they belong
+and there you go.
+
+98
+00:04:05,250 --> 00:04:07,560
+You have a real cube
+built out of a wireframe
+
+99
+00:04:07,560 --> 00:04:08,570
+and plastic faces.
+
+100
+00:04:08,570 --> 00:04:16,810
+
+101
+00:04:16,810 --> 00:04:19,630
+How many wireframe
+faces there are?
+
+102
+00:04:19,630 --> 00:04:21,864
+Please don't get this wrong.
+
+103
+00:04:21,864 --> 00:04:22,780
+AUDIENCE: Twenty-four.
+
+104
+00:04:22,780 --> 00:04:25,107
+PROFESSOR: OK.
+
+105
+00:04:25,107 --> 00:04:26,732
+AUDIENCE: There are
+some configurations
+
+106
+00:04:26,732 --> 00:04:28,807
+that aren't possible, right?
+
+107
+00:04:28,807 --> 00:04:29,390
+PROFESSOR: OK.
+
+108
+00:04:29,390 --> 00:04:31,400
+There are some configurations
+that aren't possible,
+
+109
+00:04:31,400 --> 00:04:32,590
+and that is very good news.
+
+110
+00:04:32,590 --> 00:04:33,640
+We'll get to that later.
+
+111
+00:04:33,640 --> 00:04:41,830
+
+112
+00:04:41,830 --> 00:04:46,060
+Let's see how the code
+talks about these faces.
+
+113
+00:04:46,060 --> 00:04:49,720
+So suppose we have a cubelet
+that has these faces.
+
+114
+00:04:49,720 --> 00:04:56,740
+Front faces yellow, this face is
+blue, and this face is orange.
+
+115
+00:04:56,740 --> 00:05:01,580
+This facing code is called--
+so this yellow face here
+
+116
+00:05:01,580 --> 00:05:06,520
+is called y o b.
+
+117
+00:05:06,520 --> 00:05:08,972
+So y is yellow, that's
+the yellow face,
+
+118
+00:05:08,972 --> 00:05:11,110
+and is the yellow
+facing the cubelet that
+
+119
+00:05:11,110 --> 00:05:14,880
+has a yellow face, an orange
+face, and a blue face.
+
+120
+00:05:14,880 --> 00:05:17,010
+Fortunately, there
+aren't two cubelets
+
+121
+00:05:17,010 --> 00:05:20,180
+that have the same face
+color, so this is good enough
+
+122
+00:05:20,180 --> 00:05:22,599
+to distinguish
+between all of them.
+
+123
+00:05:22,599 --> 00:05:24,390
+Let's see if you guys
+are paying attention.
+
+124
+00:05:24,390 --> 00:05:27,330
+How would I call this face?
+
+125
+00:05:27,330 --> 00:05:32,674
+
+126
+00:05:32,674 --> 00:05:33,340
+AUDIENCE: o y b?
+
+127
+00:05:33,340 --> 00:05:37,914
+
+128
+00:05:37,914 --> 00:05:38,580
+PROFESSOR: Yeah.
+
+129
+00:05:38,580 --> 00:05:43,670
+Either that or o b y, whichever
+one the code happens to use.
+
+130
+00:05:43,670 --> 00:05:45,810
+So the principal is,
+these are the colors
+
+131
+00:05:45,810 --> 00:05:49,960
+and the first one is the
+face that you're pointing at.
+
+132
+00:05:49,960 --> 00:05:53,310
+So there are 24
+plastic faces, so there
+
+133
+00:05:53,310 --> 00:05:55,960
+are 24 names for
+these plastic faces.
+
+134
+00:05:55,960 --> 00:05:57,825
+Let's see how we name
+the wireframe faces.
+
+135
+00:05:57,825 --> 00:06:01,650
+
+136
+00:06:01,650 --> 00:06:07,570
+If I take this face-- so
+we don't have colors here,
+
+137
+00:06:07,570 --> 00:06:08,450
+they're all the same.
+
+138
+00:06:08,450 --> 00:06:11,550
+So instead we care
+about their position.
+
+139
+00:06:11,550 --> 00:06:14,650
+A cube has a front
+and a back, right?
+
+140
+00:06:14,650 --> 00:06:18,770
+This cubelet is on the
+front somewhere, right?
+
+141
+00:06:18,770 --> 00:06:23,660
+So I'm going to have front
+somewhere in the name.
+
+142
+00:06:23,660 --> 00:06:29,610
+It has an upper face
+and a lower face.
+
+143
+00:06:29,610 --> 00:06:32,034
+Is this going to
+be upper or lower?
+
+144
+00:06:32,034 --> 00:06:34,990
+AUDIENCE: Upper.
+
+145
+00:06:34,990 --> 00:06:36,816
+PROFESSOR: And
+the left or right?
+
+146
+00:06:36,816 --> 00:06:37,524
+PROFESSOR: Right.
+
+147
+00:06:37,524 --> 00:06:40,870
+
+148
+00:06:40,870 --> 00:06:41,570
+PROFESSOR: OK.
+
+149
+00:06:41,570 --> 00:06:46,702
+So front upper right,
+which face am I looking at?
+
+150
+00:06:46,702 --> 00:06:47,777
+AUDIENCE: The front.
+
+151
+00:06:47,777 --> 00:06:48,360
+PROFESSOR: OK.
+
+152
+00:06:48,360 --> 00:06:51,330
+
+153
+00:06:51,330 --> 00:06:53,630
+f u r, fur.
+
+154
+00:06:53,630 --> 00:06:55,440
+How about this space?
+
+155
+00:06:55,440 --> 00:06:59,524
+
+156
+00:06:59,524 --> 00:07:00,440
+AUDIENCE: [INAUDIBLE].
+
+157
+00:07:00,440 --> 00:07:04,940
+
+158
+00:07:04,940 --> 00:07:07,604
+PROFESSOR: So far so good?
+
+159
+00:07:07,604 --> 00:07:09,490
+Or it could be r u f, right?
+
+160
+00:07:09,490 --> 00:07:10,908
+PROFESSOR: Or it could be r u f.
+
+161
+00:07:10,908 --> 00:07:11,824
+AUDIENCE: [INAUDIBLE].
+
+162
+00:07:11,824 --> 00:07:17,770
+
+163
+00:07:17,770 --> 00:07:20,322
+PROFESSOR: I really don't know
+what it means, I'm behind.
+
+164
+00:07:20,322 --> 00:07:21,405
+AUDIENCE: Ruff like a dog?
+
+165
+00:07:21,405 --> 00:07:22,830
+It has fur.
+
+166
+00:07:22,830 --> 00:07:23,100
+PROFESSOR: Oh, ruff ruff ruff.
+
+167
+00:07:23,100 --> 00:07:23,600
+OK.
+
+168
+00:07:23,600 --> 00:07:24,500
+That's not too bad.
+
+169
+00:07:24,500 --> 00:07:25,833
+I was afraid of something worse.
+
+170
+00:07:25,833 --> 00:07:26,970
+OK.
+
+171
+00:07:26,970 --> 00:07:28,270
+That's cool.
+
+172
+00:07:28,270 --> 00:07:32,860
+So a configuration
+will take plastic faces
+
+173
+00:07:32,860 --> 00:07:34,890
+and face them onto
+the wireframe faces.
+
+174
+00:07:34,890 --> 00:07:37,460
+
+175
+00:07:37,460 --> 00:07:40,730
+So a configuration is going
+to be an array of 24 elements.
+
+176
+00:07:40,730 --> 00:07:47,820
+
+177
+00:07:47,820 --> 00:07:51,660
+And the first element is going
+to tell me which plastic face
+
+178
+00:07:51,660 --> 00:07:57,270
+ends up in-- Let's say if
+you are the second one,
+
+179
+00:07:57,270 --> 00:08:03,607
+says which plastic
+face ends up in r u f,
+
+180
+00:08:03,607 --> 00:08:06,210
+and the third one, let's
+assume it's the space.
+
+181
+00:08:06,210 --> 00:08:09,204
+
+182
+00:08:09,204 --> 00:08:10,035
+AUDIENCE: Ruff.
+
+183
+00:08:10,035 --> 00:08:10,701
+PROFESSOR: Ruff.
+
+184
+00:08:10,701 --> 00:08:14,200
+
+185
+00:08:14,200 --> 00:08:16,120
+And there are 21
+more faces, right?
+
+186
+00:08:16,120 --> 00:08:17,960
+So each face has
+a number from zero
+
+187
+00:08:17,960 --> 00:08:22,990
+to 23, because we're in Python,
+so we like zero-based indexing.
+
+188
+00:08:22,990 --> 00:08:29,050
+And 24 elements in the
+array, 24 plastic faces.
+
+189
+00:08:29,050 --> 00:08:32,799
+Which plastic face
+goes into f u r?
+
+190
+00:08:32,799 --> 00:08:37,970
+Assuming this cubelet here--
+see, I said cubicle anyway.
+
+191
+00:08:37,970 --> 00:08:41,945
+This cubelet here goes here
+in exactly this configuration.
+
+192
+00:08:41,945 --> 00:08:45,350
+
+193
+00:08:45,350 --> 00:08:47,576
+AUDIENCE: [INAUDIBLE].
+
+194
+00:08:47,576 --> 00:08:49,770
+PROFESSOR: Yeah.
+
+195
+00:08:49,770 --> 00:08:53,110
+So this face ends up here.
+
+196
+00:08:53,110 --> 00:08:55,630
+And that's what it means that
+the first element in the array
+
+197
+00:08:55,630 --> 00:08:57,420
+is y o b.
+
+198
+00:08:57,420 --> 00:08:59,416
+How about r u f?
+
+199
+00:08:59,416 --> 00:09:00,290
+Who ends up in r u f?
+
+200
+00:09:00,290 --> 00:09:03,882
+
+201
+00:09:03,882 --> 00:09:05,646
+AUDIENCE: [INAUDIBLE].
+
+202
+00:09:05,646 --> 00:09:06,312
+AUDIENCE: B o y.
+
+203
+00:09:06,312 --> 00:09:10,210
+
+204
+00:09:10,210 --> 00:09:14,314
+PROFESSOR: And who
+ends up in e r f?
+
+205
+00:09:14,314 --> 00:09:15,230
+AUDIENCE: [INAUDIBLE].
+
+206
+00:09:15,230 --> 00:09:19,347
+
+207
+00:09:19,347 --> 00:09:19,930
+PROFESSOR: OK.
+
+208
+00:09:19,930 --> 00:09:22,680
+So does everyone
+understand configurations?
+
+209
+00:09:22,680 --> 00:09:24,422
+Does this make sense?
+
+210
+00:09:24,422 --> 00:09:25,047
+AUDIENCE: Yeah.
+
+211
+00:09:25,047 --> 00:09:26,544
+I got lost somewhere in there.
+
+212
+00:09:26,544 --> 00:09:30,037
+Can you explain the order
+for f u r and [INAUDIBLE]?
+
+213
+00:09:30,037 --> 00:09:31,727
+Like front upright?
+
+214
+00:09:31,727 --> 00:09:32,310
+PROFESSOR: Oh.
+
+215
+00:09:32,310 --> 00:09:34,907
+So do you mean-- so the
+order of the letters.
+
+216
+00:09:34,907 --> 00:09:36,240
+So there are two orderings here.
+
+217
+00:09:36,240 --> 00:09:39,500
+One is the order of the
+letters and there is an order.
+
+218
+00:09:39,500 --> 00:09:41,570
+I think the code
+uses clockwise order,
+
+219
+00:09:41,570 --> 00:09:44,970
+but what really matters is the
+first letter tells you which
+
+220
+00:09:44,970 --> 00:09:46,404
+face you're talking about.
+
+221
+00:09:46,404 --> 00:09:48,020
+AUDIENCE: So this is front face.
+
+222
+00:09:48,020 --> 00:09:50,758
+PROFESSOR: Face, up face.
+
+223
+00:09:50,758 --> 00:09:51,666
+AUDIENCE: What's up?
+
+224
+00:09:51,666 --> 00:09:53,940
+What's front?
+
+225
+00:09:53,940 --> 00:09:57,480
+PROFESSOR: So for this
+cubelet, this is front,
+
+226
+00:09:57,480 --> 00:09:58,730
+this is the right, this is up.
+
+227
+00:09:58,730 --> 00:10:02,310
+
+228
+00:10:02,310 --> 00:10:11,230
+This cubelet wold have a
+front, an up, and a left.
+
+229
+00:10:11,230 --> 00:10:13,580
+So now there are
+24 faces and all
+
+230
+00:10:13,580 --> 00:10:16,370
+of them get numbers from 0 23.
+
+231
+00:10:16,370 --> 00:10:19,400
+And here we assume that
+f u r is space zero,
+
+232
+00:10:19,400 --> 00:10:21,800
+r u f is space 1, and
+e r f is face 2, which
+
+233
+00:10:21,800 --> 00:10:26,830
+is not quite [INAUDIBLE], but
+you'll have the mapping there.
+
+234
+00:10:26,830 --> 00:10:27,330
+OK.
+
+235
+00:10:27,330 --> 00:10:30,610
+So a configuration is in
+an array of 24 elements
+
+236
+00:10:30,610 --> 00:10:33,450
+and it maps plastic faces
+to wireframe faces, which
+
+237
+00:10:33,450 --> 00:10:36,530
+brings us to, how many
+configurations are there?
+
+238
+00:10:36,530 --> 00:10:43,208
+
+239
+00:10:43,208 --> 00:10:45,847
+AUDIENCE: You mean like
+mapping 4 factorial?
+
+240
+00:10:45,847 --> 00:10:46,430
+PROFESSOR: OK.
+
+241
+00:10:46,430 --> 00:10:49,000
+
+242
+00:10:49,000 --> 00:10:50,280
+So let's see what it does.
+
+243
+00:10:50,280 --> 00:10:51,625
+We have 24 plastic faces.
+
+244
+00:10:51,625 --> 00:10:57,600
+
+245
+00:10:57,600 --> 00:11:00,550
+From 0 to 23.
+
+246
+00:11:00,550 --> 00:11:04,832
+And they have to be
+mapped to 24 positions.
+
+247
+00:11:04,832 --> 00:11:06,082
+AUDIENCE: [INTERPOSING VOICES]
+
+248
+00:11:06,082 --> 00:11:13,537
+
+249
+00:11:13,537 --> 00:11:15,525
+AUDIENCE: There's six
+colors, aren't there?
+
+250
+00:11:15,525 --> 00:11:17,040
+AUDIENCE: Yeah.
+
+251
+00:11:17,040 --> 00:11:21,022
+PROFESSOR: There are six colors,
+but if this is also yellow,
+
+252
+00:11:21,022 --> 00:11:21,980
+but there's a red here.
+
+253
+00:11:21,980 --> 00:11:24,160
+This is a different face,
+see, this is yellow,
+
+254
+00:11:24,160 --> 00:11:26,230
+red, and there's
+a green down here.
+
+255
+00:11:26,230 --> 00:11:29,960
+Then this is the yellow face of
+the yellow, green, red cubelet.
+
+256
+00:11:29,960 --> 00:11:31,800
+So we care about the
+individual faces.
+
+257
+00:11:31,800 --> 00:11:33,141
+So yeah, your answer was right.
+
+258
+00:11:33,141 --> 00:11:34,890
+I'm trying to explain
+it to everyone else.
+
+259
+00:11:34,890 --> 00:11:36,158
+But your answer is right.
+
+260
+00:11:36,158 --> 00:11:37,033
+AUDIENCE: Well, wait.
+
+261
+00:11:37,033 --> 00:11:40,485
+But you can't-- I mean, we
+talk about some are impossible.
+
+262
+00:11:40,485 --> 00:11:43,540
+Like, you're always gonna
+have a grouping of y o b.
+
+263
+00:11:43,540 --> 00:11:45,352
+That's never gonna change.
+
+264
+00:11:45,352 --> 00:11:46,060
+PROFESSOR: Right.
+
+265
+00:11:46,060 --> 00:11:48,870
+So some of these
+aren't reachable,
+
+266
+00:11:48,870 --> 00:11:50,870
+because you're not allowed
+to break up the cube.
+
+267
+00:11:50,870 --> 00:11:51,730
+AUDIENCE: Yeah.
+
+268
+00:11:51,730 --> 00:11:53,709
+PROFESSOR: And that's OK.
+
+269
+00:11:53,709 --> 00:11:55,500
+This is still how the
+code represents them.
+
+270
+00:11:55,500 --> 00:11:59,655
+So I'm asking if you had-- if
+all these would be possible,
+
+271
+00:11:59,655 --> 00:12:01,880
+how many would we get?
+
+272
+00:12:01,880 --> 00:12:04,470
+And the answer is that
+to map 24 plastic faces
+
+273
+00:12:04,470 --> 00:12:07,050
+to 24 wireframe faces.
+
+274
+00:12:07,050 --> 00:12:13,120
+So this mapping is called--
+anyone good with math?
+
+275
+00:12:13,120 --> 00:12:14,460
+AUDIENCE: 1 to 1.
+
+276
+00:12:14,460 --> 00:12:15,560
+AUDIENCE: Bijection.
+
+277
+00:12:15,560 --> 00:12:16,450
+PROFESSOR: OK.
+
+278
+00:12:16,450 --> 00:12:22,320
+So when you're taking-- OK.
+
+279
+00:12:22,320 --> 00:12:26,190
+So when we have two sets and you
+have a bijection between them
+
+280
+00:12:26,190 --> 00:12:31,270
+or 1 to 1 mapping, that
+function is also called?
+
+281
+00:12:31,270 --> 00:12:32,270
+AUDIENCE: [INAUDIBLE].
+
+282
+00:12:32,270 --> 00:12:34,353
+PROFESSOR: You probably
+don't know the answer yet.
+
+283
+00:12:34,353 --> 00:12:38,900
+You have to wait
+until the end of 6042.
+
+284
+00:12:38,900 --> 00:12:41,300
+So I'm trying to hint that
+right now, if you remember
+
+285
+00:12:41,300 --> 00:12:44,264
+the end of 6042, maybe the
+answer is somewhere there.
+
+286
+00:12:44,264 --> 00:12:44,930
+AUDIENCE: Blur?.
+
+287
+00:12:44,930 --> 00:12:49,830
+
+288
+00:12:49,830 --> 00:12:52,770
+AUDIENCE: Perfect.
+
+289
+00:12:52,770 --> 00:12:54,919
+AUDIENCE: A perfect match
+
+290
+00:12:54,919 --> 00:12:55,710
+AUDIENCE: Permut--.
+
+291
+00:12:55,710 --> 00:12:57,487
+
+292
+00:12:57,487 --> 00:12:59,820
+AUDIENCE: I totally learned
+about that in middle school,
+
+293
+00:12:59,820 --> 00:13:01,000
+I think.
+
+294
+00:13:01,000 --> 00:13:03,276
+PROFESSOR: OK.
+
+295
+00:13:03,276 --> 00:13:03,775
+So this is--
+
+296
+00:13:03,775 --> 00:13:05,590
+AUDIENCE: Permutations
+and combinations.
+
+297
+00:13:05,590 --> 00:13:07,240
+PROFESSOR: So this
+is a permutation.
+
+298
+00:13:07,240 --> 00:13:08,320
+AUDIENCE: Yeah.
+
+299
+00:13:08,320 --> 00:13:11,095
+PROFESSOR: How many permutations
+do you have out of 24 elements?
+
+300
+00:13:11,095 --> 00:13:15,100
+
+301
+00:13:15,100 --> 00:13:17,183
+AUDIENCE: Does that order
+[? mean ?] [? matters ?]
+
+302
+00:13:17,183 --> 00:13:19,155
+[INAUDIBLE] 24 [INAUDIBLE].
+
+303
+00:13:19,155 --> 00:13:23,110
+
+304
+00:13:23,110 --> 00:13:25,577
+PROFESSOR: So this is a
+lot of permutations, right?
+
+305
+00:13:25,577 --> 00:13:27,160
+It's a good thing
+that we're not going
+
+306
+00:13:27,160 --> 00:13:29,830
+to explore most of
+these configurations.
+
+307
+00:13:29,830 --> 00:13:31,980
+So we said before,
+that we're going
+
+308
+00:13:31,980 --> 00:13:36,490
+to build a graph where the
+vertices are configurations,
+
+309
+00:13:36,490 --> 00:13:38,180
+and the edges are
+moves that get us
+
+310
+00:13:38,180 --> 00:13:41,460
+from one configuration
+to another configuration.
+
+311
+00:13:41,460 --> 00:13:43,920
+Can they afford to build
+this graph first and then run
+
+312
+00:13:43,920 --> 00:13:46,850
+BFS on it?
+
+313
+00:13:46,850 --> 00:13:48,190
+Not going to work, right?
+
+314
+00:13:48,190 --> 00:13:51,410
+We don't have
+enough RAM for this.
+
+315
+00:13:51,410 --> 00:13:53,220
+So instead we're going
+to have to operate
+
+316
+00:13:53,220 --> 00:13:55,580
+on an implicit graph
+for presentation.
+
+317
+00:13:55,580 --> 00:13:58,340
+Well, fortunately, BFS
+doesn't want the whole graph.
+
+318
+00:13:58,340 --> 00:14:00,620
+The way BFS works is
+it has a list of nodes
+
+319
+00:14:00,620 --> 00:14:02,980
+that it has to visit, and
+when it visits a node,
+
+320
+00:14:02,980 --> 00:14:06,170
+it wants to know its neighbors.
+
+321
+00:14:06,170 --> 00:14:08,280
+And that's it.
+
+322
+00:14:08,280 --> 00:14:09,400
+Yes?
+
+323
+00:14:09,400 --> 00:14:11,290
+Everyone happy with it?
+
+324
+00:14:11,290 --> 00:14:14,040
+So all they have
+to do is, in order
+
+325
+00:14:14,040 --> 00:14:16,030
+to build this implicit
+graph representation,
+
+326
+00:14:16,030 --> 00:14:18,200
+is we have to know
+the start node,
+
+327
+00:14:18,200 --> 00:14:20,670
+So BFS can start somewhere.
+
+328
+00:14:20,670 --> 00:14:23,190
+And we have to be able
+to give it a node,
+
+329
+00:14:23,190 --> 00:14:25,860
+we have to be able to generate
+all the neighbor nodes.
+
+330
+00:14:25,860 --> 00:14:27,360
+So given the
+configuration, we have
+
+331
+00:14:27,360 --> 00:14:29,276
+to be able to generate
+the configurations that
+
+332
+00:14:29,276 --> 00:14:33,950
+would result by applying
+most of that configuration.
+
+333
+00:14:33,950 --> 00:14:36,810
+So what are the moves
+that you can do with this?
+
+334
+00:14:36,810 --> 00:14:38,440
+Suppose you have a cubelet.
+
+335
+00:14:38,440 --> 00:14:40,020
+What are the possible moves?
+
+336
+00:14:40,020 --> 00:14:41,030
+There aren't that many.
+
+337
+00:14:41,030 --> 00:14:44,840
+We're interested in the
+simplest kind of moves.
+
+338
+00:14:44,840 --> 00:14:46,766
+AUDIENCE: [INAUDIBLE]
+
+339
+00:14:46,766 --> 00:14:49,260
+AUDIENCE: Yeah, you
+can make the right side
+
+340
+00:14:49,260 --> 00:14:52,760
+go right, which is equivalent
+to the left side going left.
+
+341
+00:14:52,760 --> 00:14:57,760
+And then you can do [INAUDIBLE]
+4, left [INAUDIBLE].
+
+342
+00:14:57,760 --> 00:14:59,260
+AUDIENCE: It's a nice number.
+
+343
+00:14:59,260 --> 00:15:00,240
+PROFESSOR: OK.
+
+344
+00:15:00,240 --> 00:15:04,610
+I think there are a few more,
+so here's how I look at it.
+
+345
+00:15:04,610 --> 00:15:07,460
+You can take the front
+face, so these four,
+
+346
+00:15:07,460 --> 00:15:10,430
+and do a clockwise
+rotation, 90 degrees,
+
+347
+00:15:10,430 --> 00:15:13,260
+or you can do a counterclockwise
+rotation, 90 degrees.
+
+348
+00:15:13,260 --> 00:15:16,830
+And you can do
+that for each face.
+
+349
+00:15:16,830 --> 00:15:20,470
+AUDIENCE: But doing a front
+clockwise rotation is the same
+
+350
+00:15:20,470 --> 00:15:23,499
+as doing a back counter
+clockwise rotation, which
+
+351
+00:15:23,499 --> 00:15:24,727
+is [? it-- ?]
+
+352
+00:15:24,727 --> 00:15:26,700
+AUDIENCE: Yeah.
+
+353
+00:15:26,700 --> 00:15:28,170
+PROFESSOR: Doing
+a front clockwise,
+
+354
+00:15:28,170 --> 00:15:30,400
+doing a back counterclockwise
+is the same thing
+
+355
+00:15:30,400 --> 00:15:32,990
+after you account
+for symmetries.
+
+356
+00:15:32,990 --> 00:15:33,490
+Yeah.
+
+357
+00:15:33,490 --> 00:15:35,080
+AUDIENCE: Exactly.
+
+358
+00:15:35,080 --> 00:15:36,330
+AUDIENCE: So it's six?
+
+359
+00:15:36,330 --> 00:15:36,520
+PROFESSOR: Yep.
+
+360
+00:15:36,520 --> 00:15:38,728
+So there's only six after
+you account for symmetries.
+
+361
+00:15:38,728 --> 00:15:40,330
+Let's play devil's
+advocate and assume
+
+362
+00:15:40,330 --> 00:15:41,620
+we don't account for symmetries.
+
+363
+00:15:41,620 --> 00:15:43,286
+We're actually doing
+the code, because I
+
+364
+00:15:43,286 --> 00:15:45,610
+need to teach you something.
+
+365
+00:15:45,610 --> 00:15:47,616
+So let's assume we don't apply.
+
+366
+00:15:47,616 --> 00:15:48,990
+By the way, how
+would you account
+
+367
+00:15:48,990 --> 00:15:51,110
+for symmetries, easy way?
+
+368
+00:15:51,110 --> 00:15:52,990
+Did anyone read the
+comments in the code?
+
+369
+00:15:52,990 --> 00:15:58,091
+
+370
+00:15:58,091 --> 00:15:58,590
+OK.
+
+371
+00:15:58,590 --> 00:16:03,125
+So would you account
+for symmetries.
+
+372
+00:16:03,125 --> 00:16:04,610
+AUDIENCE: Doesn't
+it just happen?
+
+373
+00:16:04,610 --> 00:16:10,070
+
+374
+00:16:10,070 --> 00:16:11,850
+The permutation is
+going to [INAUDIBLE].
+
+375
+00:16:11,850 --> 00:16:13,266
+AUDIENCE: Can you
+just look at it,
+
+376
+00:16:13,266 --> 00:16:18,430
+like, each space is neighboring
+faces, and [INAUDIBLE]?
+
+377
+00:16:18,430 --> 00:16:22,580
+PROFESSOR: So the way we do
+it is we anchor one cubelet.
+
+378
+00:16:22,580 --> 00:16:27,870
+So we have one cubelet that
+is a plastic cubelet that
+
+379
+00:16:27,870 --> 00:16:30,910
+is always going to go here.
+
+380
+00:16:30,910 --> 00:16:34,320
+So three plastic
+faces here are always
+
+381
+00:16:34,320 --> 00:16:39,339
+going to go to three
+wireframed faces here.
+
+382
+00:16:39,339 --> 00:16:40,880
+And if you fix those
+three faces then
+
+383
+00:16:40,880 --> 00:16:43,690
+you don't have simple
+symmetries anymore.
+
+384
+00:16:43,690 --> 00:16:44,500
+All right?
+
+385
+00:16:44,500 --> 00:16:47,684
+Three axes of symmetry, so
+fixing three faces settles it.
+
+386
+00:16:47,684 --> 00:16:50,774
+
+387
+00:16:50,774 --> 00:16:52,940
+AUDIENCE: Wait, so then how
+many moves are possible?
+
+388
+00:16:52,940 --> 00:16:55,430
+12?
+
+389
+00:16:55,430 --> 00:16:56,090
+AUDIENCE: No.
+
+390
+00:16:56,090 --> 00:16:57,960
+But you only do
+one thing, though.
+
+391
+00:16:57,960 --> 00:16:59,980
+Now you don't do
+counterclock-- you don't do.
+
+392
+00:16:59,980 --> 00:17:01,190
+AUDIENCE: If one is
+anchored, there's six left.
+
+393
+00:17:01,190 --> 00:17:01,340
+AUDIENCE: Yeah.
+
+394
+00:17:01,340 --> 00:17:01,370
+Yeah.
+
+395
+00:17:01,370 --> 00:17:02,703
+You don't move the anchored one.
+
+396
+00:17:02,703 --> 00:17:05,259
+
+397
+00:17:05,259 --> 00:17:07,550
+AUDIENCE: Oh yeah, because
+you can only [INAUDIBLE] two
+
+398
+00:17:07,550 --> 00:17:11,256
+of the-- three of
+the faces now, but.
+
+399
+00:17:11,256 --> 00:17:11,839
+PROFESSOR: OK.
+
+400
+00:17:11,839 --> 00:17:15,390
+So let's look at the left face.
+
+401
+00:17:15,390 --> 00:17:17,660
+So you have a configuration.
+
+402
+00:17:17,660 --> 00:17:20,210
+So you can move the
+left face clockwise,
+
+403
+00:17:20,210 --> 00:17:21,760
+left face counterclockwise.
+
+404
+00:17:21,760 --> 00:17:26,910
+You can move the top
+face clockwise, top face
+
+405
+00:17:26,910 --> 00:17:28,680
+counterclockwise,
+and a couple more.
+
+406
+00:17:28,680 --> 00:17:32,240
+
+407
+00:17:32,240 --> 00:17:35,610
+So what does a move look like?
+
+408
+00:17:35,610 --> 00:17:36,670
+Someone said it before.
+
+409
+00:17:36,670 --> 00:17:39,190
+
+410
+00:17:39,190 --> 00:17:42,550
+So when you're doing a move,
+what's going to happen is,
+
+411
+00:17:42,550 --> 00:17:44,652
+a move doesn't
+create plastic faces
+
+412
+00:17:44,652 --> 00:17:46,110
+and it doesn't
+destroy them, right?
+
+413
+00:17:46,110 --> 00:17:51,580
+It just changes their
+position on the wireframe.
+
+414
+00:17:51,580 --> 00:17:55,150
+So if you have an initial
+configuration that
+
+415
+00:17:55,150 --> 00:17:57,560
+has plastic faces assigned
+to wireframe faces,
+
+416
+00:17:57,560 --> 00:18:02,340
+and you have a
+final configuration,
+
+417
+00:18:02,340 --> 00:18:09,882
+these plastic faces are
+going to end up somewhere
+
+418
+00:18:09,882 --> 00:18:10,590
+on the wireframe.
+
+419
+00:18:10,590 --> 00:18:13,380
+
+420
+00:18:13,380 --> 00:18:15,130
+And that's true for
+all the plastic faces.
+
+421
+00:18:15,130 --> 00:18:19,270
+So the plastic faces are
+going to end up somewhere.
+
+422
+00:18:19,270 --> 00:18:22,930
+Also, what's nice is if
+we look at the wireframe,
+
+423
+00:18:22,930 --> 00:18:27,940
+if I do a clockwise rotation
+in the front, whatever
+
+424
+00:18:27,940 --> 00:18:31,440
+plastic face was here
+is going to end up here.
+
+425
+00:18:31,440 --> 00:18:34,520
+Whatever plastic face was
+here is going to end up here,
+
+426
+00:18:34,520 --> 00:18:37,374
+so on and so forth.
+
+427
+00:18:37,374 --> 00:18:41,658
+So it's a function of rotation
+[INAUDIBLE] inside [INAUDIBLE].
+
+428
+00:18:41,658 --> 00:18:45,693
+Like the four faces that
+correspond to each other,
+
+429
+00:18:45,693 --> 00:18:46,540
+rotate.
+
+430
+00:18:46,540 --> 00:18:47,930
+PROFESSOR: OK.
+
+431
+00:18:47,930 --> 00:18:52,010
+That's some good-- that's
+going deeper than want to go.
+
+432
+00:18:52,010 --> 00:18:55,530
+I want to account for
+something simpler.
+
+433
+00:18:55,530 --> 00:18:58,120
+So my point is that
+the arrows will always,
+
+434
+00:18:58,120 --> 00:19:02,030
+if I do a right
+clockwise rotation,
+
+435
+00:19:02,030 --> 00:19:04,880
+the arrows will
+always look the same.
+
+436
+00:19:04,880 --> 00:19:08,200
+So the only thing that changes
+is what's inside the array.
+
+437
+00:19:08,200 --> 00:19:10,670
+But if you take one
+configuration array
+
+438
+00:19:10,670 --> 00:19:13,750
+and you move things
+according to the way you're
+
+439
+00:19:13,750 --> 00:19:17,390
+supposed to move them for
+the front clockwise move,
+
+440
+00:19:17,390 --> 00:19:20,712
+you're going to get
+the right result.
+
+441
+00:19:20,712 --> 00:19:22,420
+So what is this a
+bunch of arrows called?
+
+442
+00:19:22,420 --> 00:19:25,510
+What does it do?
+
+443
+00:19:25,510 --> 00:19:26,750
+What does it do to the faces?
+
+444
+00:19:26,750 --> 00:19:29,286
+What does it do to the
+elements of the array?
+
+445
+00:19:29,286 --> 00:19:31,120
+AUDIENCE: It moves
+in different spots.
+
+446
+00:19:31,120 --> 00:19:32,982
+PROFESSOR: OK, so
+fancy math name?
+
+447
+00:19:32,982 --> 00:19:34,280
+AUDIENCE: Shuffle.
+
+448
+00:19:34,280 --> 00:19:35,762
+PROFESSOR: OK.
+
+449
+00:19:35,762 --> 00:19:36,970
+So this is what I got before.
+
+450
+00:19:36,970 --> 00:19:38,428
+This is how you
+think of it, right?
+
+451
+00:19:38,428 --> 00:19:42,404
+It's a shuffle, so fancy
+math name for a shuttle.
+
+452
+00:19:42,404 --> 00:19:43,340
+AUDIENCE: [INAUDIBLE].
+
+453
+00:19:43,340 --> 00:19:46,105
+PROFESSOR: All right.
+
+454
+00:19:46,105 --> 00:19:48,850
+AUDIENCE: Something
+going on here.
+
+455
+00:19:48,850 --> 00:19:50,338
+PROFESSOR: So then a move is a?
+
+456
+00:19:50,338 --> 00:19:51,838
+AUDIENCE: Rotation
+[? permutation?].
+
+457
+00:19:51,838 --> 00:19:54,754
+
+458
+00:19:54,754 --> 00:19:55,254
+[INAUDIBLE]
+
+459
+00:19:55,254 --> 00:20:00,640
+
+460
+00:20:00,640 --> 00:20:03,410
+PROFESSOR: All right, so the
+thing is-- the difficult part
+
+461
+00:20:03,410 --> 00:20:05,190
+of the code is you
+have two things that
+
+462
+00:20:05,190 --> 00:20:07,320
+are represented by permutations.
+
+463
+00:20:07,320 --> 00:20:12,030
+Configurations are
+permutations of plastic faces
+
+464
+00:20:12,030 --> 00:20:16,540
+onto the array, onto the
+array of wireframes faces.
+
+465
+00:20:16,540 --> 00:20:20,145
+And then a move is a
+permutation of a configuration
+
+466
+00:20:20,145 --> 00:20:21,270
+into another configuration.
+
+467
+00:20:21,270 --> 00:20:24,340
+
+468
+00:20:24,340 --> 00:20:26,420
+OK, so now if I want
+to compute neighbors,
+
+469
+00:20:26,420 --> 00:20:28,730
+I take-- we think
+there are six moves,
+
+470
+00:20:28,730 --> 00:20:31,520
+so I'm going to take six moves.
+
+471
+00:20:31,520 --> 00:20:33,950
+I'm going to type out the
+permutations, so 6 times
+
+472
+00:20:33,950 --> 00:20:37,800
+24 numbers, and that's it.
+
+473
+00:20:37,800 --> 00:20:39,921
+Now I can compute neighbors.
+
+474
+00:20:39,921 --> 00:20:40,795
+Does that make sense?
+
+475
+00:20:40,795 --> 00:20:43,440
+
+476
+00:20:43,440 --> 00:20:45,942
+AUDIENCE: I think you
+have all the permutations.
+
+477
+00:20:45,942 --> 00:20:47,650
+PROFESSOR: So there
+are six moves, right?
+
+478
+00:20:47,650 --> 00:20:48,063
+AUDIENCE: Yeah, but
+then it's right.
+
+479
+00:20:48,063 --> 00:20:48,780
+Oh yeah--
+
+480
+00:20:48,780 --> 00:20:52,720
+PROFESSOR: If I take
+a configuration,
+
+481
+00:20:52,720 --> 00:20:55,009
+and I apply the
+permutation for this move,
+
+482
+00:20:55,009 --> 00:20:56,550
+I'm going to get a
+new configuration,
+
+483
+00:20:56,550 --> 00:20:57,960
+and that's its neighbor.
+
+484
+00:20:57,960 --> 00:21:04,600
+So if I apply the
+permutation for LC 4,
+
+485
+00:21:04,600 --> 00:21:06,780
+left clockwise to
+this configuration,
+
+486
+00:21:06,780 --> 00:21:08,950
+I get the new configuration.
+
+487
+00:21:08,950 --> 00:21:11,790
+So all I need to do is hard
+code those configurations,
+
+488
+00:21:11,790 --> 00:21:12,540
+and then I'm done.
+
+489
+00:21:12,540 --> 00:21:14,350
+I can compute neighbors.
+
+490
+00:21:14,350 --> 00:21:15,560
+But that's a lot of typing.
+
+491
+00:21:15,560 --> 00:21:17,480
+I don't want to type as much.
+
+492
+00:21:17,480 --> 00:21:20,170
+I want to reduce my
+burden a little bit.
+
+493
+00:21:20,170 --> 00:21:23,830
+And we can do that by noticing
+that some moves are associated
+
+494
+00:21:23,830 --> 00:21:25,460
+with some other moves.
+
+495
+00:21:25,460 --> 00:21:28,357
+So, if I go left
+clockwise move, that's
+
+496
+00:21:28,357 --> 00:21:30,190
+the inverse of a left
+counterclockwise move.
+
+497
+00:21:30,190 --> 00:21:33,110
+
+498
+00:21:33,110 --> 00:21:37,220
+So, if given the permutation,
+I could compute its inverse,
+
+499
+00:21:37,220 --> 00:21:40,634
+then I wouldn't have to
+type as many permutations.
+
+500
+00:21:40,634 --> 00:21:41,599
+Right?
+
+501
+00:21:41,599 --> 00:21:42,640
+Why do I care about that?
+
+502
+00:21:42,640 --> 00:21:46,121
+Did anyone take 6004?
+
+503
+00:21:46,121 --> 00:21:46,620
+Remember?
+
+504
+00:21:46,620 --> 00:21:49,570
+So at some lab, which
+is the dreaded beta lab,
+
+505
+00:21:49,570 --> 00:21:52,657
+you have to write the control
+block for a processor, right?
+
+506
+00:21:52,657 --> 00:21:54,990
+And that's a lot of zeros and
+1's that you have to type.
+
+507
+00:21:54,990 --> 00:21:57,858
+And if you get one wrong,
+good luck to [INAUDIBLE].
+
+508
+00:21:57,858 --> 00:22:00,810
+[INTERPOSING VOICES]
+
+509
+00:22:00,810 --> 00:22:03,437
+AUDIENCE: 18 wide and 64 tall.
+
+510
+00:22:03,437 --> 00:22:04,411
+PROFESSOR: I know.
+
+511
+00:22:04,411 --> 00:22:05,872
+AUDIENCE: Copy and paste like.
+
+512
+00:22:05,872 --> 00:22:06,846
+AUDIENCE: Yeah, and copy paste.
+
+513
+00:22:06,846 --> 00:22:07,346
+[INAUDIBLE]
+
+514
+00:22:07,346 --> 00:22:10,646
+
+515
+00:22:10,646 --> 00:22:11,229
+PROFESSOR: OK.
+
+516
+00:22:11,229 --> 00:22:12,690
+Bad memory.
+
+517
+00:22:12,690 --> 00:22:14,166
+Let's move on.
+
+518
+00:22:14,166 --> 00:22:14,980
+Let's move on.
+
+519
+00:22:14,980 --> 00:22:17,920
+So two good news, two
+pieces of good news.
+
+520
+00:22:17,920 --> 00:22:20,629
+One, some of these are
+redundant in our case, two,
+
+521
+00:22:20,629 --> 00:22:23,170
+we wrote everything for you, so
+you don't have to write them,
+
+522
+00:22:23,170 --> 00:22:25,741
+we're just teaching
+you how we did them,
+
+523
+00:22:25,741 --> 00:22:29,030
+because the inverse of
+a permutation is cool
+
+524
+00:22:29,030 --> 00:22:31,054
+and I think it's a
+good concept to know.
+
+525
+00:22:31,054 --> 00:22:32,720
+So let's look at how
+a permutation looks
+
+526
+00:22:32,720 --> 00:22:34,820
+like and compute its
+inverse and then move on
+
+527
+00:22:34,820 --> 00:22:36,040
+to other nice problems.
+
+528
+00:22:36,040 --> 00:22:43,460
+
+529
+00:22:43,460 --> 00:22:48,540
+OK so let's take a
+presentation of five elements,
+
+530
+00:22:48,540 --> 00:22:50,500
+not going to go to
+24 on the board here.
+
+531
+00:22:50,500 --> 00:22:53,330
+
+532
+00:22:53,330 --> 00:22:55,190
+3, 5, 1, 2, 4.
+
+533
+00:22:55,190 --> 00:22:57,940
+This is how permutations
+look like in math mode.
+
+534
+00:22:57,940 --> 00:22:59,520
+If you want to be
+more explicit, you
+
+535
+00:22:59,520 --> 00:23:01,730
+can add a row numbers above.
+
+536
+00:23:01,730 --> 00:23:04,830
+
+537
+00:23:04,830 --> 00:23:07,860
+And this is a bit more explicit
+about what a permutation does.
+
+538
+00:23:07,860 --> 00:23:11,010
+So permutation takes an input
+list, let's say a b c d e.
+
+539
+00:23:11,010 --> 00:23:14,351
+
+540
+00:23:14,351 --> 00:23:16,850
+And for this is an output list,
+according to the recipe that
+
+541
+00:23:16,850 --> 00:23:17,790
+you see here .
+
+542
+00:23:17,790 --> 00:23:21,110
+So this pretty much says, the
+first element of the output
+
+543
+00:23:21,110 --> 00:23:25,060
+is the third element
+of the input.
+
+544
+00:23:25,060 --> 00:23:27,850
+The second element of the
+output is the fifth element
+
+545
+00:23:27,850 --> 00:23:28,655
+in the input.
+
+546
+00:23:28,655 --> 00:23:30,880
+
+547
+00:23:30,880 --> 00:23:32,380
+Wait, this is the
+wrong permutation.
+
+548
+00:23:32,380 --> 00:23:40,257
+
+549
+00:23:40,257 --> 00:23:42,715
+It doesn't look as pretty, so
+I'm changing the permutation.
+
+550
+00:23:42,715 --> 00:23:46,570
+
+551
+00:23:46,570 --> 00:23:48,970
+The third element of the
+output is the first element
+
+552
+00:23:48,970 --> 00:23:50,790
+in the input.
+
+553
+00:23:50,790 --> 00:23:56,290
+The fourth element of the
+output is which letter?
+
+554
+00:23:56,290 --> 00:23:57,291
+So which letter?
+
+555
+00:23:57,291 --> 00:24:00,060
+AUDIENCE: Oh. [INAUDIBLE]
+
+556
+00:24:00,060 --> 00:24:03,215
+PROFESSOR: And the fifth element
+of the output is which letter?
+
+557
+00:24:03,215 --> 00:24:06,971
+
+558
+00:24:06,971 --> 00:24:10,740
+AUDIENCE: Did you mean
+to get c instead of a?
+
+559
+00:24:10,740 --> 00:24:11,240
+No.
+
+560
+00:24:11,240 --> 00:24:12,264
+PROFESSOR: Yeah.
+
+561
+00:24:12,264 --> 00:24:13,930
+That would make more
+sense, wouldn't it?
+
+562
+00:24:13,930 --> 00:24:15,800
+Thank you.
+
+563
+00:24:15,800 --> 00:24:16,300
+OK.
+
+564
+00:24:16,300 --> 00:24:20,840
+So if this is
+permutation pi, then this
+
+565
+00:24:20,840 --> 00:24:24,560
+is the effect of applying
+pi to this original list.
+
+566
+00:24:24,560 --> 00:24:28,980
+Now the inverse of a
+permutation by minus 1
+
+567
+00:24:28,980 --> 00:24:32,870
+is another bunch of arrows,
+and what I want to do
+
+568
+00:24:32,870 --> 00:24:36,344
+is, if I take this, which
+is the output of pi,
+
+569
+00:24:36,344 --> 00:24:37,760
+and I run it through
+these arrows,
+
+570
+00:24:37,760 --> 00:24:41,810
+I want to get back a b c d e.
+
+571
+00:24:41,810 --> 00:24:44,830
+So I want to undo
+the effect of pi.
+
+572
+00:24:44,830 --> 00:24:45,330
+OK.
+
+573
+00:24:45,330 --> 00:24:46,700
+How do I compute this inverse?
+
+574
+00:24:46,700 --> 00:24:48,620
+How do I compute pi
+minus 1 given pi?
+
+575
+00:24:48,620 --> 00:24:58,500
+
+576
+00:24:58,500 --> 00:25:00,760
+AUDIENCE: Wait, you're
+giving us the initial,
+
+577
+00:25:00,760 --> 00:25:03,640
+when we start with c d a e b?
+
+578
+00:25:03,640 --> 00:25:05,140
+PROFESSOR: You only
+start with this.
+
+579
+00:25:05,140 --> 00:25:07,220
+This doesn't matter at all.
+
+580
+00:25:07,220 --> 00:25:09,340
+A different list would
+get different results.
+
+581
+00:25:09,340 --> 00:25:14,920
+So this is the permutation,
+and I want pi to the minus 1.
+
+582
+00:25:14,920 --> 00:25:20,890
+AUDIENCE: So you take the value.
+
+583
+00:25:20,890 --> 00:25:23,150
+So you have 3 4 1 5 2.
+
+584
+00:25:23,150 --> 00:25:28,920
+So the value at index
+1 you put that index,
+
+585
+00:25:28,920 --> 00:25:35,390
+that index has a value
+of index 3, et cetera.
+
+586
+00:25:35,390 --> 00:25:37,580
+AUDIENCE: So c would
+go to position 1?
+
+587
+00:25:37,580 --> 00:25:39,822
+AUDIENCE: Wait.
+
+588
+00:25:39,822 --> 00:25:41,042
+PROFESSOR: OK.
+
+589
+00:25:41,042 --> 00:25:42,750
+AUDIENCE: Is it true
+that you can run pi,
+
+590
+00:25:42,750 --> 00:25:49,030
+so the number of times it will
+eventually equal pi inverse?
+
+591
+00:25:49,030 --> 00:25:52,272
+PROFESSOR: Yes, but
+that's complicated algebra
+
+592
+00:25:52,272 --> 00:25:53,117
+to prove that.
+
+593
+00:25:53,117 --> 00:25:54,200
+AUDIENCE: Not forget that.
+
+594
+00:25:54,200 --> 00:25:57,092
+
+595
+00:25:57,092 --> 00:26:00,650
+Just like make that
+[INAUDIBLE] thing that you made
+
+596
+00:26:00,650 --> 00:26:02,130
+and sort of flip it.
+
+597
+00:26:02,130 --> 00:26:03,000
+PROFESSOR: OK.
+
+598
+00:26:03,000 --> 00:26:04,640
+I like that.
+
+599
+00:26:04,640 --> 00:26:12,349
+So 34152, 1 2 3 4 5.
+
+600
+00:26:12,349 --> 00:26:13,890
+Except this doesn't
+look very pretty,
+
+601
+00:26:13,890 --> 00:26:15,389
+so I need to sort
+them again, right?
+
+602
+00:26:15,389 --> 00:26:22,350
+So 1 3, 2 5, 3 1, 4 2, 5 4.
+
+603
+00:26:22,350 --> 00:26:24,871
+
+604
+00:26:24,871 --> 00:26:25,370
+Right?
+
+605
+00:26:25,370 --> 00:26:28,080
+Did you guys come
+up with it now?
+
+606
+00:26:28,080 --> 00:26:29,990
+Congrats.
+
+607
+00:26:29,990 --> 00:26:30,740
+So this is good.
+
+608
+00:26:30,740 --> 00:26:32,198
+This is how you
+compute an inverse.
+
+609
+00:26:32,198 --> 00:26:34,640
+Let's figure out why you
+compute an inverse that way.
+
+610
+00:26:34,640 --> 00:26:36,200
+Let's look at b.
+
+611
+00:26:36,200 --> 00:26:40,730
+So b starts out at
+position 2, right?
+
+612
+00:26:40,730 --> 00:26:52,030
+And then pi of 5 equals 2, which
+means that, after applying 5,
+
+613
+00:26:52,030 --> 00:26:55,500
+b is going to go to position 5.
+
+614
+00:26:55,500 --> 00:27:00,220
+So pi inverse has to
+take b and put it where?
+
+615
+00:27:00,220 --> 00:27:01,060
+Back to 2, right?
+
+616
+00:27:01,060 --> 00:27:04,160
+Otherwise it's not
+a good inverse.
+
+617
+00:27:04,160 --> 00:27:08,860
+So pi inverse of 2.
+
+618
+00:27:08,860 --> 00:27:10,410
+So the second
+element in the output
+
+619
+00:27:10,410 --> 00:27:12,374
+has to be which
+element in the input?
+
+620
+00:27:12,374 --> 00:27:15,360
+
+621
+00:27:15,360 --> 00:27:17,160
+5, right?
+
+622
+00:27:17,160 --> 00:27:19,840
+Otherwise, this wouldn't
+undo the effect of pi.
+
+623
+00:27:19,840 --> 00:27:24,550
+
+624
+00:27:24,550 --> 00:27:28,140
+So if you write out our
+permutation and split
+
+625
+00:27:28,140 --> 00:27:31,587
+the index and the value, we
+get the inverse permutation.
+
+626
+00:27:31,587 --> 00:27:34,170
+So you can compute that with a
+couple of lines of Python code.
+
+627
+00:27:34,170 --> 00:27:36,770
+
+628
+00:27:36,770 --> 00:27:37,270
+OK.
+
+629
+00:27:37,270 --> 00:27:41,240
+So this lets us now compute
+some of the permutations there.
+
+630
+00:27:41,240 --> 00:27:43,460
+So we only have to type
+up two, three, four,
+
+631
+00:27:43,460 --> 00:27:44,892
+or something like that.
+
+632
+00:27:44,892 --> 00:27:46,350
+It's a bit nicer
+and you guys don't
+
+633
+00:27:46,350 --> 00:27:48,680
+have to type up any,
+because we gave them to you.
+
+634
+00:27:48,680 --> 00:27:51,200
+Aren't we nice?
+
+635
+00:27:51,200 --> 00:27:51,700
+All right.
+
+636
+00:27:51,700 --> 00:27:53,783
+Any questions about
+permutations or Rubik's cubes?
+
+637
+00:27:53,783 --> 00:27:56,790
+
+638
+00:27:56,790 --> 00:27:58,620
+AUDIENCE: Wait, so
+to get high inverse
+
+639
+00:27:58,620 --> 00:28:02,312
+based off those numbers,
+you just-- well,
+
+640
+00:28:02,312 --> 00:28:03,910
+it's the same thing.
+
+641
+00:28:03,910 --> 00:28:06,320
+Wait, but 5 got flipped.
+
+642
+00:28:06,320 --> 00:28:09,430
+Or you think the maybe if the
+inverse of that matrix then?
+
+643
+00:28:09,430 --> 00:28:12,260
+PROFESSOR: So you take these
+two and you flip them, right?
+
+644
+00:28:12,260 --> 00:28:13,176
+AUDIENCE: [INAUDIBLE].
+
+645
+00:28:13,176 --> 00:28:16,140
+
+646
+00:28:16,140 --> 00:28:19,530
+PROFESSOR: And then you keep
+these bound, but you sort them.
+
+647
+00:28:19,530 --> 00:28:22,700
+
+648
+00:28:22,700 --> 00:28:28,477
+2 5, 3 1, 4, no-- 3 5 1 2 4.
+
+649
+00:28:28,477 --> 00:28:30,518
+AUDIENCE: Oh they're still
+based off the top row?
+
+650
+00:28:30,518 --> 00:28:31,277
+AUDIENCE: Yeah.
+
+651
+00:28:31,277 --> 00:28:31,985
+AUDIENCE: Oh, OK.
+
+652
+00:28:31,985 --> 00:28:34,077
+AUDIENCE: Wait, how did
+he get the second one?
+
+653
+00:28:34,077 --> 00:28:35,410
+AUDIENCE: Based off the top row.
+
+654
+00:28:35,410 --> 00:28:39,090
+PROFESSOR: So you sort this
+one, but you keep the bonds,
+
+655
+00:28:39,090 --> 00:28:42,780
+so 3 ends up here and it
+gives it 1, 4 ends up here
+
+656
+00:28:42,780 --> 00:28:45,600
+and it gives us 2.
+
+657
+00:28:45,600 --> 00:28:46,360
+OK.
+
+658
+00:28:46,360 --> 00:28:49,370
+So this make sense?
+
+659
+00:28:49,370 --> 00:28:49,870
+Good.
+
+660
+00:28:49,870 --> 00:28:51,590
+We're remembering
+that, that's good.
+
+661
+00:28:51,590 --> 00:28:52,890
+Now let's talk about a problem.
+
+662
+00:28:52,890 --> 00:28:54,890
+So this is a Rubik's cube,
+this is how it works.
+
+663
+00:28:54,890 --> 00:28:57,750
+Hopefully we will remember
+how to solve game.
+
+664
+00:28:57,750 --> 00:29:05,130
+Let's try to solve
+StarCraft Well,
+
+665
+00:29:05,130 --> 00:29:06,526
+of course we're going to cheat.
+
+666
+00:29:06,526 --> 00:29:08,650
+We're going to solve a
+simpler version of StarCraft
+
+667
+00:29:08,650 --> 00:29:11,210
+because it turns out you
+can't really solve StarCraft
+
+668
+00:29:11,210 --> 00:29:14,950
+with the computers
+that we have now.
+
+669
+00:29:14,950 --> 00:29:17,470
+So let's make a few
+simplifying assumptions.
+
+670
+00:29:17,470 --> 00:29:20,980
+Who play StarCraft, by the way?
+
+671
+00:29:20,980 --> 00:29:21,580
+Two?
+
+672
+00:29:21,580 --> 00:29:22,080
+OK.
+
+673
+00:29:22,080 --> 00:29:23,817
+So you guys, please
+pay attention
+
+674
+00:29:23,817 --> 00:29:25,650
+to the simplifying
+assumptions, because this
+
+675
+00:29:25,650 --> 00:29:26,990
+isn't real StarCraft.
+
+676
+00:29:26,990 --> 00:29:31,830
+It's a lot easier, so that we
+can build a problem out of it.
+
+677
+00:29:31,830 --> 00:29:32,330
+All right.
+
+678
+00:29:32,330 --> 00:29:38,070
+So we're going to play
+with a race called Zerg.
+
+679
+00:29:38,070 --> 00:29:44,230
+And so the idea of StarCraft
+is you build an army
+
+680
+00:29:44,230 --> 00:29:45,820
+and then you take
+this army and you
+
+681
+00:29:45,820 --> 00:29:48,140
+destroy your opponent,
+nice and simple.
+
+682
+00:29:48,140 --> 00:29:50,860
+Good old violent games.
+
+683
+00:29:50,860 --> 00:29:54,240
+So we're going to look at the
+build order part of the game.
+
+684
+00:29:54,240 --> 00:29:56,840
+So the build order is the
+opening strategy and it takes
+
+685
+00:29:56,840 --> 00:30:00,830
+care of the building process,
+so it's the strategy that says,
+
+686
+00:30:00,830 --> 00:30:02,820
+what are you going
+to build and when,
+
+687
+00:30:02,820 --> 00:30:05,760
+in order to come up with an
+army as quickly as possible?
+
+688
+00:30:05,760 --> 00:30:08,970
+So the main goal is to amass
+an army quickly and then take
+
+689
+00:30:08,970 --> 00:30:10,732
+that army and
+destroy the opponent.
+
+690
+00:30:10,732 --> 00:30:12,440
+And yes, I know, not
+real life StarCraft,
+
+691
+00:30:12,440 --> 00:30:13,780
+but let's go with it.
+
+692
+00:30:13,780 --> 00:30:18,880
+
+693
+00:30:18,880 --> 00:30:21,660
+OK, so these are the
+rules in our toy StarCraft
+
+694
+00:30:21,660 --> 00:30:26,690
+And the Zerg is started with a
+building called the hatchery.
+
+695
+00:30:26,690 --> 00:30:29,810
+And out of a hatchery--
+the currency of the game,
+
+696
+00:30:29,810 --> 00:30:31,170
+by the way, is minerals.
+
+697
+00:30:31,170 --> 00:30:33,510
+We'll write that
+down as dollars.
+
+698
+00:30:33,510 --> 00:30:38,040
+So out of a hatchery
+you can build a drone
+
+699
+00:30:38,040 --> 00:30:40,400
+by spending 50 minerals.
+
+700
+00:30:40,400 --> 00:30:44,760
+You can build an
+overlord by spending 100,
+
+701
+00:30:44,760 --> 00:30:49,970
+or you can build a
+Zergling by spending 50.
+
+702
+00:30:49,970 --> 00:30:51,940
+All right, what do
+each of these do?
+
+703
+00:30:51,940 --> 00:30:55,180
+A drone harvests minerals
+for you, so it's a worker.
+
+704
+00:30:55,180 --> 00:30:59,050
+So, for every drone
+that you have,
+
+705
+00:30:59,050 --> 00:31:00,500
+you get eight minerals a second.
+
+706
+00:31:00,500 --> 00:31:03,220
+
+707
+00:31:03,220 --> 00:31:06,100
+So drone gets you eight
+minerals a second.
+
+708
+00:31:06,100 --> 00:31:08,060
+As Zergling is your
+attack unit, so this
+
+709
+00:31:08,060 --> 00:31:10,130
+is the guy that you want
+to build in the end.
+
+710
+00:31:10,130 --> 00:31:12,600
+So this destroys your opponents.
+
+711
+00:31:12,600 --> 00:31:16,020
+I don't know how to make a
+nice icon for that, so big
+
+712
+00:31:16,020 --> 00:31:17,540
+smiley green.
+
+713
+00:31:17,540 --> 00:31:20,260
+This makes it happy.
+
+714
+00:31:20,260 --> 00:31:20,850
+All right.
+
+715
+00:31:20,850 --> 00:31:22,680
+Overlords help you
+control your units,
+
+716
+00:31:22,680 --> 00:31:26,830
+so drones and
+Zerglings are units.
+
+717
+00:31:26,830 --> 00:31:29,670
+You can't build-- for every
+eight units that you build,
+
+718
+00:31:29,670 --> 00:31:31,330
+you have to have an overlord.
+
+719
+00:31:31,330 --> 00:31:32,960
+Otherwise, you can't
+build more units
+
+720
+00:31:32,960 --> 00:31:34,710
+until you build overlords.
+
+721
+00:31:34,710 --> 00:31:38,000
+So if you have eight drones,
+you can't build a ninth on one
+
+722
+00:31:38,000 --> 00:31:38,950
+you build an overlord.
+
+723
+00:31:38,950 --> 00:31:41,300
+If you have eight drones
+and these eight Zerglings,
+
+724
+00:31:41,300 --> 00:31:43,020
+you have to build
+a second overlord
+
+725
+00:31:43,020 --> 00:31:45,840
+to be able to build more units.
+
+726
+00:31:45,840 --> 00:31:49,225
+So one overlord can help
+you control eight units.
+
+727
+00:31:49,225 --> 00:31:52,130
+
+728
+00:31:52,130 --> 00:31:53,900
+In order to build
+a Zergling, which
+
+729
+00:31:53,900 --> 00:31:55,316
+is what you want
+to do in the end,
+
+730
+00:31:55,316 --> 00:31:57,930
+because these are the attack
+units, you need to spend $50,
+
+731
+00:31:57,930 --> 00:32:00,280
+and you also need to
+have one building called
+
+732
+00:32:00,280 --> 00:32:01,090
+a spawning pool.
+
+733
+00:32:01,090 --> 00:32:05,070
+
+734
+00:32:05,070 --> 00:32:07,250
+You what?
+
+735
+00:32:07,250 --> 00:32:07,800
+All right.
+
+736
+00:32:07,800 --> 00:32:09,960
+So how do you build
+that spawning pool?
+
+737
+00:32:09,960 --> 00:32:12,390
+Drones can work for
+you, but they can also
+
+738
+00:32:12,390 --> 00:32:14,080
+transform into buildings.
+
+739
+00:32:14,080 --> 00:32:16,749
+So a drone mutates into a
+building, and after it mutates,
+
+740
+00:32:16,749 --> 00:32:19,040
+it doesn't work for you
+anymore, by the way, so no more
+
+741
+00:32:19,040 --> 00:32:20,500
+minerals.
+
+742
+00:32:20,500 --> 00:32:28,230
+So a drone can mutate into the
+spawning pool for 200 minerals,
+
+743
+00:32:28,230 --> 00:32:29,230
+I think.
+
+744
+00:32:29,230 --> 00:32:31,740
+It can mutate into a hatchery.
+
+745
+00:32:31,740 --> 00:32:35,590
+That's the same thing
+that you have up here for,
+
+746
+00:32:35,590 --> 00:32:37,230
+how much is it?
+
+747
+00:32:37,230 --> 00:32:40,340
+$450.
+
+748
+00:32:40,340 --> 00:32:43,590
+And it can mutate into
+an evolution chamber
+
+749
+00:32:43,590 --> 00:32:51,030
+that we'll talk
+about soon, for $400.
+
+750
+00:32:51,030 --> 00:32:51,530
+OK.
+
+751
+00:32:51,530 --> 00:32:54,360
+Why do we care about having
+more than one hatchery?
+
+752
+00:32:54,360 --> 00:32:57,650
+One hatchery can build one unit
+per second, no more than that.
+
+753
+00:32:57,650 --> 00:33:00,689
+
+754
+00:33:00,689 --> 00:33:02,480
+So once you have a lot
+of drones and you're
+
+755
+00:33:02,480 --> 00:33:05,220
+making a lot of money, you need
+to have a lot of hatcheries
+
+756
+00:33:05,220 --> 00:33:07,180
+so that you can spend the money.
+
+757
+00:33:07,180 --> 00:33:09,670
+Our goal is not to amass money,
+it's to build units, right?
+
+758
+00:33:09,670 --> 00:33:11,004
+So money doesn't
+help you, I'm going
+
+759
+00:33:11,004 --> 00:33:12,337
+to spend it as fast as possible.
+
+760
+00:33:12,337 --> 00:33:15,140
+
+761
+00:33:15,140 --> 00:33:16,300
+OK.
+
+762
+00:33:16,300 --> 00:33:19,126
+An evolution chamber
+lets you build-- let's
+
+763
+00:33:19,126 --> 00:33:20,850
+you upgrade research
+to technologies.
+
+764
+00:33:20,850 --> 00:33:22,600
+And these technologies
+aren't like badges.
+
+765
+00:33:22,600 --> 00:33:26,420
+Once you get them,
+you keep them.
+
+766
+00:33:26,420 --> 00:33:28,630
+So you can research
+an attack upgrade
+
+767
+00:33:28,630 --> 00:33:33,560
+and you can research
+a defense upgrade.
+
+768
+00:33:33,560 --> 00:33:38,030
+They're both 1,000 minerals,
+but you only have to do it once.
+
+769
+00:33:38,030 --> 00:33:40,040
+Why do I care about these?
+
+770
+00:33:40,040 --> 00:33:43,340
+They decide how strong
+your Zerglings are.
+
+771
+00:33:43,340 --> 00:33:47,870
+So, given a Zergling, at
+the beginning of the game,
+
+772
+00:33:47,870 --> 00:33:50,670
+you don't have the
+attack upgrade,
+
+773
+00:33:50,670 --> 00:33:52,760
+and you don't have
+a defense upgrade.
+
+774
+00:33:52,760 --> 00:33:55,150
+So the Zerglings attack is 1.
+
+775
+00:33:55,150 --> 00:33:57,360
+If you research
+the attack upgrade,
+
+776
+00:33:57,360 --> 00:33:59,580
+but you haven't researched
+the defense one,
+
+777
+00:33:59,580 --> 00:34:02,530
+their total power is 133.
+
+778
+00:34:02,530 --> 00:34:05,010
+If you research the defense
+upgrade, but not the attack
+
+779
+00:34:05,010 --> 00:34:07,670
+upgrade, their
+total power is 1.2.
+
+780
+00:34:07,670 --> 00:34:11,750
+And after your research both of
+them, their total power is 2.
+
+781
+00:34:11,750 --> 00:34:13,730
+Again, oversimplifying.
+
+782
+00:34:13,730 --> 00:34:17,480
+So, we have to build an army
+that's as powerful as possible.
+
+783
+00:34:17,480 --> 00:34:21,370
+So in the end you want to
+have both of these researched.
+
+784
+00:34:21,370 --> 00:34:21,870
+All right.
+
+785
+00:34:21,870 --> 00:34:24,080
+Now there's one more
+limitation, that is,
+
+786
+00:34:24,080 --> 00:34:27,280
+you cannot control more than
+200 of these units total,
+
+787
+00:34:27,280 --> 00:34:29,130
+because even if you
+have a lot of overlords,
+
+788
+00:34:29,130 --> 00:34:33,100
+your brain isn't immensely huge,
+so you can only control 200
+
+789
+00:34:33,100 --> 00:34:34,199
+units.
+
+790
+00:34:34,199 --> 00:34:40,489
+So we want to build these 200
+units as fast as possible.
+
+791
+00:34:40,489 --> 00:34:44,699
+And out of these
+200 units, we want
+
+792
+00:34:44,699 --> 00:34:49,330
+to have at least 150 Zerglings.
+
+793
+00:34:49,330 --> 00:34:50,794
+If you build 200
+drones, you're not
+
+794
+00:34:50,794 --> 00:34:52,460
+going to attack your
+opponent with that,
+
+795
+00:34:52,460 --> 00:34:54,650
+those aren't very useful.
+
+796
+00:34:54,650 --> 00:34:56,650
+But you need some drones
+in order to make money,
+
+797
+00:34:56,650 --> 00:34:58,280
+so you need the balance.
+
+798
+00:34:58,280 --> 00:35:02,170
+So the goal is to get to 200
+units as quickly as possible,
+
+799
+00:35:02,170 --> 00:35:03,532
+and at least 150 Zergs.
+
+800
+00:35:03,532 --> 00:35:06,160
+
+801
+00:35:06,160 --> 00:35:07,960
+Yes?
+
+802
+00:35:07,960 --> 00:35:10,560
+Evolution chamber.
+
+803
+00:35:10,560 --> 00:35:13,811
+Easy, that's too much.
+
+804
+00:35:13,811 --> 00:35:14,310
+OK.
+
+805
+00:35:14,310 --> 00:35:15,624
+So how do we solve this?
+
+806
+00:35:15,624 --> 00:35:18,500
+
+807
+00:35:18,500 --> 00:35:19,416
+AUDIENCE: [INAUDIBLE].
+
+808
+00:35:19,416 --> 00:35:23,680
+
+809
+00:35:23,680 --> 00:35:26,830
+PROFESSOR: So how
+do we solve this?
+
+810
+00:35:26,830 --> 00:35:29,064
+AUDIENCE: Watch the pros play.
+
+811
+00:35:29,064 --> 00:35:31,480
+PROFESSOR: Well, they're going
+to play real StarCraft this
+
+812
+00:35:31,480 --> 00:35:34,622
+is toy StarCraft this is
+six-level 6 StarCraft so it's
+
+813
+00:35:34,622 --> 00:35:37,320
+not going to work.
+
+814
+00:35:37,320 --> 00:35:39,030
+But there is a simple
+strategy, because I
+
+815
+00:35:39,030 --> 00:35:42,688
+haven't added one
+last constraint.
+
+816
+00:35:42,688 --> 00:35:44,700
+AUDIENCE: Lets me guess.
+
+817
+00:35:44,700 --> 00:35:45,310
+PROFESSOR: No.
+
+818
+00:35:45,310 --> 00:35:48,340
+It's going to be
+harassing your enemy.
+
+819
+00:35:48,340 --> 00:35:50,590
+But if you don't have to
+harass your enemy intuitively
+
+820
+00:35:50,590 --> 00:35:53,100
+and build your economy
+first, so first
+
+821
+00:35:53,100 --> 00:35:54,950
+build your drones
+and hatcheries,
+
+822
+00:35:54,950 --> 00:35:57,222
+and then pop out
+Zerglings, right?
+
+823
+00:35:57,222 --> 00:35:58,430
+So there's a greedy strategy.
+
+824
+00:35:58,430 --> 00:36:00,450
+If you spend about an hour
+with a sheet of paper,
+
+825
+00:36:00,450 --> 00:36:02,074
+you can realize what
+is the right order
+
+826
+00:36:02,074 --> 00:36:05,510
+to build drones and
+hatcheries and overlords,
+
+827
+00:36:05,510 --> 00:36:08,680
+so that you get to a nice
+big economy, and then, Bam!
+
+828
+00:36:08,680 --> 00:36:10,944
+Build Zerglings.
+
+829
+00:36:10,944 --> 00:36:13,110
+Once you get to 50 drones,
+you start build Zerglings
+
+830
+00:36:13,110 --> 00:36:14,130
+as fast as possible.
+
+831
+00:36:14,130 --> 00:36:16,670
+
+832
+00:36:16,670 --> 00:36:19,540
+So this is a greedy
+strategy, you
+
+833
+00:36:19,540 --> 00:36:21,250
+don't need to do a
+lot of work for that.
+
+834
+00:36:21,250 --> 00:36:23,041
+So we want to make
+things more interesting.
+
+835
+00:36:23,041 --> 00:36:25,450
+So in order to make
+things more interesting,
+
+836
+00:36:25,450 --> 00:36:26,780
+the game time goes in seconds.
+
+837
+00:36:26,780 --> 00:36:28,820
+Everything that we had
+here is in seconds.
+
+838
+00:36:28,820 --> 00:36:36,865
+Every two minutes, so two
+minutes, which is 120 seconds.
+
+839
+00:36:36,865 --> 00:36:38,490
+So every two minutes
+I want to assemble
+
+840
+00:36:38,490 --> 00:36:41,570
+a small pack of
+Zerglings and send them
+
+841
+00:36:41,570 --> 00:36:43,160
+to the enemy to harass them.
+
+842
+00:36:43,160 --> 00:36:45,140
+And the Antonio enemy
+will defend themselves
+
+843
+00:36:45,140 --> 00:36:46,690
+and they will
+destroy my Zerglings,
+
+844
+00:36:46,690 --> 00:36:49,360
+but they won't be able to
+focus on the game very well.
+
+845
+00:36:49,360 --> 00:36:52,320
+So I need to do this in order
+to have a good chance to win.
+
+846
+00:36:52,320 --> 00:36:54,290
+If I don't do this, my
+strategy is invalid.
+
+847
+00:36:54,290 --> 00:36:57,070
+AUDIENCE: Does the enemy,
+does it do that to us as well?
+
+848
+00:36:57,070 --> 00:36:58,119
+PROFESSOR: No.
+
+849
+00:36:58,119 --> 00:36:59,160
+We're sending them facts.
+
+850
+00:36:59,160 --> 00:37:01,230
+We are going to have a really
+fast strategy, because we're
+
+851
+00:37:01,230 --> 00:37:03,450
+computing the optimal
+strategy, so they're not
+
+852
+00:37:03,450 --> 00:37:04,410
+going to have time.
+
+853
+00:37:04,410 --> 00:37:06,840
+They're going to
+be fighting us off.
+
+854
+00:37:06,840 --> 00:37:09,330
+OK, how many
+Zerglings do I send?
+
+855
+00:37:09,330 --> 00:37:12,170
+I have to send enough
+Zerglings so that the attack
+
+856
+00:37:12,170 --> 00:37:19,198
+power at minutes 2m is
+6 times log 1 plus m.
+
+857
+00:37:19,198 --> 00:37:21,031
+You knew there has to
+be some mapping there.
+
+858
+00:37:21,031 --> 00:37:23,720
+
+859
+00:37:23,720 --> 00:37:27,080
+So the reason for this is, let's
+look at the first two minutes.
+
+860
+00:37:27,080 --> 00:37:30,050
+After two minutes, if we
+haven't researched any upgrades,
+
+861
+00:37:30,050 --> 00:37:32,500
+we need to send this
+in six Zerglings.
+
+862
+00:37:32,500 --> 00:37:34,800
+If we researched both
+upgrades, we only
+
+863
+00:37:34,800 --> 00:37:37,379
+need to send in three Zerglings.
+
+864
+00:37:37,379 --> 00:37:38,920
+If we researched
+one of the upgrades,
+
+865
+00:37:38,920 --> 00:37:41,240
+we need to send
+in five Zerglings.
+
+866
+00:37:41,240 --> 00:37:42,911
+So this is the
+total attack power,
+
+867
+00:37:42,911 --> 00:37:45,160
+not the numbers are of
+Zerglings that we need to send.
+
+868
+00:37:45,160 --> 00:37:50,480
+
+869
+00:37:50,480 --> 00:37:53,630
+AUDIENCE: And is minutes?
+
+870
+00:37:53,630 --> 00:37:55,110
+PROFESSOR: Actually,
+it's basically
+
+871
+00:37:55,110 --> 00:37:59,810
+which attack wave you're
+doing, so every two minutes.
+
+872
+00:37:59,810 --> 00:38:00,600
+AUDIENCE: Oh, OK.
+
+873
+00:38:00,600 --> 00:38:03,060
+So the first one
+is m equals zero.
+
+874
+00:38:03,060 --> 00:38:05,064
+PROFESSOR: And 1.
+
+875
+00:38:05,064 --> 00:38:07,230
+That is not the one attacking
+right in the beginning
+
+876
+00:38:07,230 --> 00:38:08,764
+when we don't have Zerglings.
+
+877
+00:38:08,764 --> 00:38:09,680
+AUDIENCE: [INAUDIBLE].
+
+878
+00:38:09,680 --> 00:38:12,310
+PROFESSOR: Equals 1, n equals 2,
+n equals 3, so on and so forth.
+
+879
+00:38:12,310 --> 00:38:13,935
+AUDIENCE: How did
+you get that formula?
+
+880
+00:38:13,935 --> 00:38:16,978
+
+881
+00:38:16,978 --> 00:38:18,176
+OK.
+
+882
+00:38:18,176 --> 00:38:19,800
+PROFESSOR: Is it
+making your life hard?
+
+883
+00:38:19,800 --> 00:38:23,233
+Would that be logged base
+2, or is that log base 10?
+
+884
+00:38:23,233 --> 00:38:24,399
+PROFESSOR: Sure, log base 2.
+
+885
+00:38:24,399 --> 00:38:31,204
+
+886
+00:38:31,204 --> 00:38:31,704
+Fine.
+
+887
+00:38:31,704 --> 00:38:36,857
+
+888
+00:38:36,857 --> 00:38:38,440
+OK, so how are we
+going to solve this?
+
+889
+00:38:38,440 --> 00:38:40,460
+Intuitively, how did
+we solve all the game
+
+890
+00:38:40,460 --> 00:38:44,660
+problems, all the
+problems recently?
+
+891
+00:38:44,660 --> 00:38:46,000
+What are we going to do?
+
+892
+00:38:46,000 --> 00:38:47,982
+AUDIENCE: [INAUDIBLE].
+
+893
+00:38:47,982 --> 00:38:49,440
+PROFESSOR: So the
+first thing we're
+
+894
+00:38:49,440 --> 00:38:50,993
+going to build a graph, right?
+
+895
+00:38:50,993 --> 00:38:51,880
+AUDIENCE: Yeah.
+
+896
+00:38:51,880 --> 00:38:53,046
+PROFESSOR: So build a graph.
+
+897
+00:38:53,046 --> 00:38:55,890
+
+898
+00:38:55,890 --> 00:38:58,240
+The vertices are the
+states of the game,
+
+899
+00:38:58,240 --> 00:39:00,700
+so a vertex shows
+me what state I'm in
+
+900
+00:39:00,700 --> 00:39:05,930
+and an edge shows
+possible moves that I do.
+
+901
+00:39:05,930 --> 00:39:09,792
+So what I need to keep track
+in the vertex, what's my state?
+
+902
+00:39:09,792 --> 00:39:12,648
+AUDIENCE: How much money
+you have, and how many units
+
+903
+00:39:12,648 --> 00:39:14,552
+you have?
+
+904
+00:39:14,552 --> 00:39:16,932
+And maybe how fast
+you're making money?
+
+905
+00:39:16,932 --> 00:39:18,870
+AUDIENCE: Oh, unless
+the states, are
+
+906
+00:39:18,870 --> 00:39:21,274
+states-- they're not movable?
+
+907
+00:39:21,274 --> 00:39:23,440
+Oh, I guess they could be
+moveable [INAUDIBLE] could
+
+908
+00:39:23,440 --> 00:39:25,252
+do nothing, in the
+next second, right?
+
+909
+00:39:25,252 --> 00:39:27,710
+PROFESSOR: So you're saying
+you need to keep track of time,
+
+910
+00:39:27,710 --> 00:39:28,475
+too?
+
+911
+00:39:28,475 --> 00:39:29,840
+AUDIENCE: I don't know.
+
+912
+00:39:29,840 --> 00:39:31,100
+PROFESSOR: OK so maybe time.
+
+913
+00:39:31,100 --> 00:39:33,920
+
+914
+00:39:33,920 --> 00:39:35,668
+What else?
+
+915
+00:39:35,668 --> 00:39:37,120
+AUDIENCE: Badge
+[INAUDIBLE] thing.
+
+916
+00:39:37,120 --> 00:39:39,116
+PROFESSOR: OK so upgrades.
+
+917
+00:39:39,116 --> 00:39:42,104
+
+918
+00:39:42,104 --> 00:39:43,895
+You said units, I'm
+going to say buildings.
+
+919
+00:39:43,895 --> 00:39:47,380
+
+920
+00:39:47,380 --> 00:39:50,190
+AUDIENCE: Wait, is
+Zergling is a building?
+
+921
+00:39:50,190 --> 00:39:53,100
+PROFESSOR: A Zergling
+is a unit, so-
+
+922
+00:39:53,100 --> 00:39:54,530
+AUDIENCE: Overlords.
+
+923
+00:39:54,530 --> 00:39:57,590
+PROFESSOR: Unit, unit, unit.
+
+924
+00:39:57,590 --> 00:40:01,510
+Building, building,
+building, upgrade, upgrade.
+
+925
+00:40:01,510 --> 00:40:04,232
+So let's see how are we
+going to keep track of them.
+
+926
+00:40:04,232 --> 00:40:05,065
+That's a good point.
+
+927
+00:40:05,065 --> 00:40:08,870
+We started looking at units,
+we started looking at units.
+
+928
+00:40:08,870 --> 00:40:10,850
+So how do I keep
+track of my units?
+
+929
+00:40:10,850 --> 00:40:13,179
+What I need to know?
+
+930
+00:40:13,179 --> 00:40:18,110
+AUDIENCE: The number of
+drones, overlords, servlings.
+
+931
+00:40:18,110 --> 00:40:21,740
+PROFESSOR: Droids, drones,
+overlords, Zerglings.
+
+932
+00:40:21,740 --> 00:40:22,240
+OK.
+
+933
+00:40:22,240 --> 00:40:23,073
+How about buildings?
+
+934
+00:40:23,073 --> 00:40:26,418
+
+935
+00:40:26,418 --> 00:40:27,900
+AUDIENCE: [INAUDIBLE] PHEC--
+
+936
+00:40:27,900 --> 00:40:29,179
+PROFESSOR: Almost.
+
+937
+00:40:29,179 --> 00:40:30,970
+So I want to know the
+number of hatcheries,
+
+938
+00:40:30,970 --> 00:40:33,280
+because this is how
+fast I can produce.
+
+939
+00:40:33,280 --> 00:40:37,681
+But then how many spawning
+pools am I going to build?
+
+940
+00:40:37,681 --> 00:40:38,180
+Good.
+
+941
+00:40:38,180 --> 00:40:39,930
+So that was StarCraft player 1.
+
+942
+00:40:39,930 --> 00:40:42,300
+Once you have a spawning
+pool, you can build Zerglings,
+
+943
+00:40:42,300 --> 00:40:44,260
+there's no reason to
+build more than one.
+
+944
+00:40:44,260 --> 00:40:46,417
+So a spawning pool is
+going to be like a badge.
+
+945
+00:40:46,417 --> 00:40:48,250
+Once you build it, you
+have it, you're done.
+
+946
+00:40:48,250 --> 00:40:49,976
+So it's Boolean.
+
+947
+00:40:49,976 --> 00:40:51,900
+AUDIENCE: Wait, what's
+a spawning pool again?
+
+948
+00:40:51,900 --> 00:40:53,280
+PROFESSOR: So a spawning
+pool is something
+
+949
+00:40:53,280 --> 00:40:55,280
+that you build off a drone
+and once you have it,
+
+950
+00:40:55,280 --> 00:40:57,940
+you can build Zerglings
+from a hatchery.
+
+951
+00:40:57,940 --> 00:40:58,987
+So that's all it does.
+
+952
+00:40:58,987 --> 00:41:00,612
+AUDIENCE: Why would
+you want two if you
+
+953
+00:41:00,612 --> 00:41:02,735
+can build four Zerglings?
+
+954
+00:41:02,735 --> 00:41:05,110
+PROFESSOR: So the spawning
+pool doesn't build a Zergling.
+
+955
+00:41:05,110 --> 00:41:07,560
+See, the hatchery
+builds the Zerglings.
+
+956
+00:41:07,560 --> 00:41:09,019
+So the spawning
+pool is just there.
+
+957
+00:41:09,019 --> 00:41:10,601
+You need to have it
+to cross the edge.
+
+958
+00:41:10,601 --> 00:41:11,456
+Otherwise you can't.
+
+959
+00:41:11,456 --> 00:41:11,997
+AUDIENCE: OK.
+
+960
+00:41:11,997 --> 00:41:13,303
+I understand.
+
+961
+00:41:13,303 --> 00:41:13,886
+PROFESSOR: OK.
+
+962
+00:41:13,886 --> 00:41:16,810
+
+963
+00:41:16,810 --> 00:41:20,720
+So what else for buildings?
+
+964
+00:41:20,720 --> 00:41:23,220
+Whether you have
+it or not, right?
+
+965
+00:41:23,220 --> 00:41:23,830
+OK.
+
+966
+00:41:23,830 --> 00:41:26,172
+How about upgrades?
+
+967
+00:41:26,172 --> 00:41:28,900
+[INAUDIBLE] a u, d u.
+
+968
+00:41:28,900 --> 00:41:33,060
+PROFESSOR: So two
+flags, a u, d u.
+
+969
+00:41:33,060 --> 00:41:33,560
+Cool.
+
+970
+00:41:33,560 --> 00:41:37,540
+So now we have the thorny
+issues of money and time.
+
+971
+00:41:37,540 --> 00:41:41,460
+Let's say that we're going to
+have some sort of approximation
+
+972
+00:41:41,460 --> 00:41:44,390
+that's going to allow us
+to not keep track of money,
+
+973
+00:41:44,390 --> 00:41:47,290
+because money is-- you
+can have a lot of money,
+
+974
+00:41:47,290 --> 00:41:50,057
+so that will give us
+an explosion of states.
+
+975
+00:41:50,057 --> 00:41:52,140
+So we're going to assume
+that we're spending money
+
+976
+00:41:52,140 --> 00:41:54,130
+as fast as possible,
+because that's
+
+977
+00:41:54,130 --> 00:41:56,054
+what you usually want to do.
+
+978
+00:41:56,054 --> 00:41:59,040
+AUDIENCE: So should your
+money always be zero then?
+
+979
+00:41:59,040 --> 00:42:00,486
+PROFESSOR: Almost.
+
+980
+00:42:00,486 --> 00:42:01,920
+It's very close to that.
+
+981
+00:42:01,920 --> 00:42:05,840
+So you start off with no money.
+
+982
+00:42:05,840 --> 00:42:07,310
+You accumulate
+money, then you're
+
+983
+00:42:07,310 --> 00:42:10,230
+going to issue some build
+orders and build something.
+
+984
+00:42:10,230 --> 00:42:12,210
+And your money's
+going to drop, maybe
+
+985
+00:42:12,210 --> 00:42:14,470
+to zero, maybe to almost zero.
+
+986
+00:42:14,470 --> 00:42:16,770
+Then you wait to
+accumulate more money,
+
+987
+00:42:16,770 --> 00:42:18,630
+issue another build order.
+
+988
+00:42:18,630 --> 00:42:22,660
+Wait to accumulate more money,
+hopefully it goes faster now.
+
+989
+00:42:22,660 --> 00:42:24,456
+Issue another build order.
+
+990
+00:42:24,456 --> 00:42:26,330
+We're going to approximate
+that every time we
+
+991
+00:42:26,330 --> 00:42:27,890
+issue a build order,
+so every time we
+
+992
+00:42:27,890 --> 00:42:29,350
+tell our things to
+build something,
+
+993
+00:42:29,350 --> 00:42:32,420
+the money will drop to zero.
+
+994
+00:42:32,420 --> 00:42:34,470
+So that doesn't mean you
+can only build one thing
+
+995
+00:42:34,470 --> 00:42:36,120
+and then your money
+drops to zero.
+
+996
+00:42:36,120 --> 00:42:39,550
+If you wait for a few
+seconds and then you
+
+997
+00:42:39,550 --> 00:42:42,390
+have two hatcheries and tell
+both of them to build drones,
+
+998
+00:42:42,390 --> 00:42:45,640
+you build two drones and
+then your money goes to zero.
+
+999
+00:42:45,640 --> 00:42:48,909
+So that means that if we
+model our states carefully,
+
+1000
+00:42:48,909 --> 00:42:50,450
+we don't have to
+keep track of money.
+
+1001
+00:42:50,450 --> 00:42:56,722
+
+1002
+00:42:56,722 --> 00:42:58,763
+AUDIENCE: You should
+probably keep track of time.
+
+1003
+00:42:58,763 --> 00:43:01,697
+
+1004
+00:43:01,697 --> 00:43:04,000
+AUDIENCE: Actually
+keep track of the rate
+
+1005
+00:43:04,000 --> 00:43:06,470
+you're gathering though, right?
+
+1006
+00:43:06,470 --> 00:43:08,750
+PROFESSOR: So what's the
+rate that you're gathering?
+
+1007
+00:43:08,750 --> 00:43:11,055
+AUDIENCE: It's the number of--
+
+1008
+00:43:11,055 --> 00:43:14,440
+AUDIENCE: Oh [INAUDIBLE]
+drones, yeah. [INAUDIBLE], OK.
+
+1009
+00:43:14,440 --> 00:43:17,721
+PROFESSOR: So this
+multiplied by 8%.
+
+1010
+00:43:17,721 --> 00:43:19,947
+AUDIENCE: So we should
+keep track of time.
+
+1011
+00:43:19,947 --> 00:43:20,530
+PROFESSOR: OK.
+
+1012
+00:43:20,530 --> 00:43:23,441
+So how would we solve it
+if we keep track of time?
+
+1013
+00:43:23,441 --> 00:43:26,880
+
+1014
+00:43:26,880 --> 00:43:28,449
+AUDIENCE: You multiply
+
+1015
+00:43:28,449 --> 00:43:30,282
+AUDIENCE: Can you do
+that layer thing again?
+
+1016
+00:43:30,282 --> 00:43:31,190
+Where is that?
+
+1017
+00:43:31,190 --> 00:43:34,766
+PROFESSOR: So you're going
+to have-- so what's a layer?
+
+1018
+00:43:34,766 --> 00:43:36,057
+AUDIENCE: Actually, never mind.
+
+1019
+00:43:36,057 --> 00:43:39,190
+
+1020
+00:43:39,190 --> 00:43:41,240
+AUDIENCE: I want to
+know what a layer is.
+
+1021
+00:43:41,240 --> 00:43:41,968
+PROFESSOR: Sorry?
+
+1022
+00:43:41,968 --> 00:43:43,676
+AUDIENCE: I want to
+know what a layer is.
+
+1023
+00:43:43,676 --> 00:43:47,000
+PROFESSOR: So last time we-- we
+solved problems by saying that,
+
+1024
+00:43:47,000 --> 00:43:48,680
+so we had the graph of streets.
+
+1025
+00:43:48,680 --> 00:43:50,000
+We had a highway graph.
+
+1026
+00:43:50,000 --> 00:43:51,820
+And that was a 2D graph.
+
+1027
+00:43:51,820 --> 00:43:54,190
+And we made it into a
+3D graph by adding time
+
+1028
+00:43:54,190 --> 00:43:56,260
+as a third dimension.
+
+1029
+00:43:56,260 --> 00:43:58,570
+So we had layers,
+where each layer was,
+
+1030
+00:43:58,570 --> 00:44:00,310
+said that you're at
+a point in the graph
+
+1031
+00:44:00,310 --> 00:44:03,780
+at a certain point in time.
+
+1032
+00:44:03,780 --> 00:44:05,769
+So there's a layer 4
+times 0, layer 4 time 1,
+
+1033
+00:44:05,769 --> 00:44:06,560
+so on and so forth.
+
+1034
+00:44:06,560 --> 00:44:09,250
+And you start at time 0 and
+kept going up the graph.
+
+1035
+00:44:09,250 --> 00:44:12,687
+
+1036
+00:44:12,687 --> 00:44:14,300
+AUDIENCE: You have
+a flag that says,
+
+1037
+00:44:14,300 --> 00:44:16,180
+I've just purchased something?
+
+1038
+00:44:16,180 --> 00:44:19,600
+Because that way then you'll
+know that you've completely
+
+1039
+00:44:19,600 --> 00:44:23,420
+exhausted your-- that
+maybe that will tell you
+
+1040
+00:44:23,420 --> 00:44:25,502
+that you can't buy
+anything for awhile, right?
+
+1041
+00:44:25,502 --> 00:44:27,562
+Because if we're not
+keeping track of money then
+
+1042
+00:44:27,562 --> 00:44:28,700
+we should know [INAUDIBLE].
+
+1043
+00:44:28,700 --> 00:44:29,283
+PROFESSOR: OK.
+
+1044
+00:44:29,283 --> 00:44:31,200
+So that's a good point.
+
+1045
+00:44:31,200 --> 00:44:35,280
+So if I have-- so suppose here
+I have to wait for five seconds
+
+1046
+00:44:35,280 --> 00:44:37,060
+to get enough
+money to do a move.
+
+1047
+00:44:37,060 --> 00:44:38,880
+If I keep track of
+time in my state and I
+
+1048
+00:44:38,880 --> 00:44:41,431
+have five things here.
+
+1049
+00:44:41,431 --> 00:44:43,180
+I also have to keep
+track of money, right?
+
+1050
+00:44:43,180 --> 00:44:44,929
+I have to know how
+much money I'm getting,
+
+1051
+00:44:44,929 --> 00:44:46,600
+so that I know where
+I'm buying things.
+
+1052
+00:44:46,600 --> 00:44:49,020
+On the other hand,
+in this case, if I
+
+1053
+00:44:49,020 --> 00:44:51,620
+keep track of both time
+and money as states,
+
+1054
+00:44:51,620 --> 00:44:53,190
+I can implement a
+precise strategy.
+
+1055
+00:44:53,190 --> 00:44:54,523
+I don't need this approximation.
+
+1056
+00:44:54,523 --> 00:44:57,060
+
+1057
+00:44:57,060 --> 00:45:01,610
+If I do that, then what
+search algorithm would I use?
+
+1058
+00:45:01,610 --> 00:45:05,930
+So if I have time in states,
+so each vertex in my note
+
+1059
+00:45:05,930 --> 00:45:09,490
+says that I get from some
+states to some other state
+
+1060
+00:45:09,490 --> 00:45:12,200
+in one unit of time.
+
+1061
+00:45:12,200 --> 00:45:15,975
+What algorithm do I use
+to search for my strategy?
+
+1062
+00:45:15,975 --> 00:45:20,100
+
+1063
+00:45:20,100 --> 00:45:20,600
+Yeah.
+
+1064
+00:45:20,600 --> 00:45:21,659
+Why do I use BFS?
+
+1065
+00:45:21,659 --> 00:45:23,700
+AUDIENCE: Because every
+edge has the same weight.
+
+1066
+00:45:23,700 --> 00:45:25,450
+PROFESSOR: Every edge has
+the same weight, right?
+
+1067
+00:45:25,450 --> 00:45:27,040
+So if we keep
+track of time, then
+
+1068
+00:45:27,040 --> 00:45:29,970
+we-- we keep track of time,
+we keep track of money,
+
+1069
+00:45:29,970 --> 00:45:32,592
+we use BFS, we have a solution.
+
+1070
+00:45:32,592 --> 00:45:33,092
+So.
+
+1071
+00:45:33,092 --> 00:45:44,240
+
+1072
+00:45:44,240 --> 00:45:46,680
+Let's try to not do
+it, either of these.
+
+1073
+00:45:46,680 --> 00:45:48,290
+If I don't want to
+keep track of time
+
+1074
+00:45:48,290 --> 00:45:50,640
+and I don't want to
+keep track of money,
+
+1075
+00:45:50,640 --> 00:45:53,360
+what would an edge be?
+
+1076
+00:45:53,360 --> 00:45:57,880
+If I want to say that, hey, this
+is a state and this is a state.
+
+1077
+00:45:57,880 --> 00:45:59,879
+What should be the
+edge connecting them.
+
+1078
+00:45:59,879 --> 00:46:01,420
+AUDIENCE: What other
+item you got is.
+
+1079
+00:46:01,420 --> 00:46:04,170
+AUDIENCE: Is that
+after a second?
+
+1080
+00:46:04,170 --> 00:46:05,930
+PROFESSOR: So the
+distance between these
+
+1081
+00:46:05,930 --> 00:46:07,550
+won't be a second, right?
+
+1082
+00:46:07,550 --> 00:46:09,130
+If I have to wait
+for five seconds to
+
+1083
+00:46:09,130 --> 00:46:11,670
+accumulate enough to
+issue this build order
+
+1084
+00:46:11,670 --> 00:46:13,825
+that would get me
+the state then--
+
+1085
+00:46:13,825 --> 00:46:15,325
+AUDIENCE: The time
+you have to wait?
+
+1086
+00:46:15,325 --> 00:46:18,060
+
+1087
+00:46:18,060 --> 00:46:20,221
+PROFESSOR: So that's what
+I would put on an edge.
+
+1088
+00:46:20,221 --> 00:46:22,220
+So this way I don't have
+to keep track of money,
+
+1089
+00:46:22,220 --> 00:46:23,678
+I don't have to
+keep track of time.
+
+1090
+00:46:23,678 --> 00:46:25,130
+So the graph is smaller.
+
+1091
+00:46:25,130 --> 00:46:27,350
+So I can look into
+bigger graphs.
+
+1092
+00:46:27,350 --> 00:46:30,700
+If I do this, what
+algorithm do I use?
+
+1093
+00:46:30,700 --> 00:46:33,404
+To find my strategy?
+
+1094
+00:46:33,404 --> 00:46:34,320
+AUDIENCE: [INAUDIBLE].
+
+1095
+00:46:34,320 --> 00:46:36,310
+[INTERPOSING VOICES]
+
+1096
+00:46:36,310 --> 00:46:38,100
+PROFESSOR: So no time, no money.
+
+1097
+00:46:38,100 --> 00:46:41,650
+
+1098
+00:46:41,650 --> 00:46:43,670
+And [? extra ?].
+
+1099
+00:46:43,670 --> 00:46:46,010
+So this looks
+reasonably easy, right?
+
+1100
+00:46:46,010 --> 00:46:49,280
+I mean, if you want to get
+from one state to another,
+
+1101
+00:46:49,280 --> 00:46:50,890
+you see what you'd
+have to build,
+
+1102
+00:46:50,890 --> 00:46:52,870
+you see how much
+it costs, and you
+
+1103
+00:46:52,870 --> 00:46:55,910
+see how much you have to wait
+to accumulate those resources.
+
+1104
+00:46:55,910 --> 00:46:57,435
+Except there's one glitch.
+
+1105
+00:46:57,435 --> 00:47:01,840
+
+1106
+00:47:01,840 --> 00:47:02,990
+How do we deal with this?
+
+1107
+00:47:02,990 --> 00:47:05,880
+How do we make sure that we do
+our attacks on time and how do
+
+1108
+00:47:05,880 --> 00:47:10,518
+we know that we're-- how
+do we keep track of them?
+
+1109
+00:47:10,518 --> 00:47:12,881
+AUDIENCE: What is this
+again representing?
+
+1110
+00:47:12,881 --> 00:47:14,880
+PROFESSOR: So this is
+that every two minutes you
+
+1111
+00:47:14,880 --> 00:47:16,930
+have to have a
+number of Zerglings
+
+1112
+00:47:16,930 --> 00:47:19,039
+that you're sending
+to attack the enemy.
+
+1113
+00:47:19,039 --> 00:47:21,080
+And the number of Zerglings
+that you need to have
+
+1114
+00:47:21,080 --> 00:47:23,670
+depends on the time and
+it depends on the upgrades
+
+1115
+00:47:23,670 --> 00:47:24,220
+that you got.
+
+1116
+00:47:24,220 --> 00:47:28,650
+
+1117
+00:47:28,650 --> 00:47:30,140
+So how do we keep track of this?
+
+1118
+00:47:30,140 --> 00:47:34,830
+
+1119
+00:47:34,830 --> 00:47:37,650
+AUDIENCE: If the edges
+are a function of time,
+
+1120
+00:47:37,650 --> 00:47:46,853
+then just know that at radius
+120-- at radius 120 over 5,
+
+1121
+00:47:46,853 --> 00:47:50,610
+then you'd have to
+send more Zerglings.
+
+1122
+00:47:50,610 --> 00:47:55,110
+PROFESSOR: So what if not all
+the edges have the same weight.
+
+1123
+00:47:55,110 --> 00:47:57,840
+So let's look at how a graph
+looks like for a little bit.
+
+1124
+00:47:57,840 --> 00:48:00,810
+So we're going to
+have an initial state,
+
+1125
+00:48:00,810 --> 00:48:06,710
+say one hatchery and six
+drones and one overlord.
+
+1126
+00:48:06,710 --> 00:48:11,016
+And we want to
+build a new drone.
+
+1127
+00:48:11,016 --> 00:48:12,390
+Say we want to
+build a new drone.
+
+1128
+00:48:12,390 --> 00:48:15,060
+A drone costs 50 minerals.
+
+1129
+00:48:15,060 --> 00:48:17,730
+We have six drones.
+
+1130
+00:48:17,730 --> 00:48:19,890
+Each drone gets us
+eight minerals a second,
+
+1131
+00:48:19,890 --> 00:48:22,510
+so in one second we're
+going to get 48 minerals.
+
+1132
+00:48:22,510 --> 00:48:25,180
+So bummer, we have to wait for
+two seconds to build one drone.
+
+1133
+00:48:25,180 --> 00:48:29,700
+
+1134
+00:48:29,700 --> 00:48:34,660
+And now we're going to be in
+the state of one hatchery, seven
+
+1135
+00:48:34,660 --> 00:48:39,830
+drones, one overlord.
+
+1136
+00:48:39,830 --> 00:48:45,900
+If you said we want to
+build a hatchery-- then
+
+1137
+00:48:45,900 --> 00:48:50,260
+we're going to need to
+accumulate 400 or 450.
+
+1138
+00:48:50,260 --> 00:48:56,340
+Oh, we have to accumulate 450,
+using six drones, 48 minerals,
+
+1139
+00:48:56,340 --> 00:48:58,222
+so I guess nine seconds.
+
+1140
+00:48:58,222 --> 00:49:00,180
+So we're going to have
+to wait for nine seconds
+
+1141
+00:49:00,180 --> 00:49:01,070
+to get that money.
+
+1142
+00:49:01,070 --> 00:49:03,772
+
+1143
+00:49:03,772 --> 00:49:05,230
+And then when we
+build, we're going
+
+1144
+00:49:05,230 --> 00:49:07,240
+to spend the drone
+building, because it's
+
+1145
+00:49:07,240 --> 00:49:08,500
+going to turn into a hatchery.
+
+1146
+00:49:08,500 --> 00:49:12,330
+And then we're going to end
+up with two hatcheries, five
+
+1147
+00:49:12,330 --> 00:49:14,820
+drones, and one overlord.
+
+1148
+00:49:14,820 --> 00:49:17,030
+So edges have different weights.
+
+1149
+00:49:17,030 --> 00:49:19,937
+So I can't look at the radius
+in terms of number of his edges.
+
+1150
+00:49:19,937 --> 00:49:21,770
+AUDIENCE: Everything
+builds instantaneously.
+
+1151
+00:49:21,770 --> 00:49:24,750
+
+1152
+00:49:24,750 --> 00:49:25,696
+PROFESSOR: Yeah, sure.
+
+1153
+00:49:25,696 --> 00:49:28,070
+AUDIENCE: You could keep track
+of just the total distance
+
+1154
+00:49:28,070 --> 00:49:30,370
+from whatever starting
+build you are?
+
+1155
+00:49:30,370 --> 00:49:32,250
+AUDIENCE: Actually,
+if the distance
+
+1156
+00:49:32,250 --> 00:49:35,980
+from the origin to where
+you're at is a multiple of 120,
+
+1157
+00:49:35,980 --> 00:49:38,820
+then you should
+have another state
+
+1158
+00:49:38,820 --> 00:49:42,288
+that you have to [INAUDIBLE].
+
+1159
+00:49:42,288 --> 00:49:46,240
+AUDIENCE: Assuming you have any
+drones left, hopefully you do.
+
+1160
+00:49:46,240 --> 00:49:48,654
+PROFESSOR: So that's modeling.
+
+1161
+00:49:48,654 --> 00:49:50,570
+One way of doing it is
+sure, model every round
+
+1162
+00:49:50,570 --> 00:49:53,190
+of the attack as one,
+every round of harassment
+
+1163
+00:49:53,190 --> 00:49:56,460
+is one there in the graph,
+and we can do it that way.
+
+1164
+00:49:56,460 --> 00:49:58,760
+Is that what you're saying?
+
+1165
+00:49:58,760 --> 00:50:01,562
+So you can't-- once
+you're at 120 seconds,
+
+1166
+00:50:01,562 --> 00:50:04,020
+you have to do an attack and
+then you get to the next layer
+
+1167
+00:50:04,020 --> 00:50:05,320
+in the graph.
+
+1168
+00:50:05,320 --> 00:50:05,900
+AUDIENCE: That makes
+a lot of sense.
+
+1169
+00:50:05,900 --> 00:50:07,900
+AUDIENCE: Of course that's
+what we were thinking.
+
+1170
+00:50:07,900 --> 00:50:09,524
+PROFESSOR: How about
+let's not do that.
+
+1171
+00:50:09,524 --> 00:50:11,790
+How about let's represent
+it without layers?
+
+1172
+00:50:11,790 --> 00:50:12,610
+So that's good.
+
+1173
+00:50:12,610 --> 00:50:14,193
+You're getting closer
+to the solution.
+
+1174
+00:50:14,193 --> 00:50:16,620
+It is much better than
+representing every time.
+
+1175
+00:50:16,620 --> 00:50:18,926
+Write the number of
+layers this time over 120,
+
+1176
+00:50:18,926 --> 00:50:20,720
+it's a huge improvement.
+
+1177
+00:50:20,720 --> 00:50:24,070
+Well, we can do it
+without any-- we can do it
+
+1178
+00:50:24,070 --> 00:50:27,384
+without any time
+notion whatsoever.
+
+1179
+00:50:27,384 --> 00:50:29,050
+Let's see, can I let
+you think about it?
+
+1180
+00:50:29,050 --> 00:50:31,135
+Oh, I can let you think
+about it for 30 seconds.
+
+1181
+00:50:31,135 --> 00:50:37,490
+
+1182
+00:50:37,490 --> 00:50:39,377
+So there's a key
+insight here that--
+
+1183
+00:50:39,377 --> 00:50:39,960
+AUDIENCE: Ooh.
+
+1184
+00:50:39,960 --> 00:50:42,256
+PROFESSOR: Yeah.
+
+1185
+00:50:42,256 --> 00:50:44,740
+AUDIENCE: [INAUDIBLE] but if
+you figure how much time has
+
+1186
+00:50:44,740 --> 00:50:47,050
+elapsed, based on
+the items we have
+
+1187
+00:50:47,050 --> 00:50:48,766
+and our starting state, right?
+
+1188
+00:50:48,766 --> 00:50:50,140
+Because if we have
+two hatcheries
+
+1189
+00:50:50,140 --> 00:50:51,625
+and we started
+with one hatchery,
+
+1190
+00:50:51,625 --> 00:50:53,730
+we know that at least
+nine seconds has elapsed.
+
+1191
+00:50:53,730 --> 00:50:56,190
+PROFESSOR: Well, so I like the
+first part of what you said,
+
+1192
+00:50:56,190 --> 00:50:58,350
+the second part is
+too complicated.
+
+1193
+00:50:58,350 --> 00:51:01,740
+But we can know
+what time we're at.
+
+1194
+00:51:01,740 --> 00:51:03,190
+Why?
+
+1195
+00:51:03,190 --> 00:51:05,350
+AUDIENCE: Because it takes
+a certain amount of time
+
+1196
+00:51:05,350 --> 00:51:09,241
+to achieve everything,
+each thing.
+
+1197
+00:51:09,241 --> 00:51:11,366
+AUDIENCE: Are we assuming
+that we take the shortest
+
+1198
+00:51:11,366 --> 00:51:14,931
+path to get to each
+state that we're at?
+
+1199
+00:51:14,931 --> 00:51:16,430
+PROFESSOR: So we're
+using the extra.
+
+1200
+00:51:16,430 --> 00:51:19,250
+
+1201
+00:51:19,250 --> 00:51:20,510
+How does the extra work?
+
+1202
+00:51:20,510 --> 00:51:22,630
+You have a queue,
+a priority queue.
+
+1203
+00:51:22,630 --> 00:51:25,140
+You extract a node, you
+look at the neighbors.
+
+1204
+00:51:25,140 --> 00:51:26,650
+When you extract
+the node, do you
+
+1205
+00:51:26,650 --> 00:51:30,557
+know the distance to that node?
+
+1206
+00:51:30,557 --> 00:51:31,640
+AUDIENCE: Can you explain?
+
+1207
+00:51:31,640 --> 00:51:33,110
+You ask?
+
+1208
+00:51:33,110 --> 00:51:34,045
+PROFESSOR: I'm asking.
+
+1209
+00:51:34,045 --> 00:51:36,220
+AUDIENCE: I know, but like
+the node asks and says,
+
+1210
+00:51:36,220 --> 00:51:39,074
+how far away are you?
+
+1211
+00:51:39,074 --> 00:51:41,490
+PROFESSOR: So you need to keep
+that in the priority queue.
+
+1212
+00:51:41,490 --> 00:51:44,100
+So the extra--
+the main invariant
+
+1213
+00:51:44,100 --> 00:51:46,330
+is that once you
+pull out the node,
+
+1214
+00:51:46,330 --> 00:51:49,467
+you're not going to find any
+shorter path to that node.
+
+1215
+00:51:49,467 --> 00:51:51,050
+So you already know
+the shortest path.
+
+1216
+00:51:51,050 --> 00:51:53,860
+That how you sort the nodes
+in the priority queue.
+
+1217
+00:51:53,860 --> 00:51:57,920
+So when we're at
+a configuration--
+
+1218
+00:51:57,920 --> 00:52:00,330
+Say we're at some
+configuration here,
+
+1219
+00:52:00,330 --> 00:52:07,090
+two hatches, six drones,
+and five Zerglings.
+
+1220
+00:52:07,090 --> 00:52:11,780
+We already know that, say
+we're at time 119 seconds.
+
+1221
+00:52:11,780 --> 00:52:15,940
+If what I want to do next
+is build another hatchery,
+
+1222
+00:52:15,940 --> 00:52:18,836
+then I have to wait, what, six
+drones, same thing as before.
+
+1223
+00:52:18,836 --> 00:52:20,460
+I have to wait for
+nine seconds, right?
+
+1224
+00:52:20,460 --> 00:52:23,450
+
+1225
+00:52:23,450 --> 00:52:25,850
+So the edge would
+look like this.
+
+1226
+00:52:25,850 --> 00:52:28,270
+And then we're going to get
+to three hatcheries, five
+
+1227
+00:52:28,270 --> 00:52:31,480
+drones, five Zerglings.
+
+1228
+00:52:31,480 --> 00:52:35,200
+This crosses a one, this crosses
+a two-minute boundary, right?
+
+1229
+00:52:35,200 --> 00:52:39,110
+
+1230
+00:52:39,110 --> 00:52:40,810
+So when I cross
+this boundary, I'd
+
+1231
+00:52:40,810 --> 00:52:42,980
+better have enough
+Zerglings to do an attack.
+
+1232
+00:52:42,980 --> 00:52:46,660
+Do I have enough
+Zerglings to do an attack?
+
+1233
+00:52:46,660 --> 00:52:47,520
+No.
+
+1234
+00:52:47,520 --> 00:52:48,920
+So is this a valid move?
+
+1235
+00:52:48,920 --> 00:52:52,610
+Is this the valid
+edge in our graph?
+
+1236
+00:52:52,610 --> 00:52:54,480
+It's not.
+
+1237
+00:52:54,480 --> 00:52:56,700
+So when you're at a node,
+you already know the time
+
+1238
+00:52:56,700 --> 00:52:58,120
+that you need to
+get to that node,
+
+1239
+00:52:58,120 --> 00:53:00,070
+so when you generate
+the neighbors,
+
+1240
+00:53:00,070 --> 00:53:01,630
+you can check for
+each edge to see
+
+1241
+00:53:01,630 --> 00:53:04,149
+it crosses that 120 second game.
+
+1242
+00:53:04,149 --> 00:53:05,190
+Now let's assume it does.
+
+1243
+00:53:05,190 --> 00:53:06,564
+Let's see how this
+works and this
+
+1244
+00:53:06,564 --> 00:53:08,350
+is the last thing we're doing.
+
+1245
+00:53:08,350 --> 00:53:12,260
+So suppose you have two
+hatcheries, six drones,
+
+1246
+00:53:12,260 --> 00:53:14,390
+and eight Zerglings.
+
+1247
+00:53:14,390 --> 00:53:18,380
+And you're going to
+build that same hatchery.
+
+1248
+00:53:18,380 --> 00:53:22,990
+So you're going to go
+past this 120 second mark.
+
+1249
+00:53:22,990 --> 00:53:24,635
+What state are you
+going to end up in?
+
+1250
+00:53:24,635 --> 00:53:27,250
+
+1251
+00:53:27,250 --> 00:53:28,707
+How many hatcheries?
+
+1252
+00:53:28,707 --> 00:53:29,960
+AUDIENCE: Three.
+
+1253
+00:53:29,960 --> 00:53:31,140
+PROFESSOR: OK.
+
+1254
+00:53:31,140 --> 00:53:32,330
+How many drones.
+
+1255
+00:53:32,330 --> 00:53:33,585
+AUDIENCE: Five.
+
+1256
+00:53:33,585 --> 00:53:34,834
+PROFESSOR: How many Zerglings.
+
+1257
+00:53:34,834 --> 00:53:37,618
+AUDIENCE: Two.
+
+1258
+00:53:37,618 --> 00:53:39,010
+PROFESSOR: Yes.
+
+1259
+00:53:39,010 --> 00:53:42,950
+So key elements, two
+Zerglings, because this edge
+
+1260
+00:53:42,950 --> 00:53:46,200
+crosses the 120-second
+harassment boundary,
+
+1261
+00:53:46,200 --> 00:53:47,800
+so you have to send
+in six Zerglings
+
+1262
+00:53:47,800 --> 00:53:50,370
+and you're going to lose them.
+
+1263
+00:53:50,370 --> 00:53:53,580
+So we're taking advantage of
+how the extra works to sort
+
+1264
+00:53:53,580 --> 00:53:55,620
+of generate our
+edges on the fly.
+
+1265
+00:53:55,620 --> 00:53:58,390
+So we wouldn't be able
+to regenerate this graph,
+
+1266
+00:53:58,390 --> 00:53:59,610
+even if we wanted to have to.
+
+1267
+00:53:59,610 --> 00:54:01,610
+We have to work with the
+implicit representation
+
+1268
+00:54:01,610 --> 00:54:04,610
+and, as we learn the
+distances to the nodes,
+
+1269
+00:54:04,610 --> 00:54:07,990
+the minimum distances,
+we also learned the edges
+
+1270
+00:54:07,990 --> 00:54:10,165
+that we have coming
+out of those nodes.
+
+1271
+00:54:10,165 --> 00:54:12,540
+AUDIENCE: So it's kinda of
+like this graph that's growing
+
+1272
+00:54:12,540 --> 00:54:14,373
+and we're like as it
+gets to a certain point
+
+1273
+00:54:14,373 --> 00:54:17,340
+we kill a bunch of paths
+and then it keeps on going.
+
+1274
+00:54:17,340 --> 00:54:19,459
+PROFESSOR: Yeah.
+
+1275
+00:54:19,459 --> 00:54:20,500
+Doesn't this makes sense?
+
+1276
+00:54:20,500 --> 00:54:25,010
+
+1277
+00:54:25,010 --> 00:54:27,420
+So the good news is
+that this is like we're
+
+1278
+00:54:27,420 --> 00:54:29,310
+training you to run
+a 10-mile marathon,
+
+1279
+00:54:29,310 --> 00:54:32,230
+so you can run 50
+meters for the test.
+
+1280
+00:54:32,230 --> 00:54:33,730
+Let's still try to
+get it, because I
+
+1281
+00:54:33,730 --> 00:54:35,880
+think it's a cool problem.

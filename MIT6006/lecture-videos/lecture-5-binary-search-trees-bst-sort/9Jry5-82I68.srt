@@ -1,0 +1,4484 @@
+1
+00:00:00,000 --> 00:00:00,050
+
+2
+00:00:00,050 --> 00:00:01,770
+The following
+content is provided
+
+3
+00:00:01,770 --> 00:00:04,010
+under a Creative
+Commons license.
+
+4
+00:00:04,010 --> 00:00:06,860
+Your support will help MIT
+OpenCourseWare continue
+
+5
+00:00:06,860 --> 00:00:10,720
+to offer high quality
+educational resources for free.
+
+6
+00:00:10,720 --> 00:00:13,320
+To make a donation or
+view additional materials
+
+7
+00:00:13,320 --> 00:00:17,207
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+8
+00:00:17,207 --> 00:00:17,832
+at ocw.mit.edu.
+
+9
+00:00:17,832 --> 00:00:22,130
+
+10
+00:00:22,130 --> 00:00:25,860
+PROFESSOR: Today's lecture
+is about a brand new data
+
+11
+00:00:25,860 --> 00:00:29,130
+structure that you've
+probably seen before,
+
+12
+00:00:29,130 --> 00:00:32,490
+and we've mentioned
+earlier in double 06,
+
+13
+00:00:32,490 --> 00:00:34,940
+called a binary search tree.
+
+14
+00:00:34,940 --> 00:00:37,080
+We've talked about
+binary search.
+
+15
+00:00:37,080 --> 00:00:40,730
+It's a fundamental divide
+and conquer paradigm.
+
+16
+00:00:40,730 --> 00:00:42,730
+There's a data structure
+associated with it,
+
+17
+00:00:42,730 --> 00:00:45,880
+called the BST, a
+binary search tree.
+
+18
+00:00:45,880 --> 00:00:49,310
+And what I want to do is
+motivate this data structure
+
+19
+00:00:49,310 --> 00:00:51,390
+using a problem.
+
+20
+00:00:51,390 --> 00:00:55,250
+It's a bit of a toy problem,
+but certainly a problem
+
+21
+00:00:55,250 --> 00:01:01,070
+that you could imagine
+exists in all sorts
+
+22
+00:01:01,070 --> 00:01:04,690
+of scheduling problems.
+
+23
+00:01:04,690 --> 00:01:08,310
+It's a part of a runway
+reservation system
+
+24
+00:01:08,310 --> 00:01:10,160
+that you can imagine building.
+
+25
+00:01:10,160 --> 00:01:13,910
+And what I'll do is
+define this problem
+
+26
+00:01:13,910 --> 00:01:17,780
+and talk about how we could
+possibly solve it with the data
+
+27
+00:01:17,780 --> 00:01:23,080
+structures you've already seen--
+so lists and arrays, heaps
+
+28
+00:01:23,080 --> 00:01:25,270
+as well as, which
+we saw last time--
+
+29
+00:01:25,270 --> 00:01:32,540
+and hopefully motivate you into
+the reason behind the existence
+
+30
+00:01:32,540 --> 00:01:35,015
+of binary search
+trees, because they
+
+31
+00:01:35,015 --> 00:01:36,850
+are kind of the
+perfect data structure
+
+32
+00:01:36,850 --> 00:01:40,080
+for this particular problem.
+
+33
+00:01:40,080 --> 00:01:45,640
+So let's dive into what the
+runway reservation system looks
+
+34
+00:01:45,640 --> 00:01:46,140
+like.
+
+35
+00:01:46,140 --> 00:01:49,910
+
+36
+00:01:49,910 --> 00:01:53,050
+And it's your basic
+scheduling problem.
+
+37
+00:01:53,050 --> 00:02:00,030
+We'll assume an airport
+with a single runway.
+
+38
+00:02:00,030 --> 00:02:04,286
+
+39
+00:02:04,286 --> 00:02:06,180
+Now Logan has six runways.
+
+40
+00:02:06,180 --> 00:02:09,699
+But the moment there's any sort
+of weather you're down to one.
+
+41
+00:02:09,699 --> 00:02:13,180
+And of course, there's lots of
+airports with a single runway.
+
+42
+00:02:13,180 --> 00:02:15,850
+And we can imagine that
+this runway is pretty busy.
+
+43
+00:02:15,850 --> 00:02:19,670
+There's obviously safety issues
+associated with landing planes,
+
+44
+00:02:19,670 --> 00:02:21,500
+and planes taking off.
+
+45
+00:02:21,500 --> 00:02:23,230
+And so there are
+constraints associated
+
+46
+00:02:23,230 --> 00:02:25,840
+with the system, that
+have to be obeyed.
+
+47
+00:02:25,840 --> 00:02:28,530
+And you have to build these
+constraints in-- and the checks
+
+48
+00:02:28,530 --> 00:02:31,780
+for these constraints--
+into your data structure.
+
+49
+00:02:31,780 --> 00:02:34,520
+That's sort of the
+summary of the context.
+
+50
+00:02:34,520 --> 00:02:37,170
+
+51
+00:02:37,170 --> 00:02:43,780
+So reservations
+for future landings
+
+52
+00:02:43,780 --> 00:02:48,240
+is really what this
+system is built for.
+
+53
+00:02:48,240 --> 00:02:50,200
+There's a notion of time.
+
+54
+00:02:50,200 --> 00:02:52,790
+We'll assume that
+time is continuous.
+
+55
+00:02:52,790 --> 00:02:58,440
+So it could be represented
+by a real variable,
+
+56
+00:02:58,440 --> 00:03:00,290
+or a real quantity.
+
+57
+00:03:00,290 --> 00:03:14,460
+And what we'd like to do is
+reserve requests for landings.
+
+58
+00:03:14,460 --> 00:03:20,340
+And these are going to
+specify landing time.
+
+59
+00:03:20,340 --> 00:03:22,630
+Each of them is going to
+specify a landing time.
+
+60
+00:03:22,630 --> 00:03:26,110
+We call it t.
+
+61
+00:03:26,110 --> 00:03:33,210
+And in particular,
+we're going to add t
+
+62
+00:03:33,210 --> 00:03:52,370
+to the set R of landing times if
+no other landings are scheduled
+
+63
+00:03:52,370 --> 00:03:54,595
+within k minutes.
+
+64
+00:03:54,595 --> 00:03:57,790
+
+65
+00:03:57,790 --> 00:04:03,430
+And k is a parameter
+that could vary.
+
+66
+00:04:03,430 --> 00:04:07,810
+I mean, it could be statically
+set to 3 minutes, or maybe 4.
+
+67
+00:04:07,810 --> 00:04:10,420
+You can imagine it
+varying it dynamically
+
+68
+00:04:10,420 --> 00:04:12,910
+depending on weather
+conditions, things like that.
+
+69
+00:04:12,910 --> 00:04:16,230
+
+70
+00:04:16,230 --> 00:04:18,730
+For the most of the examples
+we'll talk about today,
+
+71
+00:04:18,730 --> 00:04:23,130
+we'll assume k is 3 minutes,
+or something like that.
+
+72
+00:04:23,130 --> 00:04:28,700
+So this is about adding
+to the data structure.
+
+73
+00:04:28,700 --> 00:04:31,290
+And so an insert
+operation, if you will,
+
+74
+00:04:31,290 --> 00:04:34,470
+that has a constraint associated
+with it that you need to check.
+
+75
+00:04:34,470 --> 00:04:37,060
+And so you wouldn't insert if
+the constraint was violated.
+
+76
+00:04:37,060 --> 00:04:40,760
+You would if the
+constraint was satisfied.
+
+77
+00:04:40,760 --> 00:04:45,030
+And time, as I
+said, is something
+
+78
+00:04:45,030 --> 00:04:47,500
+that is part of the system.
+
+79
+00:04:47,500 --> 00:04:49,300
+It needs to be modeled.
+
+80
+00:04:49,300 --> 00:04:51,560
+You have the current
+notion of time.
+
+81
+00:04:51,560 --> 00:04:57,240
+And every time you have a
+plane that's already landed,
+
+82
+00:04:57,240 --> 00:05:00,370
+which means that
+you can essentially
+
+83
+00:05:00,370 --> 00:05:03,430
+take this particular
+landing time away
+
+84
+00:05:03,430 --> 00:05:12,650
+from the set R. So this
+removal, or delete-- we remove
+
+85
+00:05:12,650 --> 00:05:17,730
+from set R, which is
+the set of landing times
+
+86
+00:05:17,730 --> 00:05:20,200
+after the plane lands.
+
+87
+00:05:20,200 --> 00:05:23,330
+
+88
+00:05:23,330 --> 00:05:25,892
+So every once in awhile,
+as time increments,
+
+89
+00:05:25,892 --> 00:05:27,850
+you're going to be checking
+the data structure.
+
+90
+00:05:27,850 --> 00:05:31,440
+And you can do this, maybe,
+every minute, every 30 seconds.
+
+91
+00:05:31,440 --> 00:05:32,810
+That isn't really important.
+
+92
+00:05:32,810 --> 00:05:34,810
+But you have to be able
+to remove from this data
+
+93
+00:05:34,810 --> 00:05:36,060
+structure.
+
+94
+00:05:36,060 --> 00:05:38,510
+So fairly straightforward
+data structure.
+
+95
+00:05:38,510 --> 00:05:43,190
+It's a set, R. We don't quite
+know how to implement it yet.
+
+96
+00:05:43,190 --> 00:05:59,150
+But we'd like to do all of these
+operations in order log n time,
+
+97
+00:05:59,150 --> 00:06:03,090
+where n is the size of the set.
+
+98
+00:06:03,090 --> 00:06:04,410
+All right?
+
+99
+00:06:04,410 --> 00:06:07,940
+So any questions about that?
+
+100
+00:06:07,940 --> 00:06:09,970
+Any questions about
+the definition
+
+101
+00:06:09,970 --> 00:06:14,790
+of the problem
+before we move on?
+
+102
+00:06:14,790 --> 00:06:16,440
+Are we good on?
+
+103
+00:06:16,440 --> 00:06:17,820
+OK.
+
+104
+00:06:17,820 --> 00:06:25,460
+So let's look at a real
+straightforward example,
+
+105
+00:06:25,460 --> 00:06:32,720
+and put this up here so you
+get a better sense of this.
+
+106
+00:06:32,720 --> 00:06:37,570
+Let's say that, right
+now, we are at time 37.
+
+107
+00:06:37,570 --> 00:06:45,580
+And the set R has
+41.2, 49, and 53 in it.
+
+108
+00:06:45,580 --> 00:06:48,120
+And that's time.
+
+109
+00:06:48,120 --> 00:06:53,040
+Now you may get a request
+for landing time 53.
+
+110
+00:06:53,040 --> 00:06:55,010
+And-- I'm sorry.
+
+111
+00:06:55,010 --> 00:07:01,500
+I want to call this
+56.3-- 41.2, 49, and 56.3.
+
+112
+00:07:01,500 --> 00:07:04,630
+You may get a request
+for landing time 53.
+
+113
+00:07:04,630 --> 00:07:06,740
+And right now the time is 37.
+
+114
+00:07:06,740 --> 00:07:10,870
+It's in the future, and
+you say OK because you've
+
+115
+00:07:10,870 --> 00:07:11,760
+done the check.
+
+116
+00:07:11,760 --> 00:07:15,340
+And let's assume
+that k equals 3.
+
+117
+00:07:15,340 --> 00:07:24,530
+And 53 is four ahead of 49, and
+3.3 before 56.3, so you're OK.
+
+118
+00:07:24,530 --> 00:07:27,520
+44 is not allowed.
+
+119
+00:07:27,520 --> 00:07:30,550
+
+120
+00:07:30,550 --> 00:07:33,610
+It's too close to 41.2.
+
+121
+00:07:33,610 --> 00:07:38,290
+And 20, just for
+completeness, is not
+
+122
+00:07:38,290 --> 00:07:39,475
+allowed because it's passed.
+
+123
+00:07:39,475 --> 00:07:42,710
+
+124
+00:07:42,710 --> 00:07:43,955
+Can't schedule in the past.
+
+125
+00:07:43,955 --> 00:07:45,330
+I mean, it could
+be the next day.
+
+126
+00:07:45,330 --> 00:07:46,790
+But then you
+wouldn't call it 20.
+
+127
+00:07:46,790 --> 00:07:50,110
+Let's assume that time is
+a monotonically increasing
+
+128
+00:07:50,110 --> 00:07:51,830
+function.
+
+129
+00:07:51,830 --> 00:07:54,020
+You have a 64-bit number.
+
+130
+00:07:54,020 --> 00:07:56,600
+It can go to the end
+of the world, or 2012,
+
+131
+00:07:56,600 --> 00:07:58,390
+or wherever you want.
+
+132
+00:07:58,390 --> 00:08:01,390
+So you can keep the
+number a bit smaller,
+
+133
+00:08:01,390 --> 00:08:05,390
+and do a little constant
+factor optimization, I guess.
+
+134
+00:08:05,390 --> 00:08:08,430
+So that's sort of the set up.
+
+135
+00:08:08,430 --> 00:08:12,650
+And hopefully you get a sense
+of what the requirements.
+
+136
+00:08:12,650 --> 00:08:16,510
+And you guys know about a bunch
+of data structures already.
+
+137
+00:08:16,510 --> 00:08:19,300
+And what I want to do is
+list each one of them,
+
+138
+00:08:19,300 --> 00:08:23,310
+and essentially shoot
+them down with respect
+
+139
+00:08:23,310 --> 00:08:31,520
+to not being able to make
+this efficiency requirement.
+
+140
+00:08:31,520 --> 00:08:34,830
+And I'd like you guys to
+help me shoot them down.
+
+141
+00:08:34,830 --> 00:08:39,235
+So let's talk about
+an easy one first.
+
+142
+00:08:39,235 --> 00:08:42,110
+
+143
+00:08:42,110 --> 00:08:44,720
+Let's say you have an unsorted
+list or an array corresponding
+
+144
+00:08:44,720 --> 00:08:49,670
+to R. That's all you have.
+
+145
+00:08:49,670 --> 00:08:51,990
+What's wrong with
+this data structure
+
+146
+00:08:51,990 --> 00:08:55,250
+from an efficiency standpoint?
+
+147
+00:08:55,250 --> 00:08:55,994
+Yeah.
+
+148
+00:08:55,994 --> 00:08:58,660
+AUDIENCE: Pretty much everything
+you want to do to it is linear.
+
+149
+00:08:58,660 --> 00:08:59,993
+PROFESSOR: That's exactly right.
+
+150
+00:08:59,993 --> 00:09:03,230
+Pretty much everything you
+want to do to it is linear.
+
+151
+00:09:03,230 --> 00:09:08,290
+And so you want to check
+the k minute check.
+
+152
+00:09:08,290 --> 00:09:14,360
+You can certainly insert
+into it, and just add to it.
+
+153
+00:09:14,360 --> 00:09:17,070
+So that part is not linear,
+that's constant time.
+
+154
+00:09:17,070 --> 00:09:20,250
+But certainly,
+anything where you
+
+155
+00:09:20,250 --> 00:09:25,040
+want to go check against
+other elements of the array,
+
+156
+00:09:25,040 --> 00:09:26,330
+it's unsorted.
+
+157
+00:09:26,330 --> 00:09:28,840
+You have no idea of where
+to find these elements.
+
+158
+00:09:28,840 --> 00:09:31,010
+You have to scan
+through the entire array
+
+159
+00:09:31,010 --> 00:09:33,930
+to check to see whether
+there's a landing time that's
+
+160
+00:09:33,930 --> 00:09:38,920
+within k of the current time
+t that you're asking for.
+
+161
+00:09:38,920 --> 00:09:42,490
+And that's going to
+take order n time.
+
+162
+00:09:42,490 --> 00:09:53,740
+So you can insert in
+order 1 without a check.
+
+163
+00:09:53,740 --> 00:10:03,530
+But sadly, the check
+takes order n time.
+
+164
+00:10:03,530 --> 00:10:04,030
+All right?
+
+165
+00:10:04,030 --> 00:10:09,680
+
+166
+00:10:09,680 --> 00:10:15,460
+Let's do something that is
+a little more plausible.
+
+167
+00:10:15,460 --> 00:10:18,950
+Let's talk about a sorted array.
+
+168
+00:10:18,950 --> 00:10:22,720
+So this is a little
+more subtle question.
+
+169
+00:10:22,720 --> 00:10:25,640
+Let's talk about a sorted array.
+
+170
+00:10:25,640 --> 00:10:28,640
+What happens with
+a sorted array?
+
+171
+00:10:28,640 --> 00:10:30,226
+Someone?
+
+172
+00:10:30,226 --> 00:10:33,312
+What can you do
+with a sorted array?
+
+173
+00:10:33,312 --> 00:10:33,812
+Yeah.
+
+174
+00:10:33,812 --> 00:10:37,130
+AUDIENCE: Do a binary search
+to find the [INAUDIBLE].
+
+175
+00:10:37,130 --> 00:10:40,900
+PROFESSOR: Binary search
+would find a bad insert.
+
+176
+00:10:40,900 --> 00:10:41,700
+OK, good.
+
+177
+00:10:41,700 --> 00:10:43,950
+So that's good.
+
+178
+00:10:43,950 --> 00:10:47,530
+So if you have a sorted array,
+and just for argument's sake,
+
+179
+00:10:47,530 --> 00:10:54,740
+it looks like 4, 20, 32, 37, 45.
+
+180
+00:10:54,740 --> 00:10:56,640
+And it's increasing order.
+
+181
+00:10:56,640 --> 00:11:02,180
+And if you get a particular time
+t, you can use binary search.
+
+182
+00:11:02,180 --> 00:11:07,300
+And let's say, in particular,
+the time is, for example, 34.
+
+183
+00:11:07,300 --> 00:11:10,110
+Then what you do is you go
+to the midpoint of the array,
+
+184
+00:11:10,110 --> 00:11:11,860
+and maybe you just look at that.
+
+185
+00:11:11,860 --> 00:11:17,880
+And you say oh, 34
+is greater than 32.
+
+186
+00:11:17,880 --> 00:11:22,870
+So I'm going to go
+check and figure out
+
+187
+00:11:22,870 --> 00:11:26,200
+if I need to move to
+the left or the right.
+
+188
+00:11:26,200 --> 00:11:28,450
+And since it's greater I'm
+going to move to the right.
+
+189
+00:11:28,450 --> 00:11:31,880
+And within logarithmic
+time, you'll
+
+190
+00:11:31,880 --> 00:11:37,206
+find what we call the insertion
+point of the sorted array,
+
+191
+00:11:37,206 --> 00:11:40,540
+where this 34 is
+supposed to sit.
+
+192
+00:11:40,540 --> 00:11:44,600
+And you don't necessarily
+get to insert there.
+
+193
+00:11:44,600 --> 00:11:47,330
+You need to look, once you've
+found the insertion point,
+
+194
+00:11:47,330 --> 00:11:50,440
+to your left and to your right.
+
+195
+00:11:50,440 --> 00:11:53,340
+And do the k minute check.
+
+196
+00:11:53,340 --> 00:11:57,260
+So finish up the
+answer to the question,
+
+197
+00:11:57,260 --> 00:12:02,370
+tell me how long it's going to
+take me to find the insertion
+
+198
+00:12:02,370 --> 00:12:06,100
+point, how long it's going
+to take me to do the check,
+
+199
+00:12:06,100 --> 00:12:08,210
+and how long it's going
+to take me to actually do
+
+200
+00:12:08,210 --> 00:12:09,802
+the insertion.
+
+201
+00:12:09,802 --> 00:12:12,325
+AUDIENCE: Log n in the search--
+
+202
+00:12:12,325 --> 00:12:14,450
+PROFESSOR: Log n for the
+search, to find the point.
+
+203
+00:12:14,450 --> 00:12:16,384
+AUDIENCE: Constant
+for the comparison?
+
+204
+00:12:16,384 --> 00:12:17,320
+PROFESSOR: Constant
+to the comparison.
+
+205
+00:12:17,320 --> 00:12:18,278
+And then the last step?
+
+206
+00:12:18,278 --> 00:12:20,128
+AUDIENCE: Do the
+research [INAUDIBLE].
+
+207
+00:12:20,128 --> 00:12:23,249
+PROFESSOR: Sorry, little louder.
+
+208
+00:12:23,249 --> 00:12:23,748
+Sorry.
+
+209
+00:12:23,748 --> 00:12:25,150
+AUDIENCE: The
+insertion is constant.
+
+210
+00:12:25,150 --> 00:12:26,524
+PROFESSOR: Insertion
+is constant?
+
+211
+00:12:26,524 --> 00:12:27,330
+Is that right?
+
+212
+00:12:27,330 --> 00:12:31,324
+Do you people agree with him,
+that insertion is constant?
+
+213
+00:12:31,324 --> 00:12:33,729
+AUDIENCE: You've got a
+maximum size up there, right?
+
+214
+00:12:33,729 --> 00:12:35,172
+There must be a maximum.
+
+215
+00:12:35,172 --> 00:12:37,100
+[INAUDIBLE]
+
+216
+00:12:37,100 --> 00:12:39,900
+PROFESSOR: No, the indices--
+so right now the array
+
+217
+00:12:39,900 --> 00:12:41,680
+has indices i.
+
+218
+00:12:41,680 --> 00:12:47,830
+And if you start with 1, it's
+1, 2, 3, 4, 5, et cetera.
+
+219
+00:12:47,830 --> 00:12:49,910
+So what do you
+mean by insertion?
+
+220
+00:12:49,910 --> 00:12:52,749
+Someone explain to me
+what-- yeah, go ahead.
+
+221
+00:12:52,749 --> 00:12:54,374
+AUDIENCE: When you
+put something in you
+
+222
+00:12:54,374 --> 00:12:56,042
+have to shift
+every element over.
+
+223
+00:12:56,042 --> 00:12:57,375
+PROFESSOR: That's exactly right.
+
+224
+00:12:57,375 --> 00:12:58,309
+That's exactly right.
+
+225
+00:12:58,309 --> 00:13:00,892
+Ok, good, that's great.
+
+226
+00:13:00,892 --> 00:13:02,600
+I guess I should give
+you half a cushion.
+
+227
+00:13:02,600 --> 00:13:05,000
+But I'll do the full one, right?
+
+228
+00:13:05,000 --> 00:13:05,940
+And you get one, too.
+
+229
+00:13:05,940 --> 00:13:09,010
+
+230
+00:13:09,010 --> 00:13:11,420
+So the point here is
+this is pretty close.
+
+231
+00:13:11,420 --> 00:13:13,530
+It's almost what we want.
+
+232
+00:13:13,530 --> 00:13:15,610
+It's almost what we want.
+
+233
+00:13:15,610 --> 00:13:18,320
+There's a little bit
+of a glitch here.
+
+234
+00:13:18,320 --> 00:13:20,210
+We know about binary search.
+
+235
+00:13:20,210 --> 00:13:22,360
+The binary search is
+going to allow us,
+
+236
+00:13:22,360 --> 00:13:25,950
+if there's n elements
+here, to find the place--
+
+237
+00:13:25,950 --> 00:13:29,920
+it's going to be able
+to find-- and I'm
+
+238
+00:13:29,920 --> 00:13:39,970
+going to precise here-- the
+smallest i such that R of i
+
+239
+00:13:39,970 --> 00:13:44,910
+is greater than or equal
+to t in order log n time.
+
+240
+00:13:44,910 --> 00:13:47,520
+
+241
+00:13:47,520 --> 00:13:49,970
+It's going to be
+able to do that.
+
+242
+00:13:49,970 --> 00:14:00,410
+You're going to be able to
+compare R of i and R of i
+
+243
+00:14:00,410 --> 00:14:06,530
+minus 1-- so the left
+and the right-- against t
+
+244
+00:14:06,530 --> 00:14:10,000
+in order 1 time.
+
+245
+00:14:10,000 --> 00:14:24,105
+But sadly, the actual insertion
+is going to require shifting.
+
+246
+00:14:24,105 --> 00:14:29,800
+
+247
+00:14:29,800 --> 00:14:33,890
+And that could take order n
+time, because it's an array.
+
+248
+00:14:33,890 --> 00:14:38,160
+
+249
+00:14:38,160 --> 00:14:40,470
+So that's the problem.
+
+250
+00:14:40,470 --> 00:14:47,240
+Now you could imagine that
+you had a sorted list.
+
+251
+00:14:47,240 --> 00:14:50,610
+And you could say, hey
+if I have a sorted list,
+
+252
+00:14:50,610 --> 00:14:57,430
+then the list looks
+like this, and it's
+
+253
+00:14:57,430 --> 00:14:59,650
+got a bunch of pointers in it.
+
+254
+00:14:59,650 --> 00:15:05,690
+And if I've found
+the insertion point,
+
+255
+00:15:05,690 --> 00:15:13,370
+then-- the list is nice,
+because you can insert something
+
+256
+00:15:13,370 --> 00:15:16,660
+by moving pointers
+in constant time
+
+257
+00:15:16,660 --> 00:15:18,840
+once you've found
+the insertion point.
+
+258
+00:15:18,840 --> 00:15:21,620
+But what's the
+problem with the list?
+
+259
+00:15:21,620 --> 00:15:22,120
+Yeah.
+
+260
+00:15:22,120 --> 00:15:24,580
+AUDIENCE: You can't do
+binary search [INAUDIBLE].
+
+261
+00:15:24,580 --> 00:15:26,930
+PROFESSOR: Well you can't
+do binary search on a list.
+
+262
+00:15:26,930 --> 00:15:30,800
+There's no notion of
+going to the n by 2 index
+
+263
+00:15:30,800 --> 00:15:36,480
+and doing random access on
+a conventional list, right?
+
+264
+00:15:36,480 --> 00:15:39,610
+So the list does
+one thing right,
+
+265
+00:15:39,610 --> 00:15:41,440
+but doesn't do the
+other thing right.
+
+266
+00:15:41,440 --> 00:15:43,600
+The array does a
+couple things right,
+
+267
+00:15:43,600 --> 00:15:45,440
+but doesn't do the
+shifting right.
+
+268
+00:15:45,440 --> 00:15:49,430
+And so you see why we've
+constructed this toy problem.
+
+269
+00:15:49,430 --> 00:15:52,670
+It's to motivate the
+binary search tree data
+
+270
+00:15:52,670 --> 00:15:53,850
+structure, obviously.
+
+271
+00:15:53,850 --> 00:15:59,040
+But you're close,
+but not quite there.
+
+272
+00:15:59,040 --> 00:15:59,830
+What about heaps?
+
+273
+00:15:59,830 --> 00:16:03,190
+
+274
+00:16:03,190 --> 00:16:06,510
+We talked about heaps last time.
+
+275
+00:16:06,510 --> 00:16:12,350
+What's the basic problem with
+the heap for this problem?
+
+276
+00:16:12,350 --> 00:16:14,510
+The heaps are data
+arrays, but you
+
+277
+00:16:14,510 --> 00:16:15,970
+can visualize them as trees.
+
+278
+00:16:15,970 --> 00:16:19,070
+And obviously if we're talking
+about min heaps and max heaps.
+
+279
+00:16:19,070 --> 00:16:23,430
+So in particular, what goes
+wrong with a min heap or a max
+
+280
+00:16:23,430 --> 00:16:26,940
+heap for this problem?
+
+281
+00:16:26,940 --> 00:16:28,515
+What takes a long time?
+
+282
+00:16:28,515 --> 00:16:29,015
+Yeah.
+
+283
+00:16:29,015 --> 00:16:31,660
+
+284
+00:16:31,660 --> 00:16:36,372
+AUDIENCE: You have to scan every
+element, which [INAUDIBLE].
+
+285
+00:16:36,372 --> 00:16:37,372
+PROFESSOR: That's right.
+
+286
+00:16:37,372 --> 00:16:39,990
+I mean, sadly, you know when
+we talk about min heaps or max
+
+287
+00:16:39,990 --> 00:16:46,460
+heaps, they actually have
+a fairly weak invariant.
+
+288
+00:16:46,460 --> 00:16:49,510
+It turns out that-- I'm
+previewing a bit here--
+
+289
+00:16:49,510 --> 00:16:51,040
+binary search
+trees are obviously
+
+290
+00:16:51,040 --> 00:16:53,920
+similar to heaps in the
+sense that you visualize
+
+291
+00:16:53,920 --> 00:16:56,280
+an array as a tree,
+in the case of a heap.
+
+292
+00:16:56,280 --> 00:16:58,360
+And binary search
+trees are trees.
+
+293
+00:16:58,360 --> 00:17:02,170
+But the invariant in a
+min heap or a max heap,
+
+294
+00:17:02,170 --> 00:17:04,069
+is this kind of
+a week invariant.
+
+295
+00:17:04,069 --> 00:17:12,740
+It essentially says,
+look at the min element.
+
+296
+00:17:12,740 --> 00:17:15,670
+And the min element
+has to be the root,
+
+297
+00:17:15,670 --> 00:17:18,190
+so you can do that one
+operation pretty quickly.
+
+298
+00:17:18,190 --> 00:17:21,770
+But if you want to look
+for a k minute check,
+
+299
+00:17:21,770 --> 00:17:30,760
+you want to see if there's
+an element in the heap that
+
+300
+00:17:30,760 --> 00:17:36,820
+is less than or equal to k,
+or greater than or equal to k
+
+301
+00:17:36,820 --> 00:17:41,520
+from t, this is going
+to take order n time.
+
+302
+00:17:41,520 --> 00:17:43,251
+OK?
+
+303
+00:17:43,251 --> 00:17:43,750
+Good.
+
+304
+00:17:43,750 --> 00:17:46,390
+
+305
+00:17:46,390 --> 00:17:49,250
+And finally, we haven't
+talked about dictionaries,
+
+306
+00:17:49,250 --> 00:17:52,040
+but we will next week.
+
+307
+00:17:52,040 --> 00:17:54,530
+Eric will talk about hash
+tables and dictionaries.
+
+308
+00:17:54,530 --> 00:17:56,800
+And they have the same problem.
+
+309
+00:17:56,800 --> 00:17:59,690
+So it's not like dictionaries
+are going to solve the problem,
+
+310
+00:17:59,690 --> 00:18:02,290
+for those of you who know about
+hash tables and dictionaries.
+
+311
+00:18:02,290 --> 00:18:04,040
+But you'll hear about
+them in some detail.
+
+312
+00:18:04,040 --> 00:18:06,380
+They're very good
+at other things.
+
+313
+00:18:06,380 --> 00:18:10,360
+So I don't want to say much more
+about that, because you're not
+
+314
+00:18:10,360 --> 00:18:12,340
+supposed to know
+about dictionaries.
+
+315
+00:18:12,340 --> 00:18:13,798
+Or at least we
+don't want to assume
+
+316
+00:18:13,798 --> 00:18:16,130
+you do, though we
+have talked about them
+
+317
+00:18:16,130 --> 00:18:19,190
+and alluded to
+dictionaries earlier.
+
+318
+00:18:19,190 --> 00:18:21,405
+And so that's a story here.
+
+319
+00:18:21,405 --> 00:18:22,530
+Yeah, back there, question.
+
+320
+00:18:22,530 --> 00:18:25,450
+AUDIENCE: Yeah, can you explain
+why it's [INAUDIBLE] time?
+
+321
+00:18:25,450 --> 00:18:27,530
+PROFESSOR: So what
+is a heap, right?
+
+322
+00:18:27,530 --> 00:18:30,220
+A heap essentially-- a
+min heap, for example,
+
+323
+00:18:30,220 --> 00:18:34,280
+or we talked about
+max heaps last time,
+
+324
+00:18:34,280 --> 00:18:39,440
+has the property that
+you have an element k,
+
+325
+00:18:39,440 --> 00:18:47,420
+and you're going to look
+at, let's say it's 21.
+
+326
+00:18:47,420 --> 00:18:52,050
+Let's do min heaps, so this
+has to be less than what's
+
+327
+00:18:52,050 --> 00:18:55,440
+here, 23, and what
+there, maybe it's
+
+328
+00:18:55,440 --> 00:18:57,545
+30, and so on and so forth.
+
+329
+00:18:57,545 --> 00:18:59,045
+And you have a
+recursive definition.
+
+330
+00:18:59,045 --> 00:19:04,220
+
+331
+00:19:04,220 --> 00:19:07,490
+And when you insert into a min
+heap, typically what happens
+
+332
+00:19:07,490 --> 00:19:11,590
+is suppose you wanted to
+insert, for argument's sake,
+
+333
+00:19:11,590 --> 00:19:16,280
+I want to insert 25.
+
+334
+00:19:16,280 --> 00:19:19,170
+I want to insert 25 into this.
+
+335
+00:19:19,170 --> 00:19:23,010
+The insertion algorithm
+for a min heap
+
+336
+00:19:23,010 --> 00:19:25,780
+typically adds to the
+end of the min heap.
+
+337
+00:19:25,780 --> 00:19:29,280
+So what you do is you
+would add 25 to this.
+
+338
+00:19:29,280 --> 00:19:33,500
+And let's say that you
+had something out here.
+
+339
+00:19:33,500 --> 00:19:34,630
+So you'd add to it.
+
+340
+00:19:34,630 --> 00:19:38,370
+And you'd start flipping things.
+
+341
+00:19:38,370 --> 00:19:43,080
+And you could work with
+just this part of the array
+
+342
+00:19:43,080 --> 00:19:45,140
+to insert 25 in here.
+
+343
+00:19:45,140 --> 00:19:48,660
+And you'd be able to satisfy
+the invariant of the min heap.
+
+344
+00:19:48,660 --> 00:19:51,750
+And you'd get a
+legitimate min heap.
+
+345
+00:19:51,750 --> 00:19:56,110
+But you'd never check the
+left part of it, which is 23.
+
+346
+00:19:56,110 --> 00:20:00,360
+So it's quite possible--
+and this is a good example--
+
+347
+00:20:00,360 --> 00:20:04,420
+that your basic insertion
+algorithm, which is essentially
+
+348
+00:20:04,420 --> 00:20:07,640
+a version of max heap
+of i, or min heap of i,
+
+349
+00:20:07,640 --> 00:20:09,840
+would simply insert
+at the end, and keep
+
+350
+00:20:09,840 --> 00:20:12,000
+flipping until you get
+the min heap property,
+
+351
+00:20:12,000 --> 00:20:15,110
+would be unable to check
+for the k minute check
+
+352
+00:20:15,110 --> 00:20:16,430
+during the insertion.
+
+353
+00:20:16,430 --> 00:20:18,860
+But what you'd have to do
+is to go look elsewhere.
+
+354
+00:20:18,860 --> 00:20:20,827
+That min heap of i
+we'd never look at--
+
+355
+00:20:20,827 --> 00:20:23,035
+or the insert algorithm we'd
+never look at-- and that
+
+356
+00:20:23,035 --> 00:20:24,900
+would require order n time.
+
+357
+00:20:24,900 --> 00:20:25,460
+All right?
+
+358
+00:20:25,460 --> 00:20:26,293
+AUDIENCE: Thank you.
+
+359
+00:20:26,293 --> 00:20:28,890
+
+360
+00:20:28,890 --> 00:20:31,500
+PROFESSOR: So that's the
+story for the min heap.
+
+361
+00:20:31,500 --> 00:20:32,730
+Thanks for the question.
+
+362
+00:20:32,730 --> 00:20:35,360
+And it's similar for
+dictionaries, as I said.
+
+363
+00:20:35,360 --> 00:20:37,150
+And so we're stuck.
+
+364
+00:20:37,150 --> 00:20:42,960
+We have no data structure yet
+that can do all of the things
+
+365
+00:20:42,960 --> 00:20:48,910
+that I put up on the board to
+the left, in order log n time.
+
+366
+00:20:48,910 --> 00:20:52,770
+And as you can see, the
+sorted array got pretty close.
+
+367
+00:20:52,770 --> 00:20:58,350
+And so if you could
+just solve this problem,
+
+368
+00:20:58,350 --> 00:21:04,100
+if you could do fast insertion--
+and by fast I mean order log n
+
+369
+00:21:04,100 --> 00:21:14,480
+time-- into a sorted
+array, we'd be in business.
+
+370
+00:21:14,480 --> 00:21:18,200
+So that's what we'd like to
+do with binary search trees.
+
+371
+00:21:18,200 --> 00:21:20,340
+Binary search trees
+are, as you can imagine,
+
+372
+00:21:20,340 --> 00:21:22,080
+enable binary search.
+
+373
+00:21:22,080 --> 00:21:27,320
+But the sorted arrays
+don't allow fast insertion,
+
+374
+00:21:27,320 --> 00:21:28,420
+but BSTs do.
+
+375
+00:21:28,420 --> 00:21:30,919
+
+376
+00:21:30,919 --> 00:21:31,960
+So let me introduce BSTs.
+
+377
+00:21:31,960 --> 00:21:38,500
+
+378
+00:21:38,500 --> 00:21:40,130
+As with any data
+structure, there's
+
+379
+00:21:40,130 --> 00:21:43,820
+a nice invariant
+associated with BSTs.
+
+380
+00:21:43,820 --> 00:21:49,080
+The invariant is stronger
+than the heap invariant.
+
+381
+00:21:49,080 --> 00:21:52,570
+And actually, that makes them
+a different data structure, not
+
+382
+00:21:52,570 --> 00:21:54,520
+necessarily a better
+data structure.
+
+383
+00:21:54,520 --> 00:21:57,957
+And I'll say why, but different.
+
+384
+00:21:57,957 --> 00:21:59,290
+For this problem they're better.
+
+385
+00:21:59,290 --> 00:22:02,130
+
+386
+00:22:02,130 --> 00:22:04,620
+So one example of a binary
+search tree looks like this.
+
+387
+00:22:04,620 --> 00:22:14,000
+
+388
+00:22:14,000 --> 00:22:19,600
+And as a binary tree you have
+a node, and we call it x.
+
+389
+00:22:19,600 --> 00:22:22,880
+Each of the nodes
+has a key of x.
+
+390
+00:22:22,880 --> 00:22:27,290
+So 30 is the key for this node,
+17 for that one, et cetera.
+
+391
+00:22:27,290 --> 00:22:29,575
+Unlike in a heap,
+your data structure
+
+392
+00:22:29,575 --> 00:22:31,690
+is a little more complicated.
+
+393
+00:22:31,690 --> 00:22:33,870
+The heap is simply
+an array, and you
+
+394
+00:22:33,870 --> 00:22:36,524
+happen to visualize
+it as a tree.
+
+395
+00:22:36,524 --> 00:22:37,940
+The binary search
+tree is actually
+
+396
+00:22:37,940 --> 00:22:44,040
+a tree that has
+pointers, unlike a heap.
+
+397
+00:22:44,040 --> 00:22:46,810
+So it's a more complicated
+data structure.
+
+398
+00:22:46,810 --> 00:22:50,240
+You need a few more bytes for
+every node of the binary search
+
+399
+00:22:50,240 --> 00:22:52,170
+tree, as opposed
+to the heap, which
+
+400
+00:22:52,170 --> 00:22:55,440
+is simply an array element.
+
+401
+00:22:55,440 --> 00:22:59,670
+And the pointers
+are parent of x.
+
+402
+00:22:59,670 --> 00:23:03,860
+I haven't bothered
+showing the arrows here,
+
+403
+00:23:03,860 --> 00:23:07,150
+because you could be going
+upwards or backwards.
+
+404
+00:23:07,150 --> 00:23:09,080
+And you could imagine
+that you actually
+
+405
+00:23:09,080 --> 00:23:11,930
+have a parent pointer
+that goes up this way,
+
+406
+00:23:11,930 --> 00:23:14,600
+and you have a child
+pointer that goes this way.
+
+407
+00:23:14,600 --> 00:23:17,790
+So there's really,
+potentially, three pointers
+
+408
+00:23:17,790 --> 00:23:22,220
+for each node, the
+parent, the left child,
+
+409
+00:23:22,220 --> 00:23:24,020
+and the right child.
+
+410
+00:23:24,020 --> 00:23:26,580
+So pretty straightforward.
+
+411
+00:23:26,580 --> 00:23:28,640
+That's the data
+structure in terms
+
+412
+00:23:28,640 --> 00:23:33,420
+of what it needs to have
+so you can operate on it.
+
+413
+00:23:33,420 --> 00:23:41,440
+And there's an
+invariant for a BST.
+
+414
+00:23:41,440 --> 00:23:48,420
+What makes a BST
+is that you have
+
+415
+00:23:48,420 --> 00:23:53,700
+an ordering of the
+key values that
+
+416
+00:23:53,700 --> 00:24:05,620
+satisfy the invariant that
+for all nodes x if y is
+
+417
+00:24:05,620 --> 00:24:18,780
+in the left subtree
+of x, we have--
+
+418
+00:24:18,780 --> 00:24:23,130
+if it's in the left
+subtree then key of y
+
+419
+00:24:23,130 --> 00:24:27,950
+is less than or
+equal to key of x.
+
+420
+00:24:27,950 --> 00:24:35,870
+And if y is in the
+right subtree we
+
+421
+00:24:35,870 --> 00:24:42,070
+have key of y is greater
+than or equal to key of x.
+
+422
+00:24:42,070 --> 00:24:44,540
+So if we're talking
+about trees here,
+
+423
+00:24:44,540 --> 00:24:47,110
+subtrees here,
+everything underneath--
+
+424
+00:24:47,110 --> 00:24:51,170
+and that's the stronger part
+of the invariant in the BST,
+
+425
+00:24:51,170 --> 00:24:54,700
+versus in the heap we were just
+talking about the children.
+
+426
+00:24:54,700 --> 00:24:58,090
+And so you look at
+this BST, it is a BST
+
+427
+00:24:58,090 --> 00:25:01,430
+because if I look to
+the right, from the root
+
+428
+00:25:01,430 --> 00:25:04,470
+I only see values that
+are greater than 30.
+
+429
+00:25:04,470 --> 00:25:08,150
+And if I look to the left,
+in the entire subtree,
+
+430
+00:25:08,150 --> 00:25:13,890
+all the way down I only see
+values that are less than 30.
+
+431
+00:25:13,890 --> 00:25:20,110
+And that has to be true for any
+intermediate node in the tree.
+
+432
+00:25:20,110 --> 00:25:23,940
+And the only other
+nontrivial node here is 17.
+
+433
+00:25:23,940 --> 00:25:28,830
+And you see that 14 is less than
+17, and 20 is greater than 17.
+
+434
+00:25:28,830 --> 00:25:30,000
+OK?
+
+435
+00:25:30,000 --> 00:25:32,317
+So that's the BST.
+
+436
+00:25:32,317 --> 00:25:33,400
+That's the data structure.
+
+437
+00:25:33,400 --> 00:25:34,910
+This is the invariant.
+
+438
+00:25:34,910 --> 00:25:40,890
+So let's look at why BSTs
+are a possibility for solving
+
+439
+00:25:40,890 --> 00:25:44,870
+our runway reservation problem.
+
+440
+00:25:44,870 --> 00:25:50,190
+And what I'll do is
+I'll do the insert.
+
+441
+00:25:50,190 --> 00:25:54,790
+
+442
+00:25:54,790 --> 00:25:58,970
+So let's start with the
+nil set of elements,
+
+443
+00:25:58,970 --> 00:26:04,060
+or null set of elements, R.
+And let's start inserting.
+
+444
+00:26:04,060 --> 00:26:08,370
+
+445
+00:26:08,370 --> 00:26:13,570
+So I insert 49.
+
+446
+00:26:13,570 --> 00:26:19,840
+And all I do is make a node
+that has a key value of 49.
+
+447
+00:26:19,840 --> 00:26:22,110
+This one is easy.
+
+448
+00:26:22,110 --> 00:26:23,595
+Next insert, 79.
+
+449
+00:26:23,595 --> 00:26:27,090
+
+450
+00:26:27,090 --> 00:26:32,600
+And what happens here
+is I have to look at 49,
+
+451
+00:26:32,600 --> 00:26:34,165
+and I compare 79 to 49.
+
+452
+00:26:34,165 --> 00:26:37,780
+And because 79 is greater
+than 49 I go to the right
+
+453
+00:26:37,780 --> 00:26:45,180
+and I attach 79 to
+the right child of 49.
+
+454
+00:26:45,180 --> 00:26:46,675
+Then I want to insert 46.
+
+455
+00:26:46,675 --> 00:26:49,500
+
+456
+00:26:49,500 --> 00:26:52,190
+And when I want to
+insert 46 I look at this,
+
+457
+00:26:52,190 --> 00:26:54,070
+I compare 49 and 46.
+
+458
+00:26:54,070 --> 00:26:59,390
+46 is less, so I go to the left
+side and I put 46 in there.
+
+459
+00:26:59,390 --> 00:27:04,560
+Next, let's say I
+want to insert 41.
+
+460
+00:27:04,560 --> 00:27:09,480
+So far I haven't really talked
+about the k minute checks.
+
+461
+00:27:09,480 --> 00:27:11,700
+And you could imagine
+that they're being done.
+
+462
+00:27:11,700 --> 00:27:14,080
+I'll show you exactly, or
+talk about exactly how they're
+
+463
+00:27:14,080 --> 00:27:15,540
+done in a second.
+
+464
+00:27:15,540 --> 00:27:17,410
+It's not that hard.
+
+465
+00:27:17,410 --> 00:27:21,160
+But let me go ahead
+and do one more.
+
+466
+00:27:21,160 --> 00:27:25,940
+For 41, 41 is less
+than 49, so I go left.
+
+467
+00:27:25,940 --> 00:27:30,210
+41 is less than 46, so
+I go left and attach it
+
+468
+00:27:30,210 --> 00:27:31,155
+to the left child.
+
+469
+00:27:31,155 --> 00:27:31,790
+All right?
+
+470
+00:27:31,790 --> 00:27:33,650
+So that's what I have right now.
+
+471
+00:27:33,650 --> 00:27:36,510
+Now let's talk about
+the k minute check.
+
+472
+00:27:36,510 --> 00:27:39,100
+It's good to talk about
+the K minute check
+
+473
+00:27:39,100 --> 00:27:41,750
+when there's
+actually a violation.
+
+474
+00:27:41,750 --> 00:27:45,220
+And let's assume
+the k equals 3 here.
+
+475
+00:27:45,220 --> 00:27:47,110
+And so, same thing here.
+
+476
+00:27:47,110 --> 00:27:49,780
+You're essentially doing
+binary search here.
+
+477
+00:27:49,780 --> 00:27:52,502
+And you're doing the checks as
+you're doing the binary search.
+
+478
+00:27:52,502 --> 00:27:53,960
+So what you're
+going to be doing is
+
+479
+00:27:53,960 --> 00:27:58,580
+you're going to check that--
+you're going to compare 42
+
+480
+00:27:58,580 --> 00:28:01,930
+with 49, with the
+k minute check.
+
+481
+00:28:01,930 --> 00:28:03,780
+And you realize they're 7 apart.
+
+482
+00:28:03,780 --> 00:28:04,960
+So that's OK.
+
+483
+00:28:04,960 --> 00:28:09,010
+And 42 is less than
+49, so you go left.
+
+484
+00:28:09,010 --> 00:28:12,370
+And then you compare 42 with 46.
+
+485
+00:28:12,370 --> 00:28:16,770
+And again, it's less than 46,
+but it's k away, more than 3
+
+486
+00:28:16,770 --> 00:28:18,030
+away from 46.
+
+487
+00:28:18,030 --> 00:28:18,950
+So that's cool.
+
+488
+00:28:18,950 --> 00:28:20,580
+And you go left.
+
+489
+00:28:20,580 --> 00:28:22,350
+And then you get to 41.
+
+490
+00:28:22,350 --> 00:28:25,180
+And you compare 42 with 41.
+
+491
+00:28:25,180 --> 00:28:26,610
+In this case is greater.
+
+492
+00:28:26,610 --> 00:28:30,580
+But it's not k more than it.
+
+493
+00:28:30,580 --> 00:28:34,510
+And so that means that if
+you didn't have the check,
+
+494
+00:28:34,510 --> 00:28:37,930
+you would be putting 42 in here.
+
+495
+00:28:37,930 --> 00:28:40,750
+But because you have
+the check, you fail.
+
+496
+00:28:40,750 --> 00:28:43,580
+And you say, look,
+I mean this violates
+
+497
+00:28:43,580 --> 00:28:46,485
+the safety property, violates
+the check I need to do.
+
+498
+00:28:46,485 --> 00:28:48,110
+And therefore I'm
+not going to insert--
+
+499
+00:28:48,110 --> 00:28:50,750
+I'm not going to reserve
+a request for you.
+
+500
+00:28:50,750 --> 00:28:51,520
+All right?
+
+501
+00:28:51,520 --> 00:28:55,340
+So what's happened here is
+it's basically a sorted array,
+
+502
+00:28:55,340 --> 00:28:57,850
+except that you added
+a bunch of pointers
+
+503
+00:28:57,850 --> 00:28:59,300
+associated with the tree.
+
+504
+00:28:59,300 --> 00:29:03,520
+And so it's somewhere between a
+sorted list and a sorted array.
+
+505
+00:29:03,520 --> 00:29:05,500
+And it does exactly
+the right thing
+
+506
+00:29:05,500 --> 00:29:09,310
+with respect to
+being able to insert.
+
+507
+00:29:09,310 --> 00:29:11,360
+Once you've found
+the place to insert,
+
+508
+00:29:11,360 --> 00:29:14,370
+it's merely attaching
+this particular new node
+
+509
+00:29:14,370 --> 00:29:17,150
+with it's appropriate
+key to the pointer.
+
+510
+00:29:17,150 --> 00:29:19,200
+All right?
+
+511
+00:29:19,200 --> 00:29:28,390
+So what's happened
+here is that if h
+
+512
+00:29:28,390 --> 00:29:37,970
+is the height of the
+tree then insertion
+
+513
+00:29:37,970 --> 00:29:44,510
+with or without the check
+is done in order h time.
+
+514
+00:29:44,510 --> 00:29:48,330
+
+515
+00:29:48,330 --> 00:29:52,044
+And that's what
+BSTs are good for.
+
+516
+00:29:52,044 --> 00:29:52,710
+People buy that?
+
+517
+00:29:52,710 --> 00:29:55,700
+Any questions about how they
+k minute check proceeded?
+
+518
+00:29:55,700 --> 00:29:56,441
+Yeah, question.
+
+519
+00:29:56,441 --> 00:29:57,732
+AUDIENCE: So, what's it called?
+
+520
+00:29:57,732 --> 00:29:58,460
+The what check?
+
+521
+00:29:58,460 --> 00:30:00,022
+PROFESSOR: The k minute check.
+
+522
+00:30:00,022 --> 00:30:04,410
+Sorry, the k was 3 minutes k.
+
+523
+00:30:04,410 --> 00:30:07,790
+I had this thing over
+here, add t to the set R
+
+524
+00:30:07,790 --> 00:30:12,110
+if no other landings are
+scheduled within k minutes.
+
+525
+00:30:12,110 --> 00:30:13,460
+So k was just a number.
+
+526
+00:30:13,460 --> 00:30:17,150
+I want it to be a
+parameter because it
+
+527
+00:30:17,150 --> 00:30:19,130
+doesn't matter what k is.
+
+528
+00:30:19,130 --> 00:30:22,870
+As long as you know what it is
+when you do the binary search,
+
+529
+00:30:22,870 --> 00:30:26,070
+you can add that in to an
+argument to your insert,
+
+530
+00:30:26,070 --> 00:30:27,092
+and do the check.
+
+531
+00:30:27,092 --> 00:30:28,700
+AUDIENCE: OK.
+
+532
+00:30:28,700 --> 00:30:33,080
+PROFESSOR: So in this case,
+I set k to be 3 out here.
+
+533
+00:30:33,080 --> 00:30:35,910
+And I was doing a check
+to see that the invariant,
+
+534
+00:30:35,910 --> 00:30:40,830
+any elements in the BST
+already, on any nodes that
+
+535
+00:30:40,830 --> 00:30:45,920
+had keys that were
+within 3 minutes--
+
+536
+00:30:45,920 --> 00:30:48,900
+because I fixed k to be
+3-- to the actual time
+
+537
+00:30:48,900 --> 00:30:50,590
+that I was trying to insert.
+
+538
+00:30:50,590 --> 00:30:51,090
+All right?
+
+539
+00:30:51,090 --> 00:30:53,254
+AUDIENCE: So there's
+no way [INAUDIBLE].
+
+540
+00:30:53,254 --> 00:30:54,795
+PROFESSOR: I'm sorry,
+there's no way?
+
+541
+00:30:54,795 --> 00:30:55,542
+AUDIENCE: There's
+no way you could
+
+542
+00:30:55,542 --> 00:30:57,160
+insert the 42 into
+the tree then?
+
+543
+00:30:57,160 --> 00:31:00,480
+PROFESSOR: Well, if
+the basic insertion
+
+544
+00:31:00,480 --> 00:31:03,535
+method into a binary search tree
+doesn't have any constraints.
+
+545
+00:31:03,535 --> 00:31:06,040
+
+546
+00:31:06,040 --> 00:31:10,650
+But you can certainly
+augment the insertion method
+
+547
+00:31:10,650 --> 00:31:14,720
+without changing the efficiency
+of the insertion method.
+
+548
+00:31:14,720 --> 00:31:16,710
+So let's say that
+all you wanted to do
+
+549
+00:31:16,710 --> 00:31:19,780
+was insert into a
+binary search tree,
+
+550
+00:31:19,780 --> 00:31:22,710
+and it had nothing to do
+with the runway reservation.
+
+551
+00:31:22,710 --> 00:31:25,400
+Then you would just insert
+the way I described to you.
+
+552
+00:31:25,400 --> 00:31:27,080
+The beauty of the
+binary search tree
+
+553
+00:31:27,080 --> 00:31:31,150
+is that while you're
+finding the place to insert,
+
+554
+00:31:31,150 --> 00:31:33,487
+you can do these checks--
+the k minute checks.
+
+555
+00:31:33,487 --> 00:31:34,570
+Yeah, question back there.
+
+556
+00:31:34,570 --> 00:31:36,729
+AUDIENCE: What about 45?
+
+557
+00:31:36,729 --> 00:31:37,770
+PROFESSOR: What about 45?
+
+558
+00:31:37,770 --> 00:31:43,190
+So this is after-- we
+haven't inserted 42
+
+559
+00:31:43,190 --> 00:31:45,630
+because it violated the check.
+
+560
+00:31:45,630 --> 00:31:47,520
+So when you do 45,
+then what happens
+
+561
+00:31:47,520 --> 00:31:51,100
+is you see that
+45 is less than 49
+
+562
+00:31:51,100 --> 00:31:55,510
+and you pass, because you're
+more than 3 minutes away.
+
+563
+00:31:55,510 --> 00:31:57,230
+We'll stick with that example.
+
+564
+00:31:57,230 --> 00:31:58,930
+And then you get
+here and then you
+
+565
+00:31:58,930 --> 00:32:04,780
+see that 45 is less than 46,
+and you'd fail right here.
+
+566
+00:32:04,780 --> 00:32:07,390
+You would fail right here
+if you were doing the check,
+
+567
+00:32:07,390 --> 00:32:11,220
+because 45 is not
+3 away from 46.
+
+568
+00:32:11,220 --> 00:32:13,390
+All right?
+
+569
+00:32:13,390 --> 00:32:16,580
+So that's the story.
+
+570
+00:32:16,580 --> 00:32:19,130
+And so if you have h being
+the height of the tree,
+
+571
+00:32:19,130 --> 00:32:21,670
+as you can see you're
+just following a path.
+
+572
+00:32:21,670 --> 00:32:24,150
+And depending on
+what the height is
+
+573
+00:32:24,150 --> 00:32:26,450
+you're going to do
+that many operations,
+
+574
+00:32:26,450 --> 00:32:28,320
+times some constant factor.
+
+575
+00:32:28,320 --> 00:32:31,010
+And so you can say that
+this is order h time.
+
+576
+00:32:31,010 --> 00:32:32,090
+All right?
+
+577
+00:32:32,090 --> 00:32:35,210
+Any other questions?
+
+578
+00:32:35,210 --> 00:32:36,552
+Yeah, question back there.
+
+579
+00:32:36,552 --> 00:32:38,218
+AUDIENCE: In a normal
+array [INAUDIBLE].
+
+580
+00:32:38,218 --> 00:32:44,550
+
+581
+00:32:44,550 --> 00:32:46,410
+PROFESSOR: Well, it's up to you.
+
+582
+00:32:46,410 --> 00:32:50,680
+In a conventional binary search
+tree, or the vanilla binary
+
+583
+00:32:50,680 --> 00:32:52,560
+search tree, typically
+what you're doing
+
+584
+00:32:52,560 --> 00:32:55,100
+is you're doing
+either find or insert.
+
+585
+00:32:55,100 --> 00:32:57,050
+And so what that means
+is that you would just
+
+586
+00:32:57,050 --> 00:33:00,870
+return the pointer
+associated with that element.
+
+587
+00:33:00,870 --> 00:33:04,710
+So if you're looking for find
+46, for example, on the tree
+
+588
+00:33:04,710 --> 00:33:08,656
+that I have out there, typically
+46 is just the key value.
+
+589
+00:33:08,656 --> 00:33:10,530
+And there may be a record
+associated with it.
+
+590
+00:33:10,530 --> 00:33:12,279
+And you would get a
+pointer to that record
+
+591
+00:33:12,279 --> 00:33:14,200
+because it's already in there.
+
+592
+00:33:14,200 --> 00:33:17,890
+At that point you can
+say I want to override.
+
+593
+00:33:17,890 --> 00:33:21,420
+Or if you want, you could
+have duplicate values.
+
+594
+00:33:21,420 --> 00:33:23,890
+You could have this,
+what's called a multiset.
+
+595
+00:33:23,890 --> 00:33:26,770
+A multiset is a set that
+has duplicate elements.
+
+596
+00:33:26,770 --> 00:33:29,400
+In that case, you would need
+a little more sophistication
+
+597
+00:33:29,400 --> 00:33:33,470
+to differentiate between
+two elements that
+
+598
+00:33:33,470 --> 00:33:35,870
+have the same key values.
+
+599
+00:33:35,870 --> 00:33:38,170
+So you'd have to
+call it 46a and 46b.
+
+600
+00:33:38,170 --> 00:33:41,880
+And you'd have to have some
+way of differentiating.
+
+601
+00:33:41,880 --> 00:33:43,420
+Any other questions?
+
+602
+00:33:43,420 --> 00:33:44,258
+Yeah.
+
+603
+00:33:44,258 --> 00:33:45,692
+AUDIENCE: Wouldn't
+it be a problem
+
+604
+00:33:45,692 --> 00:33:47,604
+if the tree's not balanced?
+
+605
+00:33:47,604 --> 00:33:50,770
+PROFESSOR: Ah, great question.
+
+606
+00:33:50,770 --> 00:33:55,930
+Yes, stay tuned.
+
+607
+00:33:55,930 --> 00:33:57,990
+So I was careful, right?
+
+608
+00:33:57,990 --> 00:34:00,369
+
+609
+00:34:00,369 --> 00:34:01,910
+I guess I kind of
+alluded to the fact
+
+610
+00:34:01,910 --> 00:34:03,870
+that we'd solved the
+runway reservation system.
+
+611
+00:34:03,870 --> 00:34:06,540
+Did I actually say that
+we'd solved the problem?
+
+612
+00:34:06,540 --> 00:34:08,080
+Did I say we had
+solved the problem?
+
+613
+00:34:08,080 --> 00:34:10,610
+OK, so I did not lie.
+
+614
+00:34:10,610 --> 00:34:12,150
+I did not lie.
+
+615
+00:34:12,150 --> 00:34:15,730
+I said that the height
+of the tree was h.
+
+616
+00:34:15,730 --> 00:34:18,960
+And I said that this was
+accomplished in order h time,
+
+617
+00:34:18,960 --> 00:34:19,760
+right?
+
+618
+00:34:19,760 --> 00:34:23,730
+Which is not quite what I want,
+which is really your question.
+
+619
+00:34:23,730 --> 00:34:25,300
+So we'll get to that.
+
+620
+00:34:25,300 --> 00:34:28,080
+So we're not quite done yet.
+
+621
+00:34:28,080 --> 00:34:30,719
+But before we do
+that, it turns out
+
+622
+00:34:30,719 --> 00:34:34,909
+that today's lecture is
+really part one of two.
+
+623
+00:34:34,909 --> 00:34:40,080
+You'll get a really good
+sense of BST operations
+
+624
+00:34:40,080 --> 00:34:41,699
+in today's lecture.
+
+625
+00:34:41,699 --> 00:34:44,520
+But there's going to be a few
+things that-- we can't cover
+
+626
+00:34:44,520 --> 00:34:47,090
+all of double 6 in
+the lecture, right?
+
+627
+00:34:47,090 --> 00:34:50,730
+We'd like to, and let you
+off for the entire fall,
+
+628
+00:34:50,730 --> 00:34:52,940
+but that's not the way
+it works, all right?
+
+629
+00:34:52,940 --> 00:34:54,360
+So it's a great question.
+
+630
+00:34:54,360 --> 00:34:56,959
+I'll answer it towards the end.
+
+631
+00:34:56,959 --> 00:34:58,500
+I just wanted you
+to say a little bit
+
+632
+00:34:58,500 --> 00:35:01,400
+about other operations.
+
+633
+00:35:01,400 --> 00:35:05,110
+There's many operations that
+you can do on a binary search
+
+634
+00:35:05,110 --> 00:35:10,330
+tree, that can be
+done in order h time,
+
+635
+00:35:10,330 --> 00:35:13,040
+and some even in constant time.
+
+636
+00:35:13,040 --> 00:35:14,940
+And I'll put these in the notes.
+
+637
+00:35:14,940 --> 00:35:16,970
+Some of these are
+fairly straightforward.
+
+638
+00:35:16,970 --> 00:35:22,750
+Find min can be done
+in heap, in a min heap.
+
+639
+00:35:22,750 --> 00:35:25,450
+If you want to find the minimum
+value, it's constant time.
+
+640
+00:35:25,450 --> 00:35:27,730
+You just return the root.
+
+641
+00:35:27,730 --> 00:35:32,040
+In the case of a binary search
+tree, how do you find the min?
+
+642
+00:35:32,040 --> 00:35:34,134
+Someone?
+
+643
+00:35:34,134 --> 00:35:34,800
+Worth a cushion.
+
+644
+00:35:34,800 --> 00:35:35,335
+Yep.
+
+645
+00:35:35,335 --> 00:35:36,710
+AUDIENCE: Keep
+going to the left?
+
+646
+00:35:36,710 --> 00:35:37,710
+PROFESSOR: Keep
+going to the left.
+
+647
+00:35:37,710 --> 00:35:38,660
+And how do you find the max?
+
+648
+00:35:38,660 --> 00:35:39,445
+AUDIENCE: [INAUDIBLE].
+
+649
+00:35:39,445 --> 00:35:40,903
+PROFESSOR: Keep
+going to the right.
+
+650
+00:35:40,903 --> 00:35:42,640
+All right great, thank you.
+
+651
+00:35:42,640 --> 00:35:44,646
+And finally, what
+complexity is that?
+
+652
+00:35:44,646 --> 00:35:46,812
+I sort gave it away, but I
+want to hear it from you.
+
+653
+00:35:46,812 --> 00:35:47,997
+AUDIENCE: [INAUDIBLE].
+
+654
+00:35:47,997 --> 00:35:48,580
+PROFESSOR: Hm?
+
+655
+00:35:48,580 --> 00:35:49,470
+AUDIENCE: It's the height
+
+656
+00:35:49,470 --> 00:35:50,970
+PROFESSOR: It's the
+height, order h.
+
+657
+00:35:50,970 --> 00:35:52,760
+All right, it's
+order h complexity.
+
+658
+00:35:52,760 --> 00:35:57,610
+Go to the left until
+you hit a leaf,
+
+659
+00:35:57,610 --> 00:36:04,470
+and until leaf
+order h complexity.
+
+660
+00:36:04,470 --> 00:36:05,917
+Same thing for max.
+
+661
+00:36:05,917 --> 00:36:07,500
+And then you can do
+a bunch of things.
+
+662
+00:36:07,500 --> 00:36:10,030
+I'll put these in the notes.
+
+663
+00:36:10,030 --> 00:36:13,180
+You can find things
+like next larger
+
+664
+00:36:13,180 --> 00:36:18,940
+x, which is the next
+largest value beyond x.
+
+665
+00:36:18,940 --> 00:36:22,530
+And you look at the key for
+x and you say, for example,
+
+666
+00:36:22,530 --> 00:36:25,840
+if you put 46 in there, what's
+the next thing that's larger
+
+667
+00:36:25,840 --> 00:36:28,220
+and that?
+
+668
+00:36:28,220 --> 00:36:31,930
+In this tree here, it's 49.
+
+669
+00:36:31,930 --> 00:36:36,270
+But that's something which was
+trivially done in this example.
+
+670
+00:36:36,270 --> 00:36:40,550
+But in general you can do
+this in order h time as well.
+
+671
+00:36:40,550 --> 00:36:42,280
+And you can see the pseudocode.
+
+672
+00:36:42,280 --> 00:36:46,130
+And we'll probably cover
+that in section tomorrow.
+
+673
+00:36:46,130 --> 00:36:49,130
+What I want to do today, for the
+rest of the time I have left,
+
+674
+00:36:49,130 --> 00:36:53,720
+is actually talk about augmented
+binary search trees, which
+
+675
+00:36:53,720 --> 00:36:58,870
+are things that can do more
+and have more data in them
+
+676
+00:36:58,870 --> 00:37:01,680
+than just these pointers.
+
+677
+00:37:01,680 --> 00:37:03,911
+And that's actually
+something which
+
+678
+00:37:03,911 --> 00:37:06,410
+should give you a sense of the
+richness of the binary search
+
+679
+00:37:06,410 --> 00:37:09,517
+tree structure, this
+notion of augmentation.
+
+680
+00:37:09,517 --> 00:37:11,600
+And those of you, again,
+who have taken double 05,
+
+681
+00:37:11,600 --> 00:37:13,760
+you know about
+design amendments.
+
+682
+00:37:13,760 --> 00:37:16,540
+And so specifications
+never stay the same.
+
+683
+00:37:16,540 --> 00:37:18,330
+I mean, you're
+working for someone,
+
+684
+00:37:18,330 --> 00:37:21,030
+and they never really
+tell you what they want.
+
+685
+00:37:21,030 --> 00:37:24,250
+They might, but they
+change their mind.
+
+686
+00:37:24,250 --> 00:37:26,700
+So in this case, we're
+going to change our mind.
+
+687
+00:37:26,700 --> 00:37:28,970
+And so we've done
+this to the extent
+
+688
+00:37:28,970 --> 00:37:32,330
+that we can cover all of
+these in order h time.
+
+689
+00:37:32,330 --> 00:37:35,110
+And let's say that now
+the problem specification
+
+690
+00:37:35,110 --> 00:37:36,810
+changed on us.
+
+691
+00:37:36,810 --> 00:37:38,570
+There's an additional
+requirement
+
+692
+00:37:38,570 --> 00:37:42,250
+that we're asked to solve.
+
+693
+00:37:42,250 --> 00:37:47,060
+And so you sort of
+committed to BST structures.
+
+694
+00:37:47,060 --> 00:37:50,150
+But now we have an
+additional requirement.
+
+695
+00:37:50,150 --> 00:38:00,100
+And the new requirement is that
+we be able to compute rank t.
+
+696
+00:38:00,100 --> 00:38:08,430
+And rank t is how
+many planes are
+
+697
+00:38:08,430 --> 00:38:22,470
+scheduled to land at times
+less than or equal to t.
+
+698
+00:38:22,470 --> 00:38:24,040
+So perfectly
+reasonable question.
+
+699
+00:38:24,040 --> 00:38:26,740
+It wasn't part of
+the original spec.
+
+700
+00:38:26,740 --> 00:38:29,810
+You now have built your
+BST data structure,
+
+701
+00:38:29,810 --> 00:38:31,480
+you thought you were done.
+
+702
+00:38:31,480 --> 00:38:33,340
+Sorry, you aren't.
+
+703
+00:38:33,340 --> 00:38:35,730
+You've got to do
+this extra stuff.
+
+704
+00:38:35,730 --> 00:38:39,540
+So that's the notion
+of augmentation,
+
+705
+00:38:39,540 --> 00:38:42,744
+which we're going to use this
+is an example of how we're
+
+706
+00:38:42,744 --> 00:38:45,200
+going to augment
+the BST structure.
+
+707
+00:38:45,200 --> 00:38:46,950
+And oh, by the way,
+I don't want you
+
+708
+00:38:46,950 --> 00:38:50,140
+to change the
+complexity from order h.
+
+709
+00:38:50,140 --> 00:38:52,080
+And we eventually will
+get to order log n,
+
+710
+00:38:52,080 --> 00:38:56,630
+but don't go change something
+that was logarithmic to linear.
+
+711
+00:38:56,630 --> 00:38:57,380
+That would be bad.
+
+712
+00:38:57,380 --> 00:38:59,970
+
+713
+00:38:59,970 --> 00:39:01,690
+So let's talk about
+how you do this.
+
+714
+00:39:01,690 --> 00:39:03,315
+And I don't think we
+need this anymore.
+
+715
+00:39:03,315 --> 00:39:07,830
+
+716
+00:39:07,830 --> 00:39:11,000
+So the first thing we need to
+do is add a little bit more
+
+717
+00:39:11,000 --> 00:39:15,790
+information to the
+node structure.
+
+718
+00:39:15,790 --> 00:39:20,250
+
+719
+00:39:20,250 --> 00:39:29,283
+And what we're going to do
+is augment the BST structure.
+
+720
+00:39:29,283 --> 00:39:34,130
+
+721
+00:39:34,130 --> 00:39:38,980
+And we're going to add one
+little number associated
+
+722
+00:39:38,980 --> 00:39:45,670
+with each node, that looks at
+the number of nodes below it.
+
+723
+00:39:45,670 --> 00:39:49,000
+So in particular,
+let's say that I
+
+724
+00:39:49,000 --> 00:39:59,500
+have 49, 46, let's just
+say 49, 46 for now.
+
+725
+00:39:59,500 --> 00:40:06,700
+And over here I
+have 79, 64, and 83.
+
+726
+00:40:06,700 --> 00:40:09,640
+
+727
+00:40:09,640 --> 00:40:11,490
+I'm going to modify--
+I'm going to have
+
+728
+00:40:11,490 --> 00:40:16,435
+an extra number associated
+with each of these nodes.
+
+729
+00:40:16,435 --> 00:40:18,060
+And I'm just going
+to write that number
+
+730
+00:40:18,060 --> 00:40:20,830
+on the outside of the node.
+
+731
+00:40:20,830 --> 00:40:23,640
+And you can just imagine
+that now the key value has
+
+732
+00:40:23,640 --> 00:40:25,880
+two numbers associated
+with it-- the thing
+
+733
+00:40:25,880 --> 00:40:30,450
+that I write inside the node,
+and what I write outside of it.
+
+734
+00:40:30,450 --> 00:40:35,959
+So in particular, when
+I do insert or delete
+
+735
+00:40:35,959 --> 00:40:37,625
+I'm going to be
+modifying these numbers.
+
+736
+00:40:37,625 --> 00:40:40,480
+
+737
+00:40:40,480 --> 00:40:44,470
+And these are size numbers.
+
+738
+00:40:44,470 --> 00:40:46,210
+And what do I mean by that?
+
+739
+00:40:46,210 --> 00:40:51,840
+Well these numbers
+correspond to subtree sizes.
+
+740
+00:40:51,840 --> 00:40:57,470
+
+741
+00:40:57,470 --> 00:41:01,180
+So the subtree size
+here is 1, 1, 1.
+
+742
+00:41:01,180 --> 00:41:04,100
+So as I'm building
+this tree up I'm
+
+743
+00:41:04,100 --> 00:41:06,450
+going to create an
+augmented BST structure,
+
+744
+00:41:06,450 --> 00:41:08,400
+and I've modified
+insert and delete
+
+745
+00:41:08,400 --> 00:41:10,364
+so they do some extra work.
+
+746
+00:41:10,364 --> 00:41:11,780
+So let's say, for
+argument's sake,
+
+747
+00:41:11,780 --> 00:41:18,090
+that I've added this in
+sort of a bottom up fashion.
+
+748
+00:41:18,090 --> 00:41:21,390
+And what I have are these
+particular subtree sizes.
+
+749
+00:41:21,390 --> 00:41:23,110
+All of these should make sense.
+
+750
+00:41:23,110 --> 00:41:27,240
+This has just a single
+node, same thing here.
+
+751
+00:41:27,240 --> 00:41:31,180
+So this subtree sizes associated
+with these nodes are all 1.
+
+752
+00:41:31,180 --> 00:41:33,740
+The subtree size
+associated with 79
+
+753
+00:41:33,740 --> 00:41:39,060
+is 3, because you're
+counting 79 and 64 and 83.
+
+754
+00:41:39,060 --> 00:41:41,200
+And the subtree size
+associated with 49
+
+755
+00:41:41,200 --> 00:41:44,930
+is 5, because you're counting
+everything underneath it.
+
+756
+00:41:44,930 --> 00:41:46,396
+How did we get these numbers?
+
+757
+00:41:46,396 --> 00:41:47,770
+Well you want to
+think about this
+
+758
+00:41:47,770 --> 00:41:50,120
+as you started
+with an empty set,
+
+759
+00:41:50,120 --> 00:41:51,530
+and you kept inserting into it.
+
+760
+00:41:51,530 --> 00:41:54,650
+And you were doing a sequence
+of insert and delete operations.
+
+761
+00:41:54,650 --> 00:41:59,090
+And if I explain to you how
+an insert operation modifies
+
+762
+00:41:59,090 --> 00:42:02,380
+these numbers, that is
+pretty much all you need.
+
+763
+00:42:02,380 --> 00:42:05,970
+And of course, analogously,
+for a delete operation.
+
+764
+00:42:05,970 --> 00:42:11,180
+So what would happen for, let's
+say you wanted to insert 43?
+
+765
+00:42:11,180 --> 00:42:15,160
+You would insert
+43 at this point.
+
+766
+00:42:15,160 --> 00:42:19,450
+And what you'd do is you
+follow the insertion path
+
+767
+00:42:19,450 --> 00:42:21,160
+just like you did before.
+
+768
+00:42:21,160 --> 00:42:23,430
+But when you're
+following that path
+
+769
+00:42:23,430 --> 00:42:28,570
+you're going to increment the
+nodes that you're seeing by 1.
+
+770
+00:42:28,570 --> 00:42:32,340
+So you're going
+to add 43 to this.
+
+771
+00:42:32,340 --> 00:42:40,520
+And you'd add 5 plus
+1, because you see 49.
+
+772
+00:42:40,520 --> 00:42:45,140
+And then you would go
+down and you'd see 46.
+
+773
+00:42:45,140 --> 00:42:47,170
+And so you'd add 1 to that.
+
+774
+00:42:47,170 --> 00:42:49,610
+And then finally,
+you add 43 and you
+
+775
+00:42:49,610 --> 00:42:51,640
+assign-- since
+it's a leaf-- you'd
+
+776
+00:42:51,640 --> 00:42:54,380
+assign to value corresponding
+to the subtree size
+
+777
+00:42:54,380 --> 00:42:58,370
+of this new node that you
+put in there, to be 1.
+
+778
+00:42:58,370 --> 00:43:01,200
+It guess a little, teensy
+bit more complicated
+
+779
+00:43:01,200 --> 00:43:04,110
+when you want to do
+the k minute check.
+
+780
+00:43:04,110 --> 00:43:06,700
+But from a complexity
+standpoint,
+
+781
+00:43:06,700 --> 00:43:08,860
+if you're not worried
+about constant factors,
+
+782
+00:43:08,860 --> 00:43:10,700
+you can just say, you know what?
+
+783
+00:43:10,700 --> 00:43:14,320
+I'm going to first run
+the regular insert,
+
+784
+00:43:14,320 --> 00:43:16,680
+ignoring the subtree sizes.
+
+785
+00:43:16,680 --> 00:43:19,500
+And if it fails, I'm done.
+
+786
+00:43:19,500 --> 00:43:22,870
+Because I'm not going to
+modify the BST, and I'm done.
+
+787
+00:43:22,870 --> 00:43:25,270
+I'm not going to have to
+modify the subtree sizes.
+
+788
+00:43:25,270 --> 00:43:27,930
+If it succeeds, then
+I'm going to go in,
+
+789
+00:43:27,930 --> 00:43:31,380
+and I know now that I can
+increment each of these nodes,
+
+790
+00:43:31,380 --> 00:43:33,990
+because I know I'm
+going to be successful.
+
+791
+00:43:33,990 --> 00:43:36,350
+So that's sort of a trivial
+way of solving this problem,
+
+792
+00:43:36,350 --> 00:43:38,850
+that from an asymptotic
+complexity standpoint
+
+793
+00:43:38,850 --> 00:43:42,300
+gives you your order
+h augmented insert.
+
+794
+00:43:42,300 --> 00:43:44,187
+That make sense?
+
+795
+00:43:44,187 --> 00:43:46,020
+Now you could do something
+better than that.
+
+796
+00:43:46,020 --> 00:43:49,550
+I mean, I would urge you,
+if you had wrote something
+
+797
+00:43:49,550 --> 00:43:52,130
+that-- we asked you to
+write something like this,
+
+798
+00:43:52,130 --> 00:43:55,770
+to create a single procedure
+that essentially uses
+
+799
+00:43:55,770 --> 00:44:00,500
+a recursion appropriately to
+do the right thing in one pass
+
+800
+00:44:00,500 --> 00:44:01,590
+through the BST.
+
+801
+00:44:01,590 --> 00:44:03,430
+And we'll talk about
+things like that
+
+802
+00:44:03,430 --> 00:44:08,210
+as we go along in sections,
+and possibly in lectures.
+
+803
+00:44:08,210 --> 00:44:11,516
+So that's the subtree
+insert delete.
+
+804
+00:44:11,516 --> 00:44:12,265
+Everyone buy that?
+
+805
+00:44:12,265 --> 00:44:13,693
+Yeah, question back there.
+
+806
+00:44:13,693 --> 00:44:16,234
+AUDIENCE: If I wanted to delete
+a number, like let's say 79--
+
+807
+00:44:16,234 --> 00:44:16,859
+PROFESSOR: Yep?
+
+808
+00:44:16,859 --> 00:44:18,704
+AUDIENCE: --would we
+have to take it out
+
+809
+00:44:18,704 --> 00:44:21,010
+and then rewrite the entire BST?
+
+810
+00:44:21,010 --> 00:44:24,030
+PROFESSOR: What you'd have to
+do is a bubble up pointers.
+
+811
+00:44:24,030 --> 00:44:30,130
+So you'd have to actually
+have 64 connected to-- what
+
+812
+00:44:30,130 --> 00:44:33,960
+will happen is 83
+would actually come up,
+
+813
+00:44:33,960 --> 00:44:36,410
+and you would essentially
+have some thing-- this
+
+814
+00:44:36,410 --> 00:44:38,780
+is not quite how it works--
+but 83 would move up
+
+815
+00:44:38,780 --> 00:44:40,410
+and you'd have 64 to the left.
+
+816
+00:44:40,410 --> 00:44:43,310
+That's what would happened
+for delete in this case.
+
+817
+00:44:43,310 --> 00:44:47,360
+So you would have to move
+pointers in the case of delete.
+
+818
+00:44:47,360 --> 00:44:50,670
+And we're not done with
+binary search tree operations
+
+819
+00:44:50,670 --> 00:44:53,437
+from a standpoint of
+teaching you about them.
+
+820
+00:44:53,437 --> 00:44:55,520
+We'll talk about them not
+just in today's lecture,
+
+821
+00:44:55,520 --> 00:44:58,670
+but later as well.
+
+822
+00:44:58,670 --> 00:45:00,380
+So there's one
+thing missing here,
+
+823
+00:45:00,380 --> 00:45:03,240
+though, which is I haven't
+quite figured out--
+
+824
+00:45:03,240 --> 00:45:05,690
+I've told you how these
+subtree sizes work.
+
+825
+00:45:05,690 --> 00:45:08,650
+But it's not
+completely clear, this
+
+826
+00:45:08,650 --> 00:45:11,340
+is the last thing we have
+to do, is how are you
+
+827
+00:45:11,340 --> 00:45:17,460
+going to compute rank t
+from the subtree sizes?
+
+828
+00:45:17,460 --> 00:45:21,450
+So everyone understand
+subtree sizes?
+
+829
+00:45:21,450 --> 00:45:23,780
+It's just the number of nodes
+that are underneath you.
+
+830
+00:45:23,780 --> 00:45:27,360
+And you remember to count
+yourself, all right?
+
+831
+00:45:27,360 --> 00:45:28,600
+Now what is rank t?
+
+832
+00:45:28,600 --> 00:45:30,860
+Rank t is how many
+planes are scheduled
+
+833
+00:45:30,860 --> 00:45:33,670
+to land at times less
+than or equal to t.
+
+834
+00:45:33,670 --> 00:45:37,460
+So now I have a BST structure
+that looks like the one
+
+835
+00:45:37,460 --> 00:45:40,930
+and I just ended up with.
+
+836
+00:45:40,930 --> 00:45:42,940
+So I've added this 43.
+
+837
+00:45:42,940 --> 00:45:44,500
+And so let me draw
+that out here,
+
+838
+00:45:44,500 --> 00:45:48,160
+and see if we can
+answer this question.
+
+839
+00:45:48,160 --> 00:45:51,370
+This is a subtle question.
+
+840
+00:45:51,370 --> 00:45:55,830
+So I got 49, and that
+subtree size is 6.
+
+841
+00:45:55,830 --> 00:45:59,170
+I got 46, subtree size is 2.
+
+842
+00:45:59,170 --> 00:46:07,010
+43, 79, 64.
+
+843
+00:46:07,010 --> 00:46:08,330
+and 83.
+
+844
+00:46:08,330 --> 00:46:11,000
+
+845
+00:46:11,000 --> 00:46:21,640
+So what I want is
+what lands before t?
+
+846
+00:46:21,640 --> 00:46:24,360
+
+847
+00:46:24,360 --> 00:46:27,420
+And how do I do that?
+
+848
+00:46:27,420 --> 00:46:30,660
+Give me an algorithm
+that would allow
+
+849
+00:46:30,660 --> 00:46:35,700
+me to compute in order h time.
+
+850
+00:46:35,700 --> 00:46:38,130
+I want to do this
+in order h time.
+
+851
+00:46:38,130 --> 00:46:40,040
+What lands before t?
+
+852
+00:46:40,040 --> 00:46:42,759
+Someone?
+
+853
+00:46:42,759 --> 00:46:43,258
+Yeah.
+
+854
+00:46:43,258 --> 00:46:44,662
+AUDIENCE: So first
+you would have
+
+855
+00:46:44,662 --> 00:46:47,286
+to find where to insert
+it, like we did before.
+
+856
+00:46:47,286 --> 00:46:48,285
+PROFESSOR: Right, right.
+
+857
+00:46:48,285 --> 00:46:53,071
+AUDIENCE: And then because we
+have the order of whatever it
+
+858
+00:46:53,071 --> 00:46:54,875
+was before-- not
+the order, the--
+
+859
+00:46:54,875 --> 00:46:55,750
+PROFESSOR: The sizes?
+
+860
+00:46:55,750 --> 00:46:56,280
+The sizes?
+
+861
+00:46:56,280 --> 00:46:56,780
+Yeah.
+
+862
+00:46:56,780 --> 00:46:59,445
+AUDIENCE: And then we can
+look what's more than it
+
+863
+00:46:59,445 --> 00:47:02,485
+on the right, we can
+subtract it and we get--
+
+864
+00:47:02,485 --> 00:47:04,360
+PROFESSOR: What is more
+than it on the right.
+
+865
+00:47:04,360 --> 00:47:04,750
+Do you want to say--
+
+866
+00:47:04,750 --> 00:47:05,791
+AUDIENCE: Because, like--
+
+867
+00:47:05,791 --> 00:47:06,390
+PROFESSOR: OK.
+
+868
+00:47:06,390 --> 00:47:07,060
+AUDIENCE: --on the right--
+
+869
+00:47:07,060 --> 00:47:07,768
+PROFESSOR: Right.
+
+870
+00:47:07,768 --> 00:47:09,970
+AUDIENCE: --and then we
+can take this minus this
+
+871
+00:47:09,970 --> 00:47:11,860
+and we get what's left.
+
+872
+00:47:11,860 --> 00:47:13,610
+PROFESSOR: That's
+great, that's excellent.
+
+873
+00:47:13,610 --> 00:47:15,747
+Excellent.
+
+874
+00:47:15,747 --> 00:47:18,080
+So I'm going to do it a little
+bit differently from what
+
+875
+00:47:18,080 --> 00:47:19,010
+you described.
+
+876
+00:47:19,010 --> 00:47:20,470
+I'm going to
+actually do it in a,
+
+877
+00:47:20,470 --> 00:47:23,554
+sort of, a more positive
+way, no offense intended.
+
+878
+00:47:23,554 --> 00:47:25,095
+What we're going to
+do is we're going
+
+879
+00:47:25,095 --> 00:47:28,170
+to add up the things
+that we want to add up.
+
+880
+00:47:28,170 --> 00:47:30,520
+And what you have
+to do is walk--
+
+881
+00:47:30,520 --> 00:47:33,210
+your first step was right on.
+
+882
+00:47:33,210 --> 00:47:35,260
+I mean, your answer is correct.
+
+883
+00:47:35,260 --> 00:47:38,400
+I'm just going to do it
+a little bit differently.
+
+884
+00:47:38,400 --> 00:47:42,180
+You walk down the tree
+to find the desired time.
+
+885
+00:47:42,180 --> 00:47:43,810
+This is just your search.
+
+886
+00:47:43,810 --> 00:47:46,300
+We know how to do that.
+
+887
+00:47:46,300 --> 00:47:53,840
+As you walk down you
+add in the nodes that
+
+888
+00:47:53,840 --> 00:47:58,141
+is the subtree sizes-- you're
+just adding in the notes here.
+
+889
+00:47:58,141 --> 00:48:00,140
+So if you see-- depending
+on the number of nodes
+
+890
+00:48:00,140 --> 00:48:01,880
+that you see as you're
+going deeper in,
+
+891
+00:48:01,880 --> 00:48:03,490
+you want to add in the nodes.
+
+892
+00:48:03,490 --> 00:48:05,620
+And you're going to add
+one to that, corresponding
+
+893
+00:48:05,620 --> 00:48:07,410
+to the nodes that are smaller.
+
+894
+00:48:07,410 --> 00:48:12,167
+And we're going to add in the
+subtree sizes to the left,
+
+895
+00:48:12,167 --> 00:48:13,250
+as opposed to subtracting.
+
+896
+00:48:13,250 --> 00:48:19,136
+
+897
+00:48:19,136 --> 00:48:20,510
+That may not make
+a lot of sense.
+
+898
+00:48:20,510 --> 00:48:23,720
+But I guarantee you it
+will once we do an example.
+
+899
+00:48:23,720 --> 00:48:34,270
+
+900
+00:48:34,270 --> 00:48:36,180
+So what's going on here?
+
+901
+00:48:36,180 --> 00:48:38,430
+I want to find a
+place to insert.
+
+902
+00:48:38,430 --> 00:48:40,490
+I'm not actually going
+to do the insert.
+
+903
+00:48:40,490 --> 00:48:42,280
+Think of it is doing a lookup.
+
+904
+00:48:42,280 --> 00:48:45,870
+And along the way,
+I need to figure out
+
+905
+00:48:45,870 --> 00:48:47,510
+the less than operator.
+
+906
+00:48:47,510 --> 00:48:49,110
+I want to find all
+of the things that
+
+907
+00:48:49,110 --> 00:48:51,530
+are less than this
+value I'm searching for.
+
+908
+00:48:51,530 --> 00:48:54,640
+And so I have to do
+a bit of arithmetic.
+
+909
+00:48:54,640 --> 00:49:00,380
+So let's say that I'm
+looking for what's
+
+910
+00:49:00,380 --> 00:49:03,020
+less than or equal to 79.
+
+911
+00:49:03,020 --> 00:49:07,720
+So t equals 79.
+
+912
+00:49:07,720 --> 00:49:09,890
+So I'm going to look at 49.
+
+913
+00:49:09,890 --> 00:49:13,310
+I'm going to walk down,
+I'm going to look at 49.
+
+914
+00:49:13,310 --> 00:49:22,670
+And because I say I'm
+looking at 49-- and 49
+
+915
+00:49:22,670 --> 00:49:24,810
+is clearly less than 79.
+
+916
+00:49:24,810 --> 00:49:27,960
+So I'm going to add 1.
+
+917
+00:49:27,960 --> 00:49:30,370
+And that's this check over here.
+
+918
+00:49:30,370 --> 00:49:41,830
+I move on and what I need to
+do now is move to the right,
+
+919
+00:49:41,830 --> 00:49:45,510
+because 79 is greater than 49.
+
+920
+00:49:45,510 --> 00:49:47,400
+That's how my search would work.
+
+921
+00:49:47,400 --> 00:49:50,500
+But because I've
+moved to the right,
+
+922
+00:49:50,500 --> 00:49:55,570
+I'm going to add the subtree
+sizes that were to the left.
+
+923
+00:49:55,570 --> 00:49:58,240
+Because I know that all
+of the things to the left
+
+924
+00:49:58,240 --> 00:50:01,640
+are clearly less than 79.
+
+925
+00:50:01,640 --> 00:50:10,020
+So I'm going to add 2,
+corresponding to a subtree 46.
+
+926
+00:50:10,020 --> 00:50:12,120
+So I'm not actually
+looking there.
+
+927
+00:50:12,120 --> 00:50:14,420
+But I'm going to add
+all of that stuff in.
+
+928
+00:50:14,420 --> 00:50:18,250
+I'm going to move to the right,
+and now I'm going to see 79.
+
+929
+00:50:18,250 --> 00:50:26,890
+At this point 79 is less
+than or equal to 79.
+
+930
+00:50:26,890 --> 00:50:33,290
+So I'm going to see 79
+and I'm going to add 1.
+
+931
+00:50:33,290 --> 00:50:37,300
+And because I've added 79,
+just like I did with 49,
+
+932
+00:50:37,300 --> 00:50:42,090
+I have to add the subtree
+size to the left of 79.
+
+933
+00:50:42,090 --> 00:50:46,160
+So the final addition
+is I add 1 corresponding
+
+934
+00:50:46,160 --> 00:50:50,760
+to the subtree 64.
+
+935
+00:50:50,760 --> 00:50:52,390
+And at this point
+I've discovered
+
+936
+00:50:52,390 --> 00:50:56,040
+where I have to insert, I've
+essentially found the location,
+
+937
+00:50:56,040 --> 00:50:57,900
+it matches 79.
+
+938
+00:50:57,900 --> 00:51:01,180
+And there was no modification
+required in this algorithm.
+
+939
+00:51:01,180 --> 00:51:05,990
+So if that was 78 you'd
+essentially do the same things.
+
+940
+00:51:05,990 --> 00:51:10,670
+But you're done because you
+found the value, or the place
+
+941
+00:51:10,670 --> 00:51:11,770
+that you want to insert.
+
+942
+00:51:11,770 --> 00:51:13,500
+And you've done a
+bunch of additions.
+
+943
+00:51:13,500 --> 00:51:20,160
+And you go look at add 1, add
+2, add 1, add 1, and you have 5.
+
+944
+00:51:20,160 --> 00:51:23,539
+
+945
+00:51:23,539 --> 00:51:25,080
+And that's the
+correct answer, as you
+
+946
+00:51:25,080 --> 00:51:28,440
+can see from this example.
+
+947
+00:51:28,440 --> 00:51:31,030
+So what's the bad news?
+
+948
+00:51:31,030 --> 00:51:33,820
+The bad news was what
+this lady said up
+
+949
+00:51:33,820 --> 00:51:37,390
+front, which was we haven't
+quite solved the problem.
+
+950
+00:51:37,390 --> 00:51:40,590
+Because sadly, I could
+easily set things
+
+951
+00:51:40,590 --> 00:51:49,950
+up such that the height h is
+order n, h could be order n.
+
+952
+00:51:49,950 --> 00:51:54,410
+And if, for example, I
+gave you a sorted list,
+
+953
+00:51:54,410 --> 00:51:56,650
+and I said insert into
+binary search tree
+
+954
+00:51:56,650 --> 00:52:00,410
+that's originally null 43,
+and you put 43 in there.
+
+955
+00:52:00,410 --> 00:52:02,350
+Then I say insert 46.
+
+956
+00:52:02,350 --> 00:52:04,090
+And then I say instead of 48.
+
+957
+00:52:04,090 --> 00:52:06,870
+And then I say
+insert 49, et cetera.
+
+958
+00:52:06,870 --> 00:52:09,200
+And, you know, these
+could be any numbers.
+
+959
+00:52:09,200 --> 00:52:12,030
+Then you see that what
+does this look like?
+
+960
+00:52:12,030 --> 00:52:14,060
+Does it look like a tree?
+
+961
+00:52:14,060 --> 00:52:16,300
+It looks like a list.
+
+962
+00:52:16,300 --> 00:52:18,420
+That's the bad news.
+
+963
+00:52:18,420 --> 00:52:23,200
+And I'll let Eric give
+you good news next week.
+
+964
+00:52:23,200 --> 00:52:25,930
+We need to have this notion of
+balanced binary search trees.
+
+965
+00:52:25,930 --> 00:52:28,950
+So everything I've said is true.
+
+966
+00:52:28,950 --> 00:52:30,130
+I did not lie.
+
+967
+00:52:30,130 --> 00:52:32,120
+But the one extra
+thing is we need
+
+968
+00:52:32,120 --> 00:52:35,770
+to make sure these trees are
+balanced so h is order log n.
+
+969
+00:52:35,770 --> 00:52:37,581
+And then everything
+I said works.
+
+970
+00:52:37,581 --> 00:52:38,080
+All right?
+
+971
+00:52:38,080 --> 00:52:39,950
+See you next time.

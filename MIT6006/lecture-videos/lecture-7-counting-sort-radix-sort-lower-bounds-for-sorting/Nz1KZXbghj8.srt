@@ -1,0 +1,4678 @@
+1
+00:00:00,000 --> 00:00:00,080
+
+2
+00:00:00,080 --> 00:00:01,770
+The following
+content is provided
+
+3
+00:00:01,770 --> 00:00:04,010
+under a Creative
+Commons license.
+
+4
+00:00:04,010 --> 00:00:06,860
+Your support will help MIT
+OpenCourseWare continue
+
+5
+00:00:06,860 --> 00:00:10,720
+to offer high quality
+educational resources for free.
+
+6
+00:00:10,720 --> 00:00:13,330
+To make a donation or
+view additional materials
+
+7
+00:00:13,330 --> 00:00:17,207
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+8
+00:00:17,207 --> 00:00:17,832
+at ocw.mit.edu.
+
+9
+00:00:17,832 --> 00:00:22,080
+
+10
+00:00:22,080 --> 00:00:24,660
+PROFESSOR: Last
+lecture on sorting.
+
+11
+00:00:24,660 --> 00:00:27,350
+Yay.
+
+12
+00:00:27,350 --> 00:00:29,880
+And it's one of the coolest
+lectures on sorting,
+
+13
+00:00:29,880 --> 00:00:30,870
+I would say.
+
+14
+00:00:30,870 --> 00:00:33,400
+We're going to talk about
+linear-time sorting, when it's
+
+15
+00:00:33,400 --> 00:00:36,110
+possible and when
+it's not possible,
+
+16
+00:00:36,110 --> 00:00:40,370
+and this lecture sort of
+follows the tried and tested
+
+17
+00:00:40,370 --> 00:00:45,920
+mathematical structure which is
+theorem, proof, counterexample.
+
+18
+00:00:45,920 --> 00:00:48,370
+So we're going to start
+with a theorem which
+
+19
+00:00:48,370 --> 00:00:53,490
+is that sorting requires n lg n
+time at least in the worst case
+
+20
+00:00:53,490 --> 00:00:56,460
+and we're going to then prove
+that in fact, you can get away
+
+21
+00:00:56,460 --> 00:01:00,020
+with linear time sometimes.
+
+22
+00:01:00,020 --> 00:01:02,590
+Both of these terms are
+correct, but they're slightly
+
+23
+00:01:02,590 --> 00:01:04,160
+different models of computation.
+
+24
+00:01:04,160 --> 00:01:06,890
+Remember models of
+computation from lecture two?
+
+25
+00:01:06,890 --> 00:01:09,800
+So we're going to talk about a
+new model of computation, which
+
+26
+00:01:09,800 --> 00:01:13,000
+we've sort of been using
+for most algorithms lately,
+
+27
+00:01:13,000 --> 00:01:15,030
+called the comparison model.
+
+28
+00:01:15,030 --> 00:01:16,750
+And it's a model of
+computations that's
+
+29
+00:01:16,750 --> 00:01:18,680
+really useful for proving
+lower bounds which
+
+30
+00:01:18,680 --> 00:01:20,177
+we haven't done much of yet.
+
+31
+00:01:20,177 --> 00:01:22,260
+We're going to prove two
+very simple lower bounds.
+
+32
+00:01:22,260 --> 00:01:24,840
+One is that searching
+requires lg n time.
+
+33
+00:01:24,840 --> 00:01:27,240
+This is basically binary
+search is optimal.
+
+34
+00:01:27,240 --> 00:01:29,430
+And the other is that
+sorting requires n lg n time.
+
+35
+00:01:29,430 --> 00:01:31,950
+This is that merge
+sort is optimal.
+
+36
+00:01:31,950 --> 00:01:34,550
+And then we're going to break
+outside of that comparison
+
+37
+00:01:34,550 --> 00:01:36,960
+model, work in a different
+model of computation, our more
+
+38
+00:01:36,960 --> 00:01:41,090
+usual RAM model, and show
+that in certain situations,
+
+39
+00:01:41,090 --> 00:01:42,420
+we can get linear time.
+
+40
+00:01:42,420 --> 00:01:45,440
+So that's the plan.
+
+41
+00:01:45,440 --> 00:01:49,605
+Let's start with this
+comparison model.
+
+42
+00:01:49,605 --> 00:01:56,390
+
+43
+00:01:56,390 --> 00:01:58,570
+So the idea in the
+comparison model
+
+44
+00:01:58,570 --> 00:02:00,700
+is to restrict what
+kind of operations
+
+45
+00:02:00,700 --> 00:02:03,670
+we can do to be comparisons.
+
+46
+00:02:03,670 --> 00:02:06,090
+It's very straightforward.
+
+47
+00:02:06,090 --> 00:02:16,082
+All input items are black
+boxes, you could say,
+
+48
+00:02:16,082 --> 00:02:19,920
+in that you don't really
+know what they are.
+
+49
+00:02:19,920 --> 00:02:22,246
+And a formal notion
+of black boxes
+
+50
+00:02:22,246 --> 00:02:23,870
+is something we talked
+about last class
+
+51
+00:02:23,870 --> 00:02:25,997
+at the end, abstract data type.
+
+52
+00:02:25,997 --> 00:02:27,580
+So it's a data
+structure, if you will.
+
+53
+00:02:27,580 --> 00:02:30,860
+Every item that you're
+given is a data structure.
+
+54
+00:02:30,860 --> 00:02:32,630
+You want to sort them.
+
+55
+00:02:32,630 --> 00:02:34,850
+And the data structure
+supports a single operation
+
+56
+00:02:34,850 --> 00:02:36,280
+which is compared
+to another one.
+
+57
+00:02:36,280 --> 00:02:38,850
+
+58
+00:02:38,850 --> 00:02:52,420
+Only operation allowed-- I guess
+I should say plural actually--
+
+59
+00:02:52,420 --> 00:02:53,145
+are comparisons.
+
+60
+00:02:53,145 --> 00:02:56,990
+
+61
+00:02:56,990 --> 00:03:01,060
+I'm going to be nice and I'll
+let you do less than, less than
+
+62
+00:03:01,060 --> 00:03:04,490
+or equal to, greater
+than, whatever.
+
+63
+00:03:04,490 --> 00:03:06,030
+I guess there's only one other.
+
+64
+00:03:06,030 --> 00:03:09,550
+Well, there's two more, greater
+than or equal to and equals.
+
+65
+00:03:09,550 --> 00:03:11,770
+So you can do all the
+usual comparisons.
+
+66
+00:03:11,770 --> 00:03:13,620
+You get a binary
+answer, yes or no,
+
+67
+00:03:13,620 --> 00:03:15,620
+and those the only
+operations you're given.
+
+68
+00:03:15,620 --> 00:03:18,640
+
+69
+00:03:18,640 --> 00:03:22,280
+And basically the
+last four lectures
+
+70
+00:03:22,280 --> 00:03:24,760
+have all been about
+algorithms in this model.
+
+71
+00:03:24,760 --> 00:03:27,590
+So merge sort, it
+moves items around.
+
+72
+00:03:27,590 --> 00:03:30,790
+It's changing pointers to
+items, but the only way
+
+73
+00:03:30,790 --> 00:03:33,980
+it manipulates items
+or evaluates them
+
+74
+00:03:33,980 --> 00:03:37,090
+is to compare one
+against the other.
+
+75
+00:03:37,090 --> 00:03:40,540
+Heaps and heaps sort
+also only compare.
+
+76
+00:03:40,540 --> 00:03:42,366
+Binary search
+trees only compare.
+
+77
+00:03:42,366 --> 00:03:44,740
+Everything we've been seeing
+so far is about comparisons.
+
+78
+00:03:44,740 --> 00:03:47,570
+
+79
+00:03:47,570 --> 00:03:50,210
+And so all the algorithms we've
+seen so far are in this model
+
+80
+00:03:50,210 --> 00:03:53,160
+and we're going to prove that
+they are optimal in this model.
+
+81
+00:03:53,160 --> 00:03:55,540
+That's the plan.
+
+82
+00:03:55,540 --> 00:03:58,960
+I should also define the
+cost of an algorithm.
+
+83
+00:03:58,960 --> 00:04:01,810
+Time cost is just going to
+be the number of comparisons.
+
+84
+00:04:01,810 --> 00:04:04,050
+This is the weird part,
+I guess, of the model.
+
+85
+00:04:04,050 --> 00:04:06,820
+
+86
+00:04:06,820 --> 00:04:11,030
+So in everything we've done so
+far, we've been in, I guess,
+
+87
+00:04:11,030 --> 00:04:14,270
+pointer machine or
+RAM, either way.
+
+88
+00:04:14,270 --> 00:04:17,519
+We've been showing binary
+search trees or AVL trees,
+
+89
+00:04:17,519 --> 00:04:21,089
+you can do order lg n time,
+in the regular notion of time.
+
+90
+00:04:21,089 --> 00:04:24,650
+But in particular they do
+order lg n comparisons.
+
+91
+00:04:24,650 --> 00:04:26,774
+And what we're going
+to show on the-- this
+
+92
+00:04:26,774 --> 00:04:28,940
+is only interesting from a
+lower bound perspective--
+
+93
+00:04:28,940 --> 00:04:31,439
+we're going to show that even
+if you just count comparisons,
+
+94
+00:04:31,439 --> 00:04:33,810
+you can do whatever other
+crazy things you want.
+
+95
+00:04:33,810 --> 00:04:35,100
+You need lg n time to search.
+
+96
+00:04:35,100 --> 00:04:38,210
+You need n lg n time to sort.
+
+97
+00:04:38,210 --> 00:04:40,220
+So that's our goal.
+
+98
+00:04:40,220 --> 00:04:49,160
+
+99
+00:04:49,160 --> 00:04:54,020
+So to prove that we're
+going to introduce
+
+100
+00:04:54,020 --> 00:04:55,630
+the notion of a decision tree.
+
+101
+00:04:55,630 --> 00:05:09,210
+
+102
+00:05:09,210 --> 00:05:12,260
+So the idea is the following: if
+we know that our algorithms are
+
+103
+00:05:12,260 --> 00:05:17,670
+only comparing items, we
+can actually sort of draw
+
+104
+00:05:17,670 --> 00:05:22,530
+all the possible things
+that an algorithm could do,
+
+105
+00:05:22,530 --> 00:05:24,400
+so any comparison algorithm.
+
+106
+00:05:24,400 --> 00:05:31,180
+
+107
+00:05:31,180 --> 00:05:33,480
+So this focusing
+in on comparisons
+
+108
+00:05:33,480 --> 00:06:09,730
+lets us take a tree perspective
+of what our algorithm does--
+
+109
+00:06:09,730 --> 00:06:26,140
+all possible comparisons
+and their outcomes
+
+110
+00:06:26,140 --> 00:06:28,685
+and the resulting answer.
+
+111
+00:06:28,685 --> 00:06:32,242
+
+112
+00:06:32,242 --> 00:06:33,950
+I think this would be
+a lot clearer if we
+
+113
+00:06:33,950 --> 00:06:42,500
+look at an example--
+binary search,
+
+114
+00:06:42,500 --> 00:06:44,394
+how you search a
+simple algorithm.
+
+115
+00:06:44,394 --> 00:06:46,310
+Look at the middle
+compared to the item you're
+
+116
+00:06:46,310 --> 00:06:49,890
+searching for go
+left or go right.
+
+117
+00:06:49,890 --> 00:06:57,820
+And our idea-- I
+didn't write it here--
+
+118
+00:06:57,820 --> 00:07:02,260
+is to look at a
+particular value of n,
+
+119
+00:07:02,260 --> 00:07:05,000
+n being the size of your
+problem, so binary search,
+
+120
+00:07:05,000 --> 00:07:09,670
+you're searching among n
+items for another item.
+
+121
+00:07:09,670 --> 00:07:15,520
+And I'm going to keep it
+simple, n equals three.
+
+122
+00:07:15,520 --> 00:07:22,790
+I think I'm going to go a little
+wide, use the whole board.
+
+123
+00:07:22,790 --> 00:07:28,800
+So n equals 3 we've
+got array, say
+
+124
+00:07:28,800 --> 00:07:33,570
+index turning at zero-- pretty
+simple binary search-- look
+
+125
+00:07:33,570 --> 00:07:36,150
+in the middle, go
+left or go right.
+
+126
+00:07:36,150 --> 00:07:39,280
+But I'm going to write out this
+algorithm explicitly to say,
+
+127
+00:07:39,280 --> 00:07:47,490
+all right, first thing I do
+is compare is A 1 less than x?
+
+128
+00:07:47,490 --> 00:07:48,996
+That's in all cases,
+no matter what
+
+129
+00:07:48,996 --> 00:07:50,620
+the array is as long
+as n equals three,
+
+130
+00:07:50,620 --> 00:07:52,570
+this is the first
+operation you do.
+
+131
+00:07:52,570 --> 00:07:54,060
+The answer is either yes or no.
+
+132
+00:07:54,060 --> 00:07:57,970
+
+133
+00:07:57,970 --> 00:08:04,250
+If the answer is no, that means
+x is less than or equal to A 1,
+
+134
+00:08:04,250 --> 00:08:05,670
+so it's to the left.
+
+135
+00:08:05,670 --> 00:08:07,680
+Then we compare with A 0.
+
+136
+00:08:07,680 --> 00:08:11,820
+Is A 0 less than x?
+
+137
+00:08:11,820 --> 00:08:13,350
+Answer is either yes or no.
+
+138
+00:08:13,350 --> 00:08:16,410
+
+139
+00:08:16,410 --> 00:08:19,170
+If the answer is no,
+we're kind of done.
+
+140
+00:08:19,170 --> 00:08:21,480
+We know that x is over
+here or it might actually
+
+141
+00:08:21,480 --> 00:08:24,217
+be equal to A 0.
+
+142
+00:08:24,217 --> 00:08:25,800
+If you want to figure
+out whether it's
+
+143
+00:08:25,800 --> 00:08:27,920
+equal or less than, there
+will be one more step.
+
+144
+00:08:27,920 --> 00:08:29,330
+But I'll just stop it here.
+
+145
+00:08:29,330 --> 00:08:33,510
+We'll say, well in this case,
+x is less than or equal to A 0.
+
+146
+00:08:33,510 --> 00:08:35,409
+I'm going to put it in
+a box, say that's done
+
+147
+00:08:35,409 --> 00:08:37,970
+where the circles
+are the decisions.
+
+148
+00:08:37,970 --> 00:08:38,929
+OK?
+
+149
+00:08:38,929 --> 00:08:42,890
+If the answer is yes-- there's
+no to this question, yes
+
+150
+00:08:42,890 --> 00:08:46,950
+to this question-- then you know
+that x falls in between here.
+
+151
+00:08:46,950 --> 00:08:49,440
+Probably need a
+wider box for this.
+
+152
+00:08:49,440 --> 00:08:56,070
+So we have A 0 is less than
+x-- that was the yes to this--
+
+153
+00:08:56,070 --> 00:08:59,780
+and the note of this means that
+x is less than or equal to A 1,
+
+154
+00:08:59,780 --> 00:09:02,310
+and so we basically
+identified where x fits.
+
+155
+00:09:02,310 --> 00:09:03,790
+It's in between
+those two values,
+
+156
+00:09:03,790 --> 00:09:05,201
+possibly equal to this one.
+
+157
+00:09:05,201 --> 00:09:07,450
+Again, one more comparison,
+you could figure that out.
+
+158
+00:09:07,450 --> 00:09:10,220
+
+159
+00:09:10,220 --> 00:09:15,220
+And then if x is to the right
+of A 1, so this is true,
+
+160
+00:09:15,220 --> 00:09:28,320
+then we check x against A 2 and
+the answer is either no or yes.
+
+161
+00:09:28,320 --> 00:09:33,250
+And in the no case-- well I've
+conveniently laid things out
+
+162
+00:09:33,250 --> 00:09:37,540
+here, it's sequential-- in the
+yes case, x is bigger than A 2
+
+163
+00:09:37,540 --> 00:09:39,920
+so it's outside the array.
+
+164
+00:09:39,920 --> 00:09:41,700
+It's to the right.
+
+165
+00:09:41,700 --> 00:09:44,110
+That's the answer.
+
+166
+00:09:44,110 --> 00:09:45,860
+Set.
+
+167
+00:09:45,860 --> 00:09:48,560
+Yeah.
+
+168
+00:09:48,560 --> 00:09:50,750
+And in the other case, it's
+in between A 1 and A 2.
+
+169
+00:09:50,750 --> 00:09:56,640
+
+170
+00:09:56,640 --> 00:09:59,820
+It's a tedious process to write
+out an algorithm like this
+
+171
+00:09:59,820 --> 00:10:05,230
+because a binary search-- it's
+not so bad-- but if you tried
+
+172
+00:10:05,230 --> 00:10:07,310
+to write a sorting
+algorithm out like this
+
+173
+00:10:07,310 --> 00:10:09,560
+where the answers are
+down the bottom, here's
+
+174
+00:10:09,560 --> 00:10:13,190
+the sorted order, and all
+the comparisons you do here,
+
+175
+00:10:13,190 --> 00:10:15,600
+the tree will actually
+be of exponential size.
+
+176
+00:10:15,600 --> 00:10:18,070
+So you don't actually want
+to represent an algorithm
+
+177
+00:10:18,070 --> 00:10:21,300
+like this unless you're
+just trying to analyze it.
+
+178
+00:10:21,300 --> 00:10:23,380
+But it's nice to think
+of an algorithm this way
+
+179
+00:10:23,380 --> 00:10:26,480
+because you see all possible
+executions all at once.
+
+180
+00:10:26,480 --> 00:10:32,430
+
+181
+00:10:32,430 --> 00:10:34,870
+Let me talk about some
+features of this tree
+
+182
+00:10:34,870 --> 00:10:37,410
+versus the algorithm.
+
+183
+00:10:37,410 --> 00:10:45,084
+So every internal
+node-- actually,
+
+184
+00:10:45,084 --> 00:10:47,020
+I'm going to go over here.
+
+185
+00:10:47,020 --> 00:10:52,340
+
+186
+00:10:52,340 --> 00:10:58,640
+So we have a
+decision tree and we
+
+187
+00:10:58,640 --> 00:11:03,790
+have an algorithm that
+decision tree represents.
+
+188
+00:11:03,790 --> 00:11:09,870
+And so when we have an internal
+node in the decision tree,
+
+189
+00:11:09,870 --> 00:11:15,740
+that corresponds to a binary
+decision in the algorithm.
+
+190
+00:11:15,740 --> 00:11:18,835
+In this case, we're only
+looking at comparisons.
+
+191
+00:11:18,835 --> 00:11:22,490
+
+192
+00:11:22,490 --> 00:11:24,320
+Slight technical
+detail, decision trees
+
+193
+00:11:24,320 --> 00:11:27,150
+are a little more
+general than comparisons.
+
+194
+00:11:27,150 --> 00:11:29,740
+Could be any binary decision
+here and everything I say
+
+195
+00:11:29,740 --> 00:11:33,154
+will be true about any
+binary decision you make.
+
+196
+00:11:33,154 --> 00:11:35,070
+Comparisons are the ones
+we kind of care about
+
+197
+00:11:35,070 --> 00:11:39,040
+because all of our
+algorithms are doing that.
+
+198
+00:11:39,040 --> 00:11:49,220
+And then a leaf in this tree
+corresponds to-- it stores
+
+199
+00:11:49,220 --> 00:11:51,755
+or it represents that
+you've found the answer.
+
+200
+00:11:51,755 --> 00:11:54,730
+
+201
+00:11:54,730 --> 00:11:56,207
+Maybe I'll say found.
+
+202
+00:11:56,207 --> 00:12:01,460
+
+203
+00:12:01,460 --> 00:12:04,370
+When the algorithm terminates,
+returns some answer
+
+204
+00:12:04,370 --> 00:12:08,050
+to the problem, that's
+what we write down here.
+
+205
+00:12:08,050 --> 00:12:16,616
+Here's where x is in this
+array and, yeah, we're done.
+
+206
+00:12:16,616 --> 00:12:17,490
+What else do we have?
+
+207
+00:12:17,490 --> 00:12:20,120
+
+208
+00:12:20,120 --> 00:12:21,530
+Here's some puzzles for you.
+
+209
+00:12:21,530 --> 00:12:25,470
+
+210
+00:12:25,470 --> 00:12:27,940
+If I just wanted to look
+at a single execution
+
+211
+00:12:27,940 --> 00:12:31,600
+of the algorithm, what does
+that correspond to in the tree?
+
+212
+00:12:31,600 --> 00:12:35,901
+
+213
+00:12:35,901 --> 00:12:36,400
+Yeah.
+
+214
+00:12:36,400 --> 00:12:38,670
+AUDIENCE: Going from the root
+all the way down to the leaf.
+
+215
+00:12:38,670 --> 00:12:40,586
+PROFESSOR: Going from
+the root down to a leaf.
+
+216
+00:12:40,586 --> 00:12:43,920
+This is what I normally call a
+root-to-leaf path, technically
+
+217
+00:12:43,920 --> 00:12:48,080
+a downward root-to-leaf path.
+
+218
+00:12:48,080 --> 00:12:52,600
+How about the running
+time of that execution?
+
+219
+00:12:52,600 --> 00:12:53,610
+How long does it take?
+
+220
+00:12:53,610 --> 00:12:56,650
+
+221
+00:12:56,650 --> 00:12:57,515
+Keep going?
+
+222
+00:12:57,515 --> 00:12:58,730
+AUDIENCE: Lg n.
+
+223
+00:12:58,730 --> 00:13:02,754
+PROFESSOR: Lg n in binary
+search, but in general.
+
+224
+00:13:02,754 --> 00:13:04,170
+AUDIENCE: The
+length of that path.
+
+225
+00:13:04,170 --> 00:13:05,160
+PROFESSOR: The
+length of that path.
+
+226
+00:13:05,160 --> 00:13:05,660
+Yeah.
+
+227
+00:13:05,660 --> 00:13:11,365
+
+228
+00:13:11,365 --> 00:13:13,990
+Got to make sure we get n cases
+right but I think it's correct,
+
+229
+00:13:13,990 --> 00:13:18,630
+so if here is an execution of
+the algorithm, when x happens
+
+230
+00:13:18,630 --> 00:13:22,130
+to be between A 0 and A 1,
+we do one comparison here,
+
+231
+00:13:22,130 --> 00:13:24,810
+a second comparison here,
+and then we're done.
+
+232
+00:13:24,810 --> 00:13:28,310
+So the cost was two and indeed
+the length of this path is two.
+
+233
+00:13:28,310 --> 00:13:33,360
+So it works out, no
+off-by-one errors.
+
+234
+00:13:33,360 --> 00:13:36,950
+All right, now
+exciting one for us,
+
+235
+00:13:36,950 --> 00:13:39,880
+what we care about all
+the time in this class
+
+236
+00:13:39,880 --> 00:13:43,070
+is worst-case running time.
+
+237
+00:13:43,070 --> 00:13:45,290
+This is a feature of
+the entire algorithm.
+
+238
+00:13:45,290 --> 00:13:50,175
+What is the worst-case running
+time of a given decision tree?
+
+239
+00:13:50,175 --> 00:13:50,675
+Yeah.
+
+240
+00:13:50,675 --> 00:13:53,049
+AUDIENCE: The height of the
+root, the height of the tree.
+
+241
+00:13:53,049 --> 00:13:55,030
+PROFESSOR: The height
+of the root also called
+
+242
+00:13:55,030 --> 00:13:55,750
+the height of the tree.
+
+243
+00:13:55,750 --> 00:13:56,250
+Yep.
+
+244
+00:13:56,250 --> 00:14:03,230
+
+245
+00:14:03,230 --> 00:14:05,690
+Or the depth of the
+deepest leaf, whatever.
+
+246
+00:14:05,690 --> 00:14:07,870
+So in this case all the
+leaves have the same level,
+
+247
+00:14:07,870 --> 00:14:10,590
+but in general we care
+about the overall height.
+
+248
+00:14:10,590 --> 00:14:13,370
+How many levels in
+this tree are there?
+
+249
+00:14:13,370 --> 00:14:16,140
+It's the number of levels
+minus one, technically.
+
+250
+00:14:16,140 --> 00:14:19,940
+But the length of
+longest root-to-leaf path
+
+251
+00:14:19,940 --> 00:14:21,780
+is the definition of height.
+
+252
+00:14:21,780 --> 00:14:23,040
+Here it's two.
+
+253
+00:14:23,040 --> 00:14:27,380
+In general we know for
+binary search it's lg n,
+
+254
+00:14:27,380 --> 00:14:29,030
+but given an arbitrary
+decision tree,
+
+255
+00:14:29,030 --> 00:14:30,780
+we just have to figure out
+what the height of the tree
+
+256
+00:14:30,780 --> 00:14:32,946
+is and we'll figure out the
+worst-case running time.
+
+257
+00:14:32,946 --> 00:14:35,510
+So this is why decision
+trees are interesting.
+
+258
+00:14:35,510 --> 00:14:39,860
+Not because it means they're
+pretty I guess, but the reason
+
+259
+00:14:39,860 --> 00:14:43,240
+they're going to be useful is we
+have this kind of hard question
+
+260
+00:14:43,240 --> 00:14:46,640
+which is how much time do
+you need to solve a problem?
+
+261
+00:14:46,640 --> 00:14:50,390
+And we're translating
+it into how low can you
+
+262
+00:14:50,390 --> 00:14:53,210
+make your tree, which is a
+problem we know a lot about.
+
+263
+00:14:53,210 --> 00:14:54,300
+Trees are pretty simple.
+
+264
+00:14:54,300 --> 00:14:55,910
+These are binary trees.
+
+265
+00:14:55,910 --> 00:15:00,530
+They're rooted, and so we
+know lots of good things.
+
+266
+00:15:00,530 --> 00:15:03,420
+
+267
+00:15:03,420 --> 00:15:04,935
+So let's prove
+some lower bounds.
+
+268
+00:15:04,935 --> 00:15:25,320
+
+269
+00:15:25,320 --> 00:15:30,020
+So I claim that for
+searching-- maybe I
+
+270
+00:15:30,020 --> 00:15:32,200
+should define the problem
+a little more formally--
+
+271
+00:15:32,200 --> 00:15:35,000
+I want to claim a
+lg n lower bound.
+
+272
+00:15:35,000 --> 00:15:42,355
+So let's say for searching
+I have n preprocessed items.
+
+273
+00:15:42,355 --> 00:15:49,040
+
+274
+00:15:49,040 --> 00:16:05,355
+Then finding a given item among
+them in the comparison model,
+
+275
+00:16:05,355 --> 00:16:10,079
+so all you're allowed to do are
+compare items and other stuff,
+
+276
+00:16:10,079 --> 00:16:12,370
+but the only things you're
+allowed to do with the items
+
+277
+00:16:12,370 --> 00:16:13,070
+is compare them.
+
+278
+00:16:13,070 --> 00:16:18,180
+
+279
+00:16:18,180 --> 00:16:25,297
+Requires omega lg n
+comparisons in the worst case.
+
+280
+00:16:25,297 --> 00:16:27,380
+It's kind of tedious to
+write down these theorems,
+
+281
+00:16:27,380 --> 00:16:29,500
+but for our first
+lower bounds, I
+
+282
+00:16:29,500 --> 00:16:31,090
+thought I'd be super explicit.
+
+283
+00:16:31,090 --> 00:16:33,990
+
+284
+00:16:33,990 --> 00:16:37,091
+I mentioned here that the
+items are preprocessed
+
+285
+00:16:37,091 --> 00:16:39,340
+to mean you could do whatever
+you want the items ahead
+
+286
+00:16:39,340 --> 00:16:41,040
+of time, that's for free.
+
+287
+00:16:41,040 --> 00:16:42,690
+So I can sort them
+in particular,
+
+288
+00:16:42,690 --> 00:16:44,200
+which lets me do binary search.
+
+289
+00:16:44,200 --> 00:16:47,980
+I could build them into an AVL
+tree, could do lots of things,
+
+290
+00:16:47,980 --> 00:16:51,440
+but no matter what I do to find
+another item takes lg n time.
+
+291
+00:16:51,440 --> 00:16:57,851
+
+292
+00:16:57,851 --> 00:16:58,850
+Can someone tell me why?
+
+293
+00:16:58,850 --> 00:17:02,125
+
+294
+00:17:02,125 --> 00:17:04,416
+Who doesn't have the lecture
+notes right in front them,
+
+295
+00:17:04,416 --> 00:17:08,060
+that would make it easy.
+
+296
+00:17:08,060 --> 00:17:12,599
+This is a little
+more interesting,
+
+297
+00:17:12,599 --> 00:17:15,460
+but we had all the tools
+at our disposal now.
+
+298
+00:17:15,460 --> 00:17:17,520
+We want to show that
+this at least lg n.
+
+299
+00:17:17,520 --> 00:17:20,950
+
+300
+00:17:20,950 --> 00:17:21,830
+Why?
+
+301
+00:17:21,830 --> 00:17:22,330
+Yeah.
+
+302
+00:17:22,330 --> 00:17:26,579
+AUDIENCE: [INAUDIBLE]
+have a no or yes, right?
+
+303
+00:17:26,579 --> 00:17:27,079
+So it's--
+
+304
+00:17:27,079 --> 00:17:27,787
+PROFESSOR: Right.
+
+305
+00:17:27,787 --> 00:17:29,117
+AUDIENCE: --omega lg n tree.
+
+306
+00:17:29,117 --> 00:17:29,700
+PROFESSOR: OK.
+
+307
+00:17:29,700 --> 00:17:31,560
+At each step, we only
+have a no or yes.
+
+308
+00:17:31,560 --> 00:17:32,560
+That's a binary tree.
+
+309
+00:17:32,560 --> 00:17:35,310
+
+310
+00:17:35,310 --> 00:17:36,870
+So that makes you think lg n.
+
+311
+00:17:36,870 --> 00:17:39,179
+AUDIENCE: That's possible,
+it could be lg n.
+
+312
+00:17:39,179 --> 00:17:41,470
+PROFESSOR: Maximum actually
+could be arbitrarily large.
+
+313
+00:17:41,470 --> 00:17:44,930
+You could do a linear search
+and the height will be m.
+
+314
+00:17:44,930 --> 00:17:47,790
+We care about the
+minimum of course.
+
+315
+00:17:47,790 --> 00:17:50,040
+Why does it have to be-- why
+does the height of a tree
+
+316
+00:17:50,040 --> 00:17:51,430
+have to be at least lg n?
+
+317
+00:17:51,430 --> 00:17:53,032
+There's one more
+thing we need to say.
+
+318
+00:17:53,032 --> 00:17:53,531
+Yeah.
+
+319
+00:17:53,531 --> 00:17:56,130
+AUDIENCE: The tree has
+to contain all possible--
+
+320
+00:17:56,130 --> 00:17:57,879
+PROFESSOR: Because the
+tree has to contain
+
+321
+00:17:57,879 --> 00:18:00,110
+all possible--
+answers, let's say.
+
+322
+00:18:00,110 --> 00:18:02,640
+Yeah, exactly.
+
+323
+00:18:02,640 --> 00:18:05,570
+I think that's worth a pillow.
+
+324
+00:18:05,570 --> 00:18:08,880
+See if I can do this-- oh!
+
+325
+00:18:08,880 --> 00:18:10,010
+Ouch.
+
+326
+00:18:10,010 --> 00:18:12,090
+I knew it was only
+a matter of time.
+
+327
+00:18:12,090 --> 00:18:14,190
+Sorry.
+
+328
+00:18:14,190 --> 00:18:16,665
+I'll pay you later.
+
+329
+00:18:16,665 --> 00:18:17,165
+Damages.
+
+330
+00:18:17,165 --> 00:18:20,627
+
+331
+00:18:20,627 --> 00:18:22,460
+At least I didn't hit
+a laptop or something.
+
+332
+00:18:22,460 --> 00:18:26,330
+
+333
+00:18:26,330 --> 00:18:34,090
+All right, so decision
+tree is binary--
+
+334
+00:18:34,090 --> 00:18:37,530
+that was the first
+thing-- and it
+
+335
+00:18:37,530 --> 00:18:47,970
+must have at least n
+leaves, one for each answer.
+
+336
+00:18:47,970 --> 00:18:54,330
+
+337
+00:18:54,330 --> 00:18:55,310
+At least.
+
+338
+00:18:55,310 --> 00:18:58,910
+Now, at the leaf you have
+to know what the answer is,
+
+339
+00:18:58,910 --> 00:19:01,550
+but there may be many leaves
+that have the same answer.
+
+340
+00:19:01,550 --> 00:19:03,430
+That's possible.
+
+341
+00:19:03,430 --> 00:19:05,830
+And indeed that will happen
+not for binary search
+
+342
+00:19:05,830 --> 00:19:07,630
+but typical algorithm.
+
+343
+00:19:07,630 --> 00:19:10,960
+There's multiple paths
+to get the same answer,
+
+344
+00:19:10,960 --> 00:19:13,990
+so there may be
+more leaves than n.
+
+345
+00:19:13,990 --> 00:19:17,670
+And in fact, if you want to
+know this kind of thing, where
+
+346
+00:19:17,670 --> 00:19:21,649
+x fits in this perspective,
+there's n plus 1 answers.
+
+347
+00:19:21,649 --> 00:19:23,190
+If you want to know
+is it equal or is
+
+348
+00:19:23,190 --> 00:19:26,370
+it strictly between two things
+there's 2n plus 1 answers.
+
+349
+00:19:26,370 --> 00:19:28,860
+But in all cases, there's
+at least n answers
+
+350
+00:19:28,860 --> 00:19:30,860
+and that's all I need.
+
+351
+00:19:30,860 --> 00:19:34,990
+In particular there's--
+say x exactly matches one
+
+352
+00:19:34,990 --> 00:19:37,030
+of the given items--
+there's n items--
+
+353
+00:19:37,030 --> 00:19:40,860
+so you need to have
+at least n leaves.
+
+354
+00:19:40,860 --> 00:19:42,700
+Maybe have more, I don't care.
+
+355
+00:19:42,700 --> 00:19:45,590
+But it I have a binary tree
+with at least n leaves,
+
+356
+00:19:45,590 --> 00:19:47,470
+the height has to
+be at least lg n.
+
+357
+00:19:47,470 --> 00:19:55,360
+
+358
+00:19:55,360 --> 00:19:56,160
+We're done.
+
+359
+00:19:56,160 --> 00:19:59,790
+The height is the
+worst-case running time.
+
+360
+00:19:59,790 --> 00:20:01,940
+Super, super easy proof.
+
+361
+00:20:01,940 --> 00:20:04,540
+
+362
+00:20:04,540 --> 00:20:07,660
+So easy, it's never been
+taught in 006 before.
+
+363
+00:20:07,660 --> 00:20:10,765
+But I think it's a good warm
+up for the next one which
+
+364
+00:20:10,765 --> 00:20:12,150
+is sorting.
+
+365
+00:20:12,150 --> 00:20:15,630
+Sorting is really
+the same thing.
+
+366
+00:20:15,630 --> 00:20:21,280
+It's not going to be any harder
+except that it's a little more
+
+367
+00:20:21,280 --> 00:20:24,110
+math but really not much more.
+
+368
+00:20:24,110 --> 00:20:27,510
+
+369
+00:20:27,510 --> 00:20:31,730
+So now we know-- we just
+proved two useful facts--
+
+370
+00:20:31,730 --> 00:20:35,200
+one is that binary search is
+optimal in a comparison model,
+
+371
+00:20:35,200 --> 00:20:38,570
+the other is that binary search
+trees are actually a good way
+
+372
+00:20:38,570 --> 00:20:40,120
+to solve a problem.
+
+373
+00:20:40,120 --> 00:20:42,620
+If your goal is to solve search
+and all you're allowed to do
+
+374
+00:20:42,620 --> 00:20:46,270
+is comparisons, then
+you need lg n time.
+
+375
+00:20:46,270 --> 00:20:51,030
+And so the search or next larger
+or next smaller, predecessor,
+
+376
+00:20:51,030 --> 00:20:52,970
+successor, in
+binary search trees
+
+377
+00:20:52,970 --> 00:20:55,870
+need to take at least lg n time.
+
+378
+00:20:55,870 --> 00:20:59,190
+No matter how you do it,
+even if you don't use a tree.
+
+379
+00:20:59,190 --> 00:21:02,350
+So this justifies why binary
+search trees are interesting,
+
+380
+00:21:02,350 --> 00:21:04,160
+because again the
+comparison model, that's
+
+381
+00:21:04,160 --> 00:21:07,750
+the best you can hope to do.
+
+382
+00:21:07,750 --> 00:21:09,070
+So that's comforting.
+
+383
+00:21:09,070 --> 00:21:12,622
+That's why I like lower bounds
+and theoretical computer
+
+384
+00:21:12,622 --> 00:21:14,830
+science in general because
+you know when you're done,
+
+385
+00:21:14,830 --> 00:21:16,600
+at least in a given model.
+
+386
+00:21:16,600 --> 00:21:19,120
+Whenever-- we're
+never actually done,
+
+387
+00:21:19,120 --> 00:21:22,005
+because we can always
+change the model.
+
+388
+00:21:22,005 --> 00:21:24,960
+At least we understand the
+limitations of comparisons.
+
+389
+00:21:24,960 --> 00:21:28,988
+So for sorting, we claim
+a lower bound of n lg n.
+
+390
+00:21:28,988 --> 00:21:31,401
+You've heard n lg
+n a zillion times.
+
+391
+00:21:31,401 --> 00:21:33,150
+You probably know this
+is true, but now we
+
+392
+00:21:33,150 --> 00:21:36,420
+actually get to
+prove that it's true.
+
+393
+00:21:36,420 --> 00:21:39,100
+So we just follow
+the same strategy.
+
+394
+00:21:39,100 --> 00:21:40,950
+Decision tree is binary.
+
+395
+00:21:40,950 --> 00:21:45,240
+The question is how many
+leaves does it have to have?
+
+396
+00:21:45,240 --> 00:21:50,909
+So for sorting-- I didn't
+draw up an example--
+
+397
+00:21:50,909 --> 00:21:52,700
+I'm not going to draw
+an example of sorting
+
+398
+00:21:52,700 --> 00:21:55,090
+because the trees get ginormous.
+
+399
+00:21:55,090 --> 00:21:55,590
+Right?
+
+400
+00:21:55,590 --> 00:22:01,610
+Because of the depth is n
+log n, the height is n log n,
+
+401
+00:22:01,610 --> 00:22:04,520
+then there's binary
+branching everywhere.
+
+402
+00:22:04,520 --> 00:22:06,610
+That's a lot of nodes.
+
+403
+00:22:06,610 --> 00:22:10,030
+Two to the n lg n is big.
+
+404
+00:22:10,030 --> 00:22:13,140
+More than two to
+the n even, so it's
+
+405
+00:22:13,140 --> 00:22:15,237
+hard to draw a picture
+even for n equals 3.
+
+406
+00:22:15,237 --> 00:22:15,820
+You can do it.
+
+407
+00:22:15,820 --> 00:22:18,090
+People have done it.
+
+408
+00:22:18,090 --> 00:22:19,020
+I don't want to.
+
+409
+00:22:19,020 --> 00:22:20,590
+I'm lazy.
+
+410
+00:22:20,590 --> 00:22:23,680
+But the internal nodes
+look just the same.
+
+411
+00:22:23,680 --> 00:22:26,440
+You're comparing two
+items, A I verses
+
+412
+00:22:26,440 --> 00:22:30,160
+A J. I'll just draw
+the generic version.
+
+413
+00:22:30,160 --> 00:22:34,080
+You have A I less than
+A J, question mark.
+
+414
+00:22:34,080 --> 00:22:36,110
+And then you'll
+have a no and a yes.
+
+415
+00:22:36,110 --> 00:22:38,320
+So that's what a typical
+comparison looks like.
+
+416
+00:22:38,320 --> 00:22:42,010
+Swaps don't appear
+here, because we're just
+
+417
+00:22:42,010 --> 00:22:43,770
+looking at the comparisons.
+
+418
+00:22:43,770 --> 00:22:46,980
+And then when you get
+down to a leaf, a leaf--
+
+419
+00:22:46,980 --> 00:22:54,440
+this is the interesting part--
+the leaf will look like this.
+
+420
+00:22:54,440 --> 00:22:57,690
+Well I took the original
+A 5 and that turned out
+
+421
+00:22:57,690 --> 00:22:59,200
+to be the smallest element.
+
+422
+00:22:59,200 --> 00:23:01,870
+Then-- maybe I'll
+write it this way--
+
+423
+00:23:01,870 --> 00:23:06,020
+then I have A 7, that turned
+out to be the next smallest
+
+424
+00:23:06,020 --> 00:23:13,020
+element, then A 1
+then A 0, whatever.
+
+425
+00:23:13,020 --> 00:23:16,610
+Hey, right at the end, somehow
+you know the sorted order
+
+426
+00:23:16,610 --> 00:23:18,154
+and you can just write it down.
+
+427
+00:23:18,154 --> 00:23:19,320
+We're not charging for this.
+
+428
+00:23:19,320 --> 00:23:20,819
+We're only charging
+for comparisons.
+
+429
+00:23:20,819 --> 00:23:23,730
+So however, maybe
+you've done swaps,
+
+430
+00:23:23,730 --> 00:23:25,930
+in the end you know
+what the final order is
+
+431
+00:23:25,930 --> 00:23:28,350
+and so you just write it down.
+
+432
+00:23:28,350 --> 00:23:31,090
+And your goal is to make enough
+comparisons that you figure out
+
+433
+00:23:31,090 --> 00:23:32,580
+what the sorted order is.
+
+434
+00:23:32,580 --> 00:23:34,470
+We claim the number
+of comparisons
+
+435
+00:23:34,470 --> 00:23:35,860
+here has to be at least n lg n.
+
+436
+00:23:35,860 --> 00:23:38,410
+
+437
+00:23:38,410 --> 00:23:39,210
+OK, why?
+
+438
+00:23:39,210 --> 00:23:52,650
+Because the decision tree is
+binary and the number of leaves
+
+439
+00:23:52,650 --> 00:23:57,070
+has to be at least the
+number of possible answers.
+
+440
+00:23:57,070 --> 00:23:58,990
+Could be more because
+each answer could appear
+
+441
+00:23:58,990 --> 00:24:01,450
+in several leaves
+and it probably will
+
+442
+00:24:01,450 --> 00:24:03,800
+in a typical sorting algorithm.
+
+443
+00:24:03,800 --> 00:24:05,640
+And how many possible
+answers are there?
+
+444
+00:24:05,640 --> 00:24:08,400
+
+445
+00:24:08,400 --> 00:24:08,900
+Batter?
+
+446
+00:24:08,900 --> 00:24:09,816
+AUDIENCE: n factorial.
+
+447
+00:24:09,816 --> 00:24:12,880
+PROFESSOR: n factorial,
+number of permutations.
+
+448
+00:24:12,880 --> 00:24:15,530
+This is a permutation
+of the input sequence
+
+449
+00:24:15,530 --> 00:24:18,200
+and if all the items
+you're given are distinct,
+
+450
+00:24:18,200 --> 00:24:21,890
+there will be n factorial
+permutations of them.
+
+451
+00:24:21,890 --> 00:24:25,350
+So that's the worst case.
+
+452
+00:24:25,350 --> 00:24:27,000
+So n factorial.
+
+453
+00:24:27,000 --> 00:24:32,870
+Now the tricky part
+is the algebra.
+
+454
+00:24:32,870 --> 00:24:35,430
+Say, oh, well then
+the height is at least
+
+455
+00:24:35,430 --> 00:24:37,760
+lg base 2 of n
+factorial-- lg base 2
+
+456
+00:24:37,760 --> 00:24:41,469
+because it's a binary tree.
+
+457
+00:24:41,469 --> 00:24:43,260
+You can put a parentheses
+here if you want,
+
+458
+00:24:43,260 --> 00:24:46,510
+they're not necessary.
+
+459
+00:24:46,510 --> 00:24:49,480
+So now I want to claim
+that this is n lg n.
+
+460
+00:24:49,480 --> 00:24:50,270
+How do I do that?
+
+461
+00:24:50,270 --> 00:24:53,100
+
+462
+00:24:53,100 --> 00:24:56,010
+Maybe you just know?
+
+463
+00:24:56,010 --> 00:24:56,510
+Yeah.
+
+464
+00:24:56,510 --> 00:24:58,676
+AUDIENCE: We can either use
+Stirling's approximation
+
+465
+00:24:58,676 --> 00:25:03,910
+or we could write it
+out as a sum [INAUDIBLE]
+
+466
+00:25:03,910 --> 00:25:05,150
+PROFESSOR: Wow, cool.
+
+467
+00:25:05,150 --> 00:25:07,819
+All right, you could either
+use Stirling's approximation
+
+468
+00:25:07,819 --> 00:25:08,860
+or write it out as a sum.
+
+469
+00:25:08,860 --> 00:25:10,151
+I've never done it with it sum.
+
+470
+00:25:10,151 --> 00:25:13,120
+Let's do that, that
+sounds like fun.
+
+471
+00:25:13,120 --> 00:25:14,800
+So, right?
+
+472
+00:25:14,800 --> 00:25:17,507
+I like that because you
+know Stirling's-- it's like
+
+473
+00:25:17,507 --> 00:25:19,840
+you've got to know Stirling
+and that's kind of annoying.
+
+474
+00:25:19,840 --> 00:25:21,700
+What if you don't know Sterling?
+
+475
+00:25:21,700 --> 00:25:23,650
+But we all know the
+definition of factorial.
+
+476
+00:25:23,650 --> 00:25:24,940
+I mean, we learned
+in grade school
+
+477
+00:25:24,940 --> 00:25:26,148
+just because it's fun, right?
+
+478
+00:25:26,148 --> 00:25:30,990
+Oh, I guess we-- I mean we
+did because we're geeks.
+
+479
+00:25:30,990 --> 00:25:35,800
+And then we know the lg of our
+product is the sum of the lg's.
+
+480
+00:25:35,800 --> 00:25:44,380
+So this is lg n plus lg n
+minus 1 plus lg 2 plus lg 1.
+
+481
+00:25:44,380 --> 00:25:47,800
+
+482
+00:25:47,800 --> 00:25:49,230
+I think at this
+point it's easier
+
+483
+00:25:49,230 --> 00:25:52,500
+to use summation
+notation, so sum of lg i.
+
+484
+00:25:52,500 --> 00:25:57,950
+OK now we've got to do sum,
+this is 1 to n I guess.
+
+485
+00:25:57,950 --> 00:26:00,590
+Now we need to know something
+about lg's, so it's not
+
+486
+00:26:00,590 --> 00:26:02,730
+so easy.
+
+487
+00:26:02,730 --> 00:26:06,630
+It's easy to show-- I mean,
+certainly this is at most n lg
+
+488
+00:26:06,630 --> 00:26:09,750
+n, but we need show that
+it's at least n lg n.
+
+489
+00:26:09,750 --> 00:26:11,430
+That's a little trickier.
+
+490
+00:26:11,430 --> 00:26:12,555
+I happen to know it's true.
+
+491
+00:26:12,555 --> 00:26:15,240
+
+492
+00:26:15,240 --> 00:26:17,630
+But I'd know it even
+in the summation form
+
+493
+00:26:17,630 --> 00:26:23,360
+because I know that lg-- lg
+looks like this basically,
+
+494
+00:26:23,360 --> 00:26:25,906
+and so if you're
+adding up, you're
+
+495
+00:26:25,906 --> 00:26:27,530
+taking the area under
+this curve right?
+
+496
+00:26:27,530 --> 00:26:28,696
+Oh, look at these integrals.
+
+497
+00:26:28,696 --> 00:26:30,250
+Oh, integrals.
+
+498
+00:26:30,250 --> 00:26:32,010
+Brings back memories.
+
+499
+00:26:32,010 --> 00:26:35,555
+This is discrete math class,
+though, continuous stuff.
+
+500
+00:26:35,555 --> 00:26:37,430
+So you're adding up all
+these numbers, right?
+
+501
+00:26:37,430 --> 00:26:41,060
+This is lg i over all the
+i's and basically all of them
+
+502
+00:26:41,060 --> 00:26:42,850
+have the same length.
+
+503
+00:26:42,850 --> 00:26:45,580
+Like if you look at
+the last half, that
+
+504
+00:26:45,580 --> 00:26:47,030
+would be one way to prove it.
+
+505
+00:26:47,030 --> 00:26:51,460
+Ah, it's fun, haven't done
+summations in so long.
+
+506
+00:26:51,460 --> 00:26:55,950
+Good stuff. [? IS042 ?] material
+but applied to algorithms
+
+507
+00:26:55,950 --> 00:26:58,480
+and in algorithms it's fun
+because you could throw away
+
+508
+00:26:58,480 --> 00:27:01,690
+constant factors
+and life is good.
+
+509
+00:27:01,690 --> 00:27:03,510
+We don't need exact
+answers really.
+
+510
+00:27:03,510 --> 00:27:05,660
+You can find an exact
+answer, but let's say
+
+511
+00:27:05,660 --> 00:27:08,280
+you look at the last half.
+
+512
+00:27:08,280 --> 00:27:10,890
+Those are all going
+to be basically lg n.
+
+513
+00:27:10,890 --> 00:27:12,185
+You can prove that.
+
+514
+00:27:12,185 --> 00:27:15,120
+So this is going to be
+at least the sum where
+
+515
+00:27:15,120 --> 00:27:21,550
+i equals n over 2 n of lg i.
+
+516
+00:27:21,550 --> 00:27:24,710
+Here I just throw away the
+first out of our two terms.
+
+517
+00:27:24,710 --> 00:27:28,660
+And this is going to be at
+least sum i equals n over 2
+
+518
+00:27:28,660 --> 00:27:31,720
+to n of lg n over 2.
+
+519
+00:27:31,720 --> 00:27:34,650
+
+520
+00:27:34,650 --> 00:27:36,740
+Each of these terms is
+bigger than lg n over 2
+
+521
+00:27:36,740 --> 00:27:39,890
+so if I just say, well,
+they're all lg n over 2 that's
+
+522
+00:27:39,890 --> 00:27:42,060
+going to give me
+something even smaller.
+
+523
+00:27:42,060 --> 00:27:44,370
+Now the lg n over 2,
+that's just lg n minus 1.
+
+524
+00:27:44,370 --> 00:27:48,760
+
+525
+00:27:48,760 --> 00:27:49,380
+I love this.
+
+526
+00:27:49,380 --> 00:27:51,930
+It's going to give
+the right answer even.
+
+527
+00:27:51,930 --> 00:27:58,770
+So that's an equals and so
+this equals n lg n minus n.
+
+528
+00:27:58,770 --> 00:28:00,950
+That summation I can do.
+
+529
+00:28:00,950 --> 00:28:05,070
+All the terms are the
+same, sorry n over 2.
+
+530
+00:28:05,070 --> 00:28:06,770
+Not quite what I wanted.
+
+531
+00:28:06,770 --> 00:28:07,360
+Close enough.
+
+532
+00:28:07,360 --> 00:28:10,344
+
+533
+00:28:10,344 --> 00:28:11,760
+Sorry there is
+only n over 2 terms
+
+534
+00:28:11,760 --> 00:28:14,580
+here, ignoring
+floors and ceilings.
+
+535
+00:28:14,580 --> 00:28:18,310
+So I get n lg n divided by 2.
+
+536
+00:28:18,310 --> 00:28:22,690
+This is omega n lg n
+because this n term
+
+537
+00:28:22,690 --> 00:28:24,720
+is smaller than n lg n.
+
+538
+00:28:24,720 --> 00:28:26,020
+So this one dominates.
+
+539
+00:28:26,020 --> 00:28:29,550
+Doesn't matter if this one's
+negative, because it's smaller.
+
+540
+00:28:29,550 --> 00:28:31,120
+This is omega n lg n.
+
+541
+00:28:31,120 --> 00:28:31,670
+We're done.
+
+542
+00:28:31,670 --> 00:28:33,890
+Sorting is omega n lg n.
+
+543
+00:28:33,890 --> 00:28:34,440
+Very easy.
+
+544
+00:28:34,440 --> 00:28:37,090
+Who said summations?
+
+545
+00:28:37,090 --> 00:28:37,660
+All right.
+
+546
+00:28:37,660 --> 00:28:39,160
+Why don't you come
+collect a pillow,
+
+547
+00:28:39,160 --> 00:28:40,910
+I'm not going to throw that far.
+
+548
+00:28:40,910 --> 00:28:42,510
+Afterwards.
+
+549
+00:28:42,510 --> 00:28:43,440
+OK.
+
+550
+00:28:43,440 --> 00:28:44,620
+That's one way to do it.
+
+551
+00:28:44,620 --> 00:28:46,078
+Another way to do
+it, if you happen
+
+552
+00:28:46,078 --> 00:28:50,540
+to know Stirling's formula
+for n factorial-- n factorial
+
+553
+00:28:50,540 --> 00:28:56,560
+is about n over e to the n
+times square root of 2 pi n.
+
+554
+00:28:56,560 --> 00:28:57,740
+Right?
+
+555
+00:28:57,740 --> 00:29:01,330
+If you do Taylor series
+approximation of n factorial,
+
+556
+00:29:01,330 --> 00:29:04,000
+the first term, which is the
+most important term for us
+
+557
+00:29:04,000 --> 00:29:05,670
+because as the
+asymptotically dominating
+
+558
+00:29:05,670 --> 00:29:09,390
+term is square root of 2 pi
+n times n over e to the n.
+
+559
+00:29:09,390 --> 00:29:12,200
+Hope I got that right.
+
+560
+00:29:12,200 --> 00:29:15,600
+Yeah, clearly I've
+been studying.
+
+561
+00:29:15,600 --> 00:29:18,490
+You take lg's of that and
+you do the same thing of lg
+
+562
+00:29:18,490 --> 00:29:21,440
+of a product is sum of
+the lg's and you end up
+
+563
+00:29:21,440 --> 00:29:28,150
+with-- the right answer is
+actually n lg n minus order n.
+
+564
+00:29:28,150 --> 00:29:31,980
+So I was off by a
+factor of 2 here.
+
+565
+00:29:31,980 --> 00:29:34,820
+The linear term--
+it does appear,
+
+566
+00:29:34,820 --> 00:29:38,042
+but it's smaller than this
+and this is also omega n lg n.
+
+567
+00:29:38,042 --> 00:29:40,250
+If you don't care about
+constants, it doesn't matter.
+
+568
+00:29:40,250 --> 00:29:43,040
+If you care about constants,
+the constant is 1.
+
+569
+00:29:43,040 --> 00:29:44,350
+Kind of nice.
+
+570
+00:29:44,350 --> 00:29:46,360
+Easy to prove a one half.
+
+571
+00:29:46,360 --> 00:29:49,620
+And if you look at the lecture
+notes it works through that.
+
+572
+00:29:49,620 --> 00:29:53,300
+But I think we've seen
+enough of that lower bound.
+
+573
+00:29:53,300 --> 00:29:55,580
+And that's the end of
+our lower bound topic.
+
+574
+00:29:55,580 --> 00:29:57,520
+Any questions on that?
+
+575
+00:29:57,520 --> 00:29:59,580
+So it's really easy.
+
+576
+00:29:59,580 --> 00:30:05,590
+Once you set up this framework
+of comparison trees and now
+
+577
+00:30:05,590 --> 00:30:08,080
+it becomes just a question
+of the height of a comparison
+
+578
+00:30:08,080 --> 00:30:09,810
+tree.
+
+579
+00:30:09,810 --> 00:30:11,180
+Comparison trees are binary.
+
+580
+00:30:11,180 --> 00:30:13,140
+Just count how many leaves
+do you have to have,
+
+581
+00:30:13,140 --> 00:30:16,576
+take lg of that and you
+get a lower bound of that.
+
+582
+00:30:16,576 --> 00:30:21,540
+AUDIENCE: What is meant
+by n preprocessed items?
+
+583
+00:30:21,540 --> 00:30:22,790
+PROFESSOR: Oh, yeah.
+
+584
+00:30:22,790 --> 00:30:25,710
+For searching I was trying
+to be careful and say, well,
+
+585
+00:30:25,710 --> 00:30:27,950
+if I have n preprocessed items.
+
+586
+00:30:27,950 --> 00:30:29,900
+AUDIENCE: [INAUDIBLE]
+
+587
+00:30:29,900 --> 00:30:32,510
+PROFESSOR: It means you can
+do whatever the heck you want.
+
+588
+00:30:32,510 --> 00:30:33,900
+So here's the model.
+
+589
+00:30:33,900 --> 00:30:34,890
+I give you n items.
+
+590
+00:30:34,890 --> 00:30:38,120
+You can do all pairwise
+comparisons between those items
+
+591
+00:30:38,120 --> 00:30:41,180
+for free and then I
+give you a new item
+
+592
+00:30:41,180 --> 00:30:43,260
+and then I start
+charging for comparisons.
+
+593
+00:30:43,260 --> 00:30:45,270
+So another way to
+say it is I only
+
+594
+00:30:45,270 --> 00:30:50,800
+charge between for comparisons
+between x and the other items.
+
+595
+00:30:50,800 --> 00:30:53,273
+And even then you need lg n.
+
+596
+00:30:53,273 --> 00:30:55,675
+AUDIENCE: [INAUDIBLE]
+case for sorting, right?
+
+597
+00:30:55,675 --> 00:30:57,800
+PROFESSOR: With sorting
+they were not preprocessed.
+
+598
+00:30:57,800 --> 00:30:59,420
+Yeah, I didn't
+write the theorem.
+
+599
+00:30:59,420 --> 00:31:01,670
+It's just sorting and given
+items, no preprocessing.
+
+600
+00:31:01,670 --> 00:31:03,190
+AUDIENCE: What if there
+were preprocessing?
+
+601
+00:31:03,190 --> 00:31:04,130
+PROFESSOR: If they
+were preprocessed,
+
+602
+00:31:04,130 --> 00:31:05,650
+you'd be done in
+zero comparisons.
+
+603
+00:31:05,650 --> 00:31:07,640
+Yeah, exactly.
+
+604
+00:31:07,640 --> 00:31:11,580
+This theorem is also true
+if I remove preprocessed,
+
+605
+00:31:11,580 --> 00:31:14,244
+but in fact then
+you need n time.
+
+606
+00:31:14,244 --> 00:31:15,660
+Unfortunately this
+proof technique
+
+607
+00:31:15,660 --> 00:31:17,670
+will only prove a
+lower bound of log n,
+
+608
+00:31:17,670 --> 00:31:21,070
+because even if these items
+were not preprocessed, then
+
+609
+00:31:21,070 --> 00:31:23,104
+you have to do linear
+search basically.
+
+610
+00:31:23,104 --> 00:31:25,020
+So if you don't know
+anything about the items,
+
+611
+00:31:25,020 --> 00:31:26,670
+you need linear time.
+
+612
+00:31:26,670 --> 00:31:29,950
+But this proof will only
+prove a lower bound of log n.
+
+613
+00:31:29,950 --> 00:31:32,520
+So this technique,
+while cool and simple,
+
+614
+00:31:32,520 --> 00:31:34,270
+does not always give
+you the right answer.
+
+615
+00:31:34,270 --> 00:31:36,170
+It just gives you a lower bound.
+
+616
+00:31:36,170 --> 00:31:39,800
+May not be the right lower
+bound, may not be tight.
+
+617
+00:31:39,800 --> 00:31:42,870
+So searching always requires lg
+n time and what's interesting
+
+618
+00:31:42,870 --> 00:31:45,980
+is it requires it even when
+you preprocess the items.
+
+619
+00:31:45,980 --> 00:31:49,050
+Sorting, if you haven't
+preprocessed the items,
+
+620
+00:31:49,050 --> 00:31:51,050
+then it takes n lg n.
+
+621
+00:31:51,050 --> 00:31:52,660
+Clear?
+
+622
+00:31:52,660 --> 00:31:53,510
+Good.
+
+623
+00:31:53,510 --> 00:31:55,843
+Now we get to the algorithms
+part of the lecture, always
+
+624
+00:31:55,843 --> 00:31:56,650
+the most fun.
+
+625
+00:31:56,650 --> 00:31:58,730
+The moments you've
+been waiting for.
+
+626
+00:31:58,730 --> 00:32:00,040
+Let me erase comparison trees.
+
+627
+00:32:00,040 --> 00:32:03,950
+
+628
+00:32:03,950 --> 00:32:07,770
+Henceforth and I mean not
+only this lecture, but also
+
+629
+00:32:07,770 --> 00:32:10,380
+the next three lectures
+which are about hashing,
+
+630
+00:32:10,380 --> 00:32:13,480
+we will not be in
+the comparison model
+
+631
+00:32:13,480 --> 00:32:16,760
+because for comparison
+model, we're done.
+
+632
+00:32:16,760 --> 00:32:20,480
+We solved search, we solved
+sorting, n lg n three ways.
+
+633
+00:32:20,480 --> 00:32:22,770
+I mean, how much more can we do?
+
+634
+00:32:22,770 --> 00:32:26,350
+So it's time to
+bump it up a notch,
+
+635
+00:32:26,350 --> 00:32:29,130
+increase our model power.
+
+636
+00:32:29,130 --> 00:32:32,880
+We've talked about the RAM
+in particular, Random Access
+
+637
+00:32:32,880 --> 00:32:35,660
+Machine, where
+memory is in array,
+
+638
+00:32:35,660 --> 00:32:38,230
+you can access anything in
+the array in constant time.
+
+639
+00:32:38,230 --> 00:32:45,185
+We're going to use that power of
+the RAM to sort in linear time,
+
+640
+00:32:45,185 --> 00:32:45,685
+sometimes.
+
+641
+00:32:45,685 --> 00:32:52,490
+
+642
+00:32:52,490 --> 00:32:56,550
+A more appropriate title for
+this section of this lecture
+
+643
+00:32:56,550 --> 00:32:57,850
+would be integer sorting.
+
+644
+00:32:57,850 --> 00:33:01,950
+
+645
+00:33:01,950 --> 00:33:04,120
+OK, so far we've been
+talking about comparison
+
+646
+00:33:04,120 --> 00:33:07,140
+sorting where the items you're
+given-- the only thing you
+
+647
+00:33:07,140 --> 00:33:11,110
+know about them is that you can
+compare them in constant time.
+
+648
+00:33:11,110 --> 00:33:13,130
+But now we're going to
+think about the situation
+
+649
+00:33:13,130 --> 00:33:16,310
+where the things that
+you're sorting are integers.
+
+650
+00:33:16,310 --> 00:33:20,560
+That's a big assumption but it's
+a practical assumption a lot
+
+651
+00:33:20,560 --> 00:33:21,220
+of the time.
+
+652
+00:33:21,220 --> 00:33:23,720
+If you're not sorting integers
+you can map whatever the heck
+
+653
+00:33:23,720 --> 00:33:25,620
+you're sorting into integers.
+
+654
+00:33:25,620 --> 00:33:27,210
+And usually it's
+already been done
+
+655
+00:33:27,210 --> 00:33:29,140
+because you're representing
+it on a computer.
+
+656
+00:33:29,140 --> 00:33:33,050
+You've already represented your
+thing is an integer of sorts.
+
+657
+00:33:33,050 --> 00:33:33,570
+Bad pun.
+
+658
+00:33:33,570 --> 00:33:36,870
+
+659
+00:33:36,870 --> 00:33:38,060
+This is an assumption.
+
+660
+00:33:38,060 --> 00:33:43,390
+So we assume-- going to
+be a little more precise.
+
+661
+00:33:43,390 --> 00:33:49,200
+The keys you're
+sorting are integers.
+
+662
+00:33:49,200 --> 00:33:51,720
+There's still-- I'm going
+to put a little n here,
+
+663
+00:33:51,720 --> 00:33:52,795
+remember there's n keys.
+
+664
+00:33:52,795 --> 00:33:58,100
+
+665
+00:33:58,100 --> 00:34:01,926
+I'm also going to assume
+that they're in some range.
+
+666
+00:34:01,926 --> 00:34:04,300
+And for convenience, I'm going
+to assume that they're all
+
+667
+00:34:04,300 --> 00:34:07,500
+non-negative-- it's not hard
+to deal with negative numbers,
+
+668
+00:34:07,500 --> 00:34:09,719
+but it's just
+convenient to think
+
+669
+00:34:09,719 --> 00:34:12,350
+about non-negative numbers.
+
+670
+00:34:12,350 --> 00:34:15,260
+So if you start at zero,
+there's some maximum value,
+
+671
+00:34:15,260 --> 00:34:16,230
+say k minus 1.
+
+672
+00:34:16,230 --> 00:34:18,900
+So there's k different
+values they could be.
+
+673
+00:34:18,900 --> 00:34:19,800
+K could be anything.
+
+674
+00:34:19,800 --> 00:34:20,639
+It's a parameter.
+
+675
+00:34:20,639 --> 00:34:22,139
+We've always had
+n as a parameter,
+
+676
+00:34:22,139 --> 00:34:24,055
+now we're going to also
+have k as a parameter.
+
+677
+00:34:24,055 --> 00:34:27,750
+
+678
+00:34:27,750 --> 00:34:36,659
+And just for completeness--
+and each fits in a word.
+
+679
+00:34:36,659 --> 00:34:42,442
+Remember the machine
+word of your RAM machine?
+
+680
+00:34:42,442 --> 00:34:43,900
+Words were the
+things that we could
+
+681
+00:34:43,900 --> 00:34:45,174
+manipulate in constant time.
+
+682
+00:34:45,174 --> 00:34:46,840
+Now this is a very
+reasonable assumption
+
+683
+00:34:46,840 --> 00:34:48,280
+because we've been
+assuming so far
+
+684
+00:34:48,280 --> 00:34:52,814
+you can compare two keys
+to items in constant time.
+
+685
+00:34:52,814 --> 00:34:54,230
+To get that for
+integers, you need
+
+686
+00:34:54,230 --> 00:34:56,130
+to assume that your integers
+are fitting in words.
+
+687
+00:34:56,130 --> 00:34:57,755
+We usually don't
+state this assumption,
+
+688
+00:34:57,755 --> 00:34:59,745
+but I thought I'd throw
+it in just for kicks.
+
+689
+00:34:59,745 --> 00:35:01,120
+So we've got a
+bunch of integers,
+
+690
+00:35:01,120 --> 00:35:02,119
+each one fits in a word.
+
+691
+00:35:02,119 --> 00:35:04,660
+I could compare them,
+that takes constant time,
+
+692
+00:35:04,660 --> 00:35:09,510
+or I could add them or subtract
+them or multiply them or divide
+
+693
+00:35:09,510 --> 00:35:13,160
+them or do whatever
+the heck I want.
+
+694
+00:35:13,160 --> 00:35:24,582
+It turns out you can do a
+lot more than comparisons
+
+695
+00:35:24,582 --> 00:35:26,040
+and it turns out
+this will help us.
+
+696
+00:35:26,040 --> 00:35:40,950
+
+697
+00:35:40,950 --> 00:35:43,150
+I don't know if I want to
+tell you the answer here.
+
+698
+00:35:43,150 --> 00:35:49,940
+For k-- not too big-- you
+can sort in linear time.
+
+699
+00:35:49,940 --> 00:35:53,510
+
+700
+00:35:53,510 --> 00:35:56,500
+Believe it or not, this
+topic, integer sorting,
+
+701
+00:35:56,500 --> 00:35:58,280
+is still a major
+area of research.
+
+702
+00:35:58,280 --> 00:36:01,070
+People are still trying
+to solve this problem.
+
+703
+00:36:01,070 --> 00:36:05,640
+One conjecture is that
+even in all cases,
+
+704
+00:36:05,640 --> 00:36:07,460
+you can sort in
+linear time given
+
+705
+00:36:07,460 --> 00:36:09,505
+any integers that fit in words.
+
+706
+00:36:09,505 --> 00:36:11,660
+This is not yet solved.
+
+707
+00:36:11,660 --> 00:36:14,780
+Best algorithm is n
+times square root lg lg
+
+708
+00:36:14,780 --> 00:36:17,810
+n with high probability.
+
+709
+00:36:17,810 --> 00:36:20,420
+So it's almost-- almost n.
+
+710
+00:36:20,420 --> 00:36:22,540
+It's a lot better than n lg n.
+
+711
+00:36:22,540 --> 00:36:28,620
+I'll just write that for fun
+case you can't parse in words.
+
+712
+00:36:28,620 --> 00:36:31,880
+This is the best
+algorithms to date.
+
+713
+00:36:31,880 --> 00:36:34,500
+I would conjecture you can do
+linear time in all situations.
+
+714
+00:36:34,500 --> 00:36:36,166
+We're not going to
+cover this algorithm.
+
+715
+00:36:36,166 --> 00:36:37,710
+That's a little beyond us.
+
+716
+00:36:37,710 --> 00:36:42,360
+It's in advanced algorithms
+if you're interested, 6854.
+
+717
+00:36:42,360 --> 00:36:45,160
+But we're going to show that
+for a lot of cases of interest
+
+718
+00:36:45,160 --> 00:36:47,430
+when k is not
+ginormous, it's really
+
+719
+00:36:47,430 --> 00:36:50,601
+easy to sort in linear time.
+
+720
+00:36:50,601 --> 00:36:51,100
+All right?
+
+721
+00:36:51,100 --> 00:36:56,010
+And our first algorithm to
+achieve this is counting sort.
+
+722
+00:36:56,010 --> 00:37:01,000
+
+723
+00:37:01,000 --> 00:37:03,680
+Counting sort does not
+make any comparisons.
+
+724
+00:37:03,680 --> 00:37:06,980
+It only does other stuff.
+
+725
+00:37:06,980 --> 00:37:09,760
+And it's going to depend on n.
+
+726
+00:37:09,760 --> 00:37:10,910
+It's going to depend on k.
+
+727
+00:37:10,910 --> 00:37:14,820
+We'll get some running times not
+bad as long as k is not giant.
+
+728
+00:37:14,820 --> 00:37:17,500
+So as the name might
+suggest, what you
+
+729
+00:37:17,500 --> 00:37:21,140
+do is count all the items.
+
+730
+00:37:21,140 --> 00:37:30,570
+So imagine I give you a bunch
+of keys like 3, 5 7, 5, 5, 3, 6,
+
+731
+00:37:30,570 --> 00:37:32,524
+whatever.
+
+732
+00:37:32,524 --> 00:37:33,940
+I'd like to run
+through this array
+
+733
+00:37:33,940 --> 00:37:37,440
+and say, ah, I see there
+are two 3's and there
+
+734
+00:37:37,440 --> 00:37:44,670
+are three 5's and there's one 6,
+and one 7, so how do I sort it?
+
+735
+00:37:44,670 --> 00:37:46,930
+I'd like to say, well
+3 is smallest key
+
+736
+00:37:46,930 --> 00:37:49,430
+and there's two of them, so
+I'll write two 3's, then there's
+
+737
+00:37:49,430 --> 00:37:53,020
+three 5's so I'll write three
+5's, and then there's a 6
+
+738
+00:37:53,020 --> 00:37:54,810
+and then there's a 7.
+
+739
+00:37:54,810 --> 00:37:56,030
+That's the intuition.
+
+740
+00:37:56,030 --> 00:38:00,170
+Now how do I-- how I do
+that with an algorithm?
+
+741
+00:38:00,170 --> 00:38:02,700
+Suggestions?
+
+742
+00:38:02,700 --> 00:38:03,265
+Yeah?
+
+743
+00:38:03,265 --> 00:38:04,140
+AUDIENCE: [INAUDIBLE]
+
+744
+00:38:04,140 --> 00:38:10,870
+
+745
+00:38:10,870 --> 00:38:11,550
+PROFESSOR: Yeah.
+
+746
+00:38:11,550 --> 00:38:13,030
+Allocate an array
+of memory, which
+
+747
+00:38:13,030 --> 00:38:15,900
+is my counters-- I'm
+going to count each k.
+
+748
+00:38:15,900 --> 00:38:17,840
+I need an array of
+size k because there
+
+749
+00:38:17,840 --> 00:38:19,790
+are k possible keys.
+
+750
+00:38:19,790 --> 00:38:23,460
+Convenient those two terms
+start with the same letter.
+
+751
+00:38:23,460 --> 00:38:25,290
+And then I'll just--
+whenever I see
+
+752
+00:38:25,290 --> 00:38:27,340
+an-- I'm going to run
+through the items in order,
+
+753
+00:38:27,340 --> 00:38:30,140
+when I see an item, I say,
+OK, well that's key 3.
+
+754
+00:38:30,140 --> 00:38:35,060
+I will look at index 3 of this
+array, increment that counter.
+
+755
+00:38:35,060 --> 00:38:36,620
+Then I see 5,
+increment that counter.
+
+756
+00:38:36,620 --> 00:38:39,470
+I see 7, I see 5, I
+see 5, and by the end,
+
+757
+00:38:39,470 --> 00:38:43,859
+I'll know that there are three
+5's and two 3's and so on.
+
+758
+00:38:43,859 --> 00:38:44,650
+That's how I count.
+
+759
+00:38:44,650 --> 00:38:46,185
+And then how do
+output the items?
+
+760
+00:38:46,185 --> 00:38:48,890
+
+761
+00:38:48,890 --> 00:38:50,060
+You want to keep going?
+
+762
+00:38:50,060 --> 00:38:50,935
+AUDIENCE: [INAUDIBLE]
+
+763
+00:38:50,935 --> 00:38:56,300
+
+764
+00:38:56,300 --> 00:38:58,500
+PROFESSOR: Yeah, just
+traverse the array
+
+765
+00:38:58,500 --> 00:39:03,250
+of counters and the
+array is already
+
+766
+00:39:03,250 --> 00:39:06,940
+written in order by key,
+so it's really easy.
+
+767
+00:39:06,940 --> 00:39:10,220
+I mean I could draw this array
+for you if you like at 0, 1,
+
+768
+00:39:10,220 --> 00:39:10,870
+2 3.
+
+769
+00:39:10,870 --> 00:39:15,270
+Here's the 3 position, it
+ends up with the value 2.
+
+770
+00:39:15,270 --> 00:39:18,360
+And if I just go through, a lot
+of these will have 0's in them,
+
+771
+00:39:18,360 --> 00:39:19,870
+just skip those.
+
+772
+00:39:19,870 --> 00:39:21,490
+When I find a
+non-zero entry, just
+
+773
+00:39:21,490 --> 00:39:26,096
+write-- oh, that means there's
+two 3's there, so I write 3, 3.
+
+774
+00:39:26,096 --> 00:39:27,920
+OK, that algorithm
+would work but I'm not
+
+775
+00:39:27,920 --> 00:39:30,790
+going to even write it down,
+not even going to dignify it,
+
+776
+00:39:30,790 --> 00:39:35,920
+because all it does
+is sort integers.
+
+777
+00:39:35,920 --> 00:39:37,600
+But there's a
+subtlety here which
+
+778
+00:39:37,600 --> 00:39:40,300
+we're going to need in a moment,
+which is why I stress it,
+
+779
+00:39:40,300 --> 00:39:42,750
+that really we have n items.
+
+780
+00:39:42,750 --> 00:39:45,550
+Each of them has a key, but
+it might have other stuff
+
+781
+00:39:45,550 --> 00:39:48,290
+too that we'd like to
+bring along for the ride.
+
+782
+00:39:48,290 --> 00:39:50,470
+We'll see why we care
+about that in a moment.
+
+783
+00:39:50,470 --> 00:39:52,690
+But it's also a
+typical situation,
+
+784
+00:39:52,690 --> 00:39:57,440
+like you have a spreadsheet and
+you click sort by this column.
+
+785
+00:39:57,440 --> 00:39:59,990
+Well every row has a
+whole bunch of data
+
+786
+00:39:59,990 --> 00:40:02,440
+but you're only trying to
+sort by one of those fields,
+
+787
+00:40:02,440 --> 00:40:04,240
+that one column.
+
+788
+00:40:04,240 --> 00:40:06,202
+And that one field
+may be an integer,
+
+789
+00:40:06,202 --> 00:40:08,660
+but there's all this other
+stuff you'd like to bring along.
+
+790
+00:40:08,660 --> 00:40:11,910
+And when you say, oh,
+there are two 3's,
+
+791
+00:40:11,910 --> 00:40:15,450
+you know there's this
+3, which you know maybe
+
+792
+00:40:15,450 --> 00:40:17,270
+has a cloud around it.
+
+793
+00:40:17,270 --> 00:40:19,320
+There's this 3 which maybe
+has a heart around it.
+
+794
+00:40:19,320 --> 00:40:21,840
+That's about the limit
+of my drawing abilities.
+
+795
+00:40:21,840 --> 00:40:24,792
+And now say, oh, there
+are two 3's but which 3?
+
+796
+00:40:24,792 --> 00:40:27,000
+Should the cloud go first,
+should the heart go first?
+
+797
+00:40:27,000 --> 00:40:28,541
+I mean I don't care
+which goes first,
+
+798
+00:40:28,541 --> 00:40:32,330
+maybe-- I do, actually--
+but I will in a moment.
+
+799
+00:40:32,330 --> 00:40:34,110
+That's another topic.
+
+800
+00:40:34,110 --> 00:40:36,084
+But I'd like to bring
+that cloud somewhere.
+
+801
+00:40:36,084 --> 00:40:37,500
+I want to put the
+cloud somewhere,
+
+802
+00:40:37,500 --> 00:40:38,970
+want to put the heart somewhere.
+
+803
+00:40:38,970 --> 00:40:42,090
+All right, so here's
+a way to do all that.
+
+804
+00:40:42,090 --> 00:40:53,560
+Basically the same algorithm
+but I'm just going to use lists.
+
+805
+00:40:53,560 --> 00:40:58,110
+
+806
+00:40:58,110 --> 00:41:00,700
+Still have an array of k
+things but no longer counters,
+
+807
+00:41:00,700 --> 00:41:01,290
+now lists.
+
+808
+00:41:01,290 --> 00:41:03,620
+They could be linked lists,
+they could be python lists.
+
+809
+00:41:03,620 --> 00:41:06,230
+It won't matter for my purposes.
+
+810
+00:41:06,230 --> 00:41:14,940
+And then I'll say for j
+and range of n-- that'd
+
+811
+00:41:14,940 --> 00:41:19,940
+be super pythonic here-- I
+want to look at the list who's
+
+812
+00:41:19,940 --> 00:41:32,500
+at index a of j
+and append a of j.
+
+813
+00:41:32,500 --> 00:41:39,765
+And then the output is going
+to be an empty list initially.
+
+814
+00:41:39,765 --> 00:41:43,220
+
+815
+00:41:43,220 --> 00:41:47,600
+And then I iterate through the
+array their k values for that,
+
+816
+00:41:47,600 --> 00:41:58,170
+and I just say output,
+extend, list i.
+
+817
+00:41:58,170 --> 00:41:58,730
+OK.
+
+818
+00:41:58,730 --> 00:42:01,149
+This is counting sort or a
+version of counting sort.
+
+819
+00:42:01,149 --> 00:42:03,440
+In your textbook, you'll find
+a different version which
+
+820
+00:42:03,440 --> 00:42:06,006
+does not use lists, So it's
+probably more practical
+
+821
+00:42:06,006 --> 00:42:07,880
+because it uses no data
+structures whatsoever
+
+822
+00:42:07,880 --> 00:42:10,370
+except three arrays.
+
+823
+00:42:10,370 --> 00:42:12,110
+But it runs in the
+same amount of time
+
+824
+00:42:12,110 --> 00:42:14,370
+and this is a lot easier
+I think to think about.
+
+825
+00:42:14,370 --> 00:42:18,920
+This is more modern
+perspective, if you well.
+
+826
+00:42:18,920 --> 00:42:20,890
+For every item, if
+you'd look at them
+
+827
+00:42:20,890 --> 00:42:22,810
+in the given order
+of your array,
+
+828
+00:42:22,810 --> 00:42:24,410
+you see what it's key value is.
+
+829
+00:42:24,410 --> 00:42:26,700
+Maybe that's not exactly
+the same as the item,
+
+830
+00:42:26,700 --> 00:42:29,202
+so it could be key
+of x is just x.
+
+831
+00:42:29,202 --> 00:42:30,910
+But you know in python
+sort, for example,
+
+832
+00:42:30,910 --> 00:42:33,446
+you're given a key function.
+
+833
+00:42:33,446 --> 00:42:34,570
+So you take that key value.
+
+834
+00:42:34,570 --> 00:42:36,630
+The key is guaranteed to
+be an integer between 0
+
+835
+00:42:36,630 --> 00:42:41,240
+and k minus 1, so you look at
+the list, that numbered list,
+
+836
+00:42:41,240 --> 00:42:44,320
+and you just add this
+item to the list.
+
+837
+00:42:44,320 --> 00:42:44,820
+OK.
+
+838
+00:42:44,820 --> 00:42:46,195
+But the item is
+not just the key,
+
+839
+00:42:46,195 --> 00:42:49,460
+it's everything-- whatever
+that data structure is--
+
+840
+00:42:49,460 --> 00:42:53,420
+and then you just go through the
+list and you concatenate them.
+
+841
+00:42:53,420 --> 00:42:53,920
+OK.
+
+842
+00:42:53,920 --> 00:42:54,930
+How long does this take?
+
+843
+00:42:54,930 --> 00:42:57,480
+
+844
+00:42:57,480 --> 00:43:01,140
+How long does this step take?
+
+845
+00:43:01,140 --> 00:43:01,880
+N?
+
+846
+00:43:01,880 --> 00:43:03,990
+Nope.
+
+847
+00:43:03,990 --> 00:43:04,660
+Constant?
+
+848
+00:43:04,660 --> 00:43:06,110
+Nope.
+
+849
+00:43:06,110 --> 00:43:07,345
+OK.
+
+850
+00:43:07,345 --> 00:43:08,345
+Look at all the actions.
+
+851
+00:43:08,345 --> 00:43:09,557
+It's order k time.
+
+852
+00:43:09,557 --> 00:43:11,390
+To create an empty list
+takes constant time.
+
+853
+00:43:11,390 --> 00:43:12,600
+They're k of them.
+
+854
+00:43:12,600 --> 00:43:14,400
+OK?
+
+855
+00:43:14,400 --> 00:43:16,850
+How long does this step
+take, just the append?
+
+856
+00:43:16,850 --> 00:43:20,330
+
+857
+00:43:20,330 --> 00:43:21,130
+Constant?
+
+858
+00:43:21,130 --> 00:43:22,070
+Good.
+
+859
+00:43:22,070 --> 00:43:25,120
+Remember, append is constant
+time from the Python model
+
+860
+00:43:25,120 --> 00:43:27,670
+or your favorite
+model, anything.
+
+861
+00:43:27,670 --> 00:43:29,590
+We're assuming the key
+takes constant time
+
+862
+00:43:29,590 --> 00:43:33,370
+because that's the word,
+so that's an assumption,
+
+863
+00:43:33,370 --> 00:43:35,900
+but in the normal assumption.
+
+864
+00:43:35,900 --> 00:43:39,640
+So total time here is order n.
+
+865
+00:43:39,640 --> 00:43:43,680
+And this thing, well this
+takes basically the length
+
+866
+00:43:43,680 --> 00:43:46,360
+of Li time.
+
+867
+00:43:46,360 --> 00:43:50,910
+And so when you add
+it up, maybe plus 1--
+
+868
+00:43:50,910 --> 00:43:52,660
+because to look at an
+empty list you still
+
+869
+00:43:52,660 --> 00:43:54,950
+need to look at it--
+so you add it up
+
+870
+00:43:54,950 --> 00:44:00,662
+and you get order sum of all
+the Li's is all the items.
+
+871
+00:44:00,662 --> 00:44:02,370
+And then you get plus
+1 for each of them,
+
+872
+00:44:02,370 --> 00:44:05,380
+so you get n plus k. n
+plus k is the running
+
+873
+00:44:05,380 --> 00:44:08,050
+time of this algorithm.
+
+874
+00:44:08,050 --> 00:44:10,380
+Add those up.
+
+875
+00:44:10,380 --> 00:44:12,610
+OK, so counting sort
+is order n plus k.
+
+876
+00:44:12,610 --> 00:44:16,870
+So if k happens to be order
+n, this is linear time.
+
+877
+00:44:16,870 --> 00:44:19,890
+But as soon as it's a little
+bit bigger, you're in trouble.
+
+878
+00:44:19,890 --> 00:44:21,370
+So counting sort's
+a good warm up,
+
+879
+00:44:21,370 --> 00:44:23,120
+but it's not ultimately
+what we want.
+
+880
+00:44:23,120 --> 00:44:31,060
+
+881
+00:44:31,060 --> 00:44:40,350
+And a much cooler algorithm
+is called radix sort.
+
+882
+00:44:40,350 --> 00:44:45,467
+
+883
+00:44:45,467 --> 00:44:47,800
+It's going to use counting
+sort as the subroutine, which
+
+884
+00:44:47,800 --> 00:44:52,150
+is why spent all this time
+on a mediocre algorithm.
+
+885
+00:44:52,150 --> 00:44:56,800
+And it's going to get a
+much larger range of k
+
+886
+00:44:56,800 --> 00:45:00,740
+and it will still
+be linear time.
+
+887
+00:45:00,740 --> 00:45:01,830
+I'll tell you the answer.
+
+888
+00:45:01,830 --> 00:45:09,040
+
+889
+00:45:09,040 --> 00:45:11,850
+K can be polynomial in n.
+
+890
+00:45:11,850 --> 00:45:18,000
+So like if all your integers
+are between 0 and n to the 100,
+
+891
+00:45:18,000 --> 00:45:20,800
+you can sort them
+in n lg n time.
+
+892
+00:45:20,800 --> 00:45:22,420
+That's a lot bigger.
+
+893
+00:45:22,420 --> 00:45:24,190
+It's not just like 10 n.
+
+894
+00:45:24,190 --> 00:45:27,470
+I mean you could do 10 n here
+as well with counting sort.
+
+895
+00:45:27,470 --> 00:45:30,480
+And it's not just like n lg
+n, but they can go all the way
+
+896
+00:45:30,480 --> 00:45:34,760
+to n to the 100,
+still be linear time.
+
+897
+00:45:34,760 --> 00:45:38,290
+So that's what we're
+going to achieve.
+
+898
+00:45:38,290 --> 00:45:41,330
+The idea of radix
+sort is simple.
+
+899
+00:45:41,330 --> 00:45:44,820
+It's actually kind of the
+Excel spreadsheet approach.
+
+900
+00:45:44,820 --> 00:45:49,730
+We're going to imagine
+we want to break
+
+901
+00:45:49,730 --> 00:45:51,640
+each integer into
+a bunch of columns.
+
+902
+00:45:51,640 --> 00:46:03,530
+
+903
+00:46:03,530 --> 00:46:04,910
+How do we do that?
+
+904
+00:46:04,910 --> 00:46:07,050
+Well, the way we normally
+write down numbers,
+
+905
+00:46:07,050 --> 00:46:10,040
+except not necessarily in
+decimal, in some arbitrary base
+
+906
+00:46:10,040 --> 00:46:11,280
+b.
+
+907
+00:46:11,280 --> 00:46:12,960
+So I say, oh, an
+integer in base b.
+
+908
+00:46:12,960 --> 00:46:15,010
+Well then there's the
+least significant digit
+
+909
+00:46:15,010 --> 00:46:16,593
+and then the next
+one and the next one
+
+910
+00:46:16,593 --> 00:46:18,720
+and the next one, some
+sequence of digits.
+
+911
+00:46:18,720 --> 00:46:22,560
+And if I know that the
+maximum value is k,
+
+912
+00:46:22,560 --> 00:46:25,490
+I know that the
+number of digits,
+
+913
+00:46:25,490 --> 00:46:28,210
+which I'm going to call--
+for each number which I'm
+
+914
+00:46:28,210 --> 00:46:37,511
+going to call d, is just lg
+base b of k plus one, whatever.
+
+915
+00:46:37,511 --> 00:46:40,410
+We've got to be
+super precise here
+
+916
+00:46:40,410 --> 00:46:44,146
+because if I'm in base b then
+that's what lg is, right?
+
+917
+00:46:44,146 --> 00:46:45,520
+So normally we
+think of lg base 2
+
+918
+00:46:45,520 --> 00:46:47,460
+because we're writing
+things in binary.
+
+919
+00:46:47,460 --> 00:46:50,450
+Computer scientists
+normally think that way.
+
+920
+00:46:50,450 --> 00:46:52,949
+And fine, so now we
+decomposed our integer.
+
+921
+00:46:52,949 --> 00:46:54,740
+I'm not going to actually
+compute this base
+
+922
+00:46:54,740 --> 00:46:57,730
+b representation, because
+it would take a long time.
+
+923
+00:46:57,730 --> 00:47:01,780
+I'd have to spend n times
+lg k time to do that.
+
+924
+00:47:01,780 --> 00:47:03,830
+I don't want to do that.
+
+925
+00:47:03,830 --> 00:47:06,950
+OK, but just
+imagine it that way.
+
+926
+00:47:06,950 --> 00:47:08,980
+And then the
+algorithm as follows,
+
+927
+00:47:08,980 --> 00:47:15,350
+sort the integers, all of them,
+by the least significant digit.
+
+928
+00:47:15,350 --> 00:47:20,540
+
+929
+00:47:20,540 --> 00:47:22,400
+Sort by the next least
+significant digit.
+
+930
+00:47:22,400 --> 00:47:29,000
+Dot, dot, dot, sort by the
+most significant digit.
+
+931
+00:47:29,000 --> 00:47:33,460
+So there are d iterations
+here, for d digits.
+
+932
+00:47:33,460 --> 00:47:35,570
+Sort all the integers by
+the least significant,
+
+933
+00:47:35,570 --> 00:47:39,010
+all the integers by
+the next, and so on.
+
+934
+00:47:39,010 --> 00:47:41,670
+It's like in your-- this is
+a useful technique in Excel,
+
+935
+00:47:41,670 --> 00:47:43,739
+if you want to sort
+by several columns--
+
+936
+00:47:43,739 --> 00:47:46,030
+or your favorite spreadsheet,
+doesn't have to be Excel,
+
+937
+00:47:46,030 --> 00:47:50,480
+sorry-- you click on the least
+significant column first,
+
+938
+00:47:50,480 --> 00:47:53,130
+and then click on all the other
+columns in increasing order,
+
+939
+00:47:53,130 --> 00:47:55,550
+you will sort by all
+of them, it turns out.
+
+940
+00:47:55,550 --> 00:47:57,425
+It's kind of magical
+that this works.
+
+941
+00:47:57,425 --> 00:48:00,512
+
+942
+00:48:00,512 --> 00:48:03,030
+I don't have a ton of
+time for an example.
+
+943
+00:48:03,030 --> 00:48:04,660
+Let me first analyze
+the algorithm.
+
+944
+00:48:04,660 --> 00:48:07,160
+We'll see if we have
+time for an example.
+
+945
+00:48:07,160 --> 00:48:12,240
+So there are d
+digits-- oh, and I'm
+
+946
+00:48:12,240 --> 00:48:18,535
+going to sort each of these
+sorts of using counting sort.
+
+947
+00:48:18,535 --> 00:48:27,450
+
+948
+00:48:27,450 --> 00:48:33,500
+This is I guess sort by
+digit using counting sort.
+
+949
+00:48:33,500 --> 00:48:35,820
+So how long does it
+take to sort using
+
+950
+00:48:35,820 --> 00:48:37,270
+counting sort in this setting?
+
+951
+00:48:37,270 --> 00:48:43,310
+
+952
+00:48:43,310 --> 00:48:44,770
+Normally, it's n plus k.
+
+953
+00:48:44,770 --> 00:48:48,510
+
+954
+00:48:48,510 --> 00:48:51,750
+Here it is, n plus b.
+
+955
+00:48:51,750 --> 00:48:52,250
+Good.
+
+956
+00:48:52,250 --> 00:48:57,300
+
+957
+00:48:57,300 --> 00:49:01,550
+Because all of our digits
+are between 0 and b minus 1.
+
+958
+00:49:01,550 --> 00:49:03,230
+So we're just sorting by digit.
+
+959
+00:49:03,230 --> 00:49:06,430
+Now here is where we're
+using this idea of a key.
+
+960
+00:49:06,430 --> 00:49:08,710
+When we say key, I
+wanted our integers.
+
+961
+00:49:08,710 --> 00:49:12,330
+What we do is compute
+the digit we care about.
+
+962
+00:49:12,330 --> 00:49:15,350
+So if we're in this
+step, the key function
+
+963
+00:49:15,350 --> 00:49:17,530
+will be compute the least
+significant digit, which
+
+964
+00:49:17,530 --> 00:49:21,070
+is like taking it mod
+b to compute the most
+
+965
+00:49:21,070 --> 00:49:26,940
+significant digits like dividing
+by b to the power of d minus 1
+
+966
+00:49:26,940 --> 00:49:28,450
+or so.
+
+967
+00:49:28,450 --> 00:49:29,670
+OK but it's a constant.
+
+968
+00:49:29,670 --> 00:49:32,450
+You do one divide and one
+mod, the constant number
+
+969
+00:49:32,450 --> 00:49:33,570
+of operations.
+
+970
+00:49:33,570 --> 00:49:35,430
+You can extract the
+digit in constant time.
+
+971
+00:49:35,430 --> 00:49:38,630
+So the key function is constant
+time and so this works.
+
+972
+00:49:38,630 --> 00:49:41,210
+We don't have to actually
+write them all down,
+
+973
+00:49:41,210 --> 00:49:44,930
+just compute them
+as we need them.
+
+974
+00:49:44,930 --> 00:49:46,980
+Cool I guess we could
+compute them ahead of time.
+
+975
+00:49:46,980 --> 00:49:49,680
+It's not a big deal.
+
+976
+00:49:49,680 --> 00:49:51,370
+Fine.
+
+977
+00:49:51,370 --> 00:49:52,890
+So that's each digit.
+
+978
+00:49:52,890 --> 00:49:57,140
+So the total time
+is just that times
+
+979
+00:49:57,140 --> 00:49:59,400
+d because we have d steps.
+
+980
+00:49:59,400 --> 00:50:03,094
+So it's n plus b times d.
+
+981
+00:50:03,094 --> 00:50:09,840
+Now d was that lg
+thing, lg base b of n.
+
+982
+00:50:09,840 --> 00:50:11,030
+I have this b.
+
+983
+00:50:11,030 --> 00:50:14,840
+What should be b?
+
+984
+00:50:14,840 --> 00:50:17,240
+You gotta love the
+English language.
+
+985
+00:50:17,240 --> 00:50:22,510
+What should I choose
+b to be, or not to be?
+
+986
+00:50:22,510 --> 00:50:23,900
+That's the question.
+
+987
+00:50:23,900 --> 00:50:25,360
+Any suggestions?
+
+988
+00:50:25,360 --> 00:50:26,670
+I want to minimize this, right?
+
+989
+00:50:26,670 --> 00:50:28,760
+I want minimum running time.
+
+990
+00:50:28,760 --> 00:50:32,450
+So I'd like b to kind of
+large to make this base large.
+
+991
+00:50:32,450 --> 00:50:35,165
+Sorry, this is not n, this is k.
+
+992
+00:50:35,165 --> 00:50:37,830
+I copied that wrong
+out of excitement.
+
+993
+00:50:37,830 --> 00:50:40,430
+Just copying this over.
+
+994
+00:50:40,430 --> 00:50:41,840
+OK, I'd like b to
+be large, but I
+
+995
+00:50:41,840 --> 00:50:44,410
+don't want it to be so
+large because I don't want
+
+996
+00:50:44,410 --> 00:50:46,890
+it to be bigger than n so
+what should I set b to be?
+
+997
+00:50:46,890 --> 00:50:47,710
+AUDIENCE: N.
+
+998
+00:50:47,710 --> 00:50:49,510
+PROFESSOR: N, good choice.
+
+999
+00:50:49,510 --> 00:50:51,380
+It's a good trick
+whenever you have
+
+1000
+00:50:51,380 --> 00:50:52,960
+a sum of things you
+want to minimize,
+
+1001
+00:50:52,960 --> 00:50:55,230
+usually it's when they're equal.
+
+1002
+00:50:55,230 --> 00:50:58,700
+Occasionally it's the extreme
+like when b is 0 or something.
+
+1003
+00:50:58,700 --> 00:51:00,700
+B as 0 not a good plan.
+
+1004
+00:51:00,700 --> 00:51:05,220
+Base 0 is pretty slow.
+
+1005
+00:51:05,220 --> 00:51:08,640
+So if I set-- I'll
+write it here--
+
+1006
+00:51:08,640 --> 00:51:10,970
+you can prove it with a
+derivative or whatever.
+
+1007
+00:51:10,970 --> 00:51:13,990
+This is going to
+be minimized when
+
+1008
+00:51:13,990 --> 00:51:18,980
+b is-- I'll be vague-- theta n.
+
+1009
+00:51:18,980 --> 00:51:26,990
+So then it's going to come
+out to n times lg base n of k.
+
+1010
+00:51:26,990 --> 00:51:31,370
+And lo and behold, when
+k is polynomial in n,
+
+1011
+00:51:31,370 --> 00:51:36,920
+it's k to some constant,
+then that will be linear.
+
+1012
+00:51:36,920 --> 00:51:38,530
+So let me write that.
+
+1013
+00:51:38,530 --> 00:51:46,670
+If k equals n to the c, or
+say is at most n to the c,
+
+1014
+00:51:46,670 --> 00:51:50,660
+then this is going to
+be order n times c.
+
+1015
+00:51:50,660 --> 00:51:53,070
+So if your integers
+are reasonably small,
+
+1016
+00:51:53,070 --> 00:51:54,920
+you get a linear time
+sorting algorithm.
+
+1017
+00:51:54,920 --> 00:51:59,550
+And reasonably small means
+polynomial in n, in value.
+
+1018
+00:51:59,550 --> 00:52:00,810
+That's kind of cool.
+
+1019
+00:52:00,810 --> 00:52:01,824
+That's radix sort.
+
+1020
+00:52:01,824 --> 00:52:02,740
+And we're out of time.
+
+1021
+00:52:02,740 --> 00:52:04,156
+There's an example
+in the textbook
+
+1022
+00:52:04,156 --> 00:52:05,700
+or in the notes how this works.
+
+1023
+00:52:05,700 --> 00:52:07,853
+You could prove it by
+a simple induction.
+
+1024
+00:52:07,853 --> 00:52:08,353
